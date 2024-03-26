@@ -17,20 +17,36 @@ Route::get('/client', [ClientController::class, 'index']);
 Route::get('/ajouterclient', [ClientController::class, 'create'])->name('client.create');
 Route::post('/client/store', [ClientController::class, 'store'])->name('client.store');
 
+Route::get('/ventes', [VenteController::class, 'index'])->name('vente.index');
+Route::get('/ventes/create', [VenteController::class, 'create'])->name('vente.create');
+Route::post('/ventes', [VenteController::class, 'store'])->name('vente.store');
+Route::get('/ventes/{vente}', [VenteController::class, 'show'])->name('vente.show');
+Route::get('/ventes/{vente}/edit', [VenteController::class, 'edit'])->name('vente.edit');
+Route::put('/ventes/{vente}', [VenteController::class, 'update'])->name('vente.update');
+Route::delete('/ventes/{vente}', [VenteController::class, 'destroy'])->name('vente.destroy');
+
+
+Route::get('/detailsvente', [DetailventeController::class, 'index'])->name('detailsvente.index');
+Route::get('/detailsvente/create', [DetailventeController::class, 'create'])->name('detailsvente.create');
+Route::post('/detailsvente/store', [DetailventeController::class, 'store'])->name('detailsvente.store');
+Route::get('/detailsvente/{detailvente}', [DetailventeController::class, 'show'])->name('detailsvente.show');
+Route::get('/detailsvente/{detailvente}/edit', [DetailventeController::class, 'edit'])->name('detailsvente.edit');
+Route::put('/detailsvente/{detailvente}', [DetailventeController::class, 'update'])->name('detailsvente.update');
+Route::delete('/detailsvente/{detailvente}', [DetailventeController::class, 'destroy'])->name('detailsvente.destroy');
+
+
+
+
+
+
+
 Route::get('/artisan', [ArtisanController::class, 'index'])->name('artisan.index');
-Route::get('/ajouter', [ArtisanController::class, 'create'])->name('artisan.create');
+Route::get('/artisan/create', [ArtisanController::class, 'create'])->name('artisan.create');
 Route::post('/artisan/store', [ArtisanController::class, 'store'])->name('artisan.store');
-
-Route::get('/familles', [FamilleController::class, 'index'])->name('familles.index');
-Route::get('/create', [FamilleController::class, 'create'])->name('familles.create');
-Route::post('/familles/store', [FamilleController::class, 'store'])->name('familles.store');
-Route::get('/article', [ArticleController::class, 'index']);
-Route::get('/ajouterarticle', [ArticleController::class, 'create'])->name('article.create');
-Route::post('/article/store', [ArticleController::class, 'store'])->name('article.store');
-
-Route::get('/sousfamille', [SousFamilleController::class, 'index']);
-Route::get('/ajoutersousfamille', [SousFamilleController::class, 'create'])->name('sous-familles.create');
-Route::post('/sousfamille/store', [SousFamilleController::class, 'store'])->name('sous-familles.store');
+Route::get('/artisan/{artisan}', [ArtisanController::class, 'show'])->name('artisan.show');
+Route::get('/artisan/{artisan}/edit', [ArtisanController::class, 'edit'])->name('artisan.edit');
+Route::put('/artisan/{artisan}', [ArtisanController::class, 'update'])->name('artisan.update');
+Route::delete('/artisan/{artisan}', [ArtisanController::class, 'destroy'])->name('artisan.destroy');
 
 
 
@@ -54,24 +70,56 @@ Route::delete('/details/{detail_Br}', [DetailBrController::class, 'destroy'])->n
 
 
 
-Route::get('/detailsvente', [DetailventeController::class, 'index'])->name('detailsvente.index');
-Route::get('/detailsvente/create', [DetailventeController::class, 'create'])->name('detailsvente.create');
-Route::post('/detailsvente', [DetailventeController::class, 'store'])->name('detailsvente.store');
-Route::get('/detailsvente/{detailvente}', [DetailventeController::class, 'show'])->name('detailsvente.show');
-Route::get('/detailsvente/{detailvente}/edit', [DetailventeController::class, 'edit'])->name('detailsvente.edit');
-Route::put('/detailsvente/{detailvente}', [DetailventeController::class, 'update'])->name('detailsvente.update');
-Route::delete('/detailsvente/{detailvente}', [DetailventeController::class, 'destroy'])->name('detailsvente.destroy');
+
+
+Route::get('/familles', [FamilleController::class, 'index'])->name('familles.index');
+Route::get('/create', [FamilleController::class, 'create'])->name('familles.create');
+Route::post('/familles/store', [FamilleController::class, 'store'])->name('familles.store');
+Route::get('/article', [ArticleController::class, 'index']);
+Route::get('/ajouterarticle', [ArticleController::class, 'create'])->name('article.create');
+Route::post('/article/store', [ArticleController::class, 'store'])->name('article.store');
+
+Route::get('/sousfamille', [SousFamilleController::class, 'index']);
+Route::get('/ajoutersousfamille', [SousFamilleController::class, 'create'])->name('sous-familles.create');
+Route::post('/sousfamille/store', [SousFamilleController::class, 'store'])->name('sous-familles.store');
+
+
+Route::get('/article', [ArticleController::class, 'index']);
+Route::get('/ajouterarticle', [ArticleController::class, 'create'])->name('article.create');
+Route::post('/article/store', [ArticleController::class, 'store'])->name('article.store');
 
 
 
 
-Route::get('/ventes', [VenteController::class, 'index'])->name('vente.index');
-Route::get('/ventes/create', [VenteController::class, 'create'])->name('vente.create');
-Route::post('/ventes', [VenteController::class, 'store'])->name('vente.store');
-Route::get('/ventes/{vente}', [VenteController::class, 'show'])->name('vente.show');
-Route::get('/ventes/{vente}/edit', [VenteController::class, 'edit'])->name('vente.edit');
-Route::put('/ventes/{vente}', [VenteController::class, 'update'])->name('vente.update');
-Route::delete('/ventes/{vente}', [VenteController::class, 'destroy'])->name('vente.destroy');
 
 
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\PageController;
+use App\Http\Controllers\RegisterController;
+use App\Http\Controllers\LoginController;
+use App\Http\Controllers\UserProfileController;
+use App\Http\Controllers\ResetPassword;
+use App\Http\Controllers\ChangePassword;            
+            
 
+    Route::get('/dashboard', function () {return redirect('/dashboard');})->middleware('auth');
+	Route::get('/register', [RegisterController::class, 'create'])->middleware('guest')->name('register');
+	Route::post('/register', [RegisterController::class, 'store'])->middleware('guest')->name('register.perform');
+	Route::get('/login', [LoginController::class, 'show'])->middleware('guest')->name('login');
+	Route::post('/login', [LoginController::class, 'login'])->middleware('guest')->name('login.perform');
+	Route::get('/reset-password', [ResetPassword::class, 'show'])->middleware('guest')->name('reset-password');
+	Route::post('/reset-password', [ResetPassword::class, 'send'])->middleware('guest')->name('reset.perform');
+	Route::get('/change-password', [ChangePassword::class, 'show'])->middleware('guest')->name('change-password');
+	Route::post('/change-password', [ChangePassword::class, 'update'])->middleware('guest')->name('change.perform');
+	Route::get('/dashboard', [HomeController::class, 'index'])->name('home')->middleware('auth');
+    Route::group(['middleware' => 'auth'], function () {
+	//Route::get('/virtual-reality', [PageController::class, 'vr'])->name('virtual-reality');
+	Route::get('/rtl', [PageController::class, 'rtl'])->name('rtl');
+	Route::get('/profile', [UserProfileController::class, 'show'])->name('profile');
+	Route::post('/profile', [UserProfileController::class, 'update'])->name('profile.update');
+	Route::get('/profile-static', [PageController::class, 'profile'])->name('profile-static'); 
+	Route::get('/sign-in-static', [PageController::class, 'signin'])->name('sign-in-static');
+	Route::get('/sign-up-static', [PageController::class, 'signup'])->name('sign-up-static'); 
+	Route::get('/{page}', [PageController::class, 'index'])->name('page');
+	Route::post('logout', [LoginController::class, 'logout'])->name('logout');
+});

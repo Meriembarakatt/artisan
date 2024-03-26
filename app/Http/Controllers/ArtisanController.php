@@ -30,8 +30,7 @@ class ArtisanController extends Controller
             'fonction' => 'required',
         ]);
         
-         
-        Artisan::create($request->all());
+        Artisan::create($validatedData);
         return redirect('/artisan')->with('success', 'Artisan ajouté avec succès');
     }
 

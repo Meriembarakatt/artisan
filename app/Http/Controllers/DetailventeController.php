@@ -50,7 +50,7 @@ class DetailventeController extends Controller
 
         Detailvente::create($validatedData);
 
-        return redirect('/details')->with('success', 'Détail de vente ajouté avec succès');
+        return redirect('/detailsvente')->with('success', 'Détail de vente ajouté avec succès');
     }
 
     /**

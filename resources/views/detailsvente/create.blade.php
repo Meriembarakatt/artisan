@@ -1,8 +1,8 @@
-{{-- resources/views/details/create.blade.php
 
-@extends('layouts.app')
 
-@section('content') --}}
+{{--@extends('layouts.app')--}}
+
+{{--@section('content')--}}
 <div class="container">
     <h1>Ajouter un Détail de Vente</h1>
     <form action="{{ route('detailsvente.store') }}" method="POST">
@@ -36,4 +36,5 @@
         <button type="submit" class="btn btn-primary">Ajouter</button>
     </form>
 </div>
+{{--@endsection--}}
 

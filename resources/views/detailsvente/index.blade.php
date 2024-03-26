@@ -1,8 +1,8 @@
-{{-- resources/views/details/index.blade.php --}}
+{{-- resources/views/details/index.blade.php 
 
-{{--@extends('layouts.app')
+@extends('layouts.app')
 
-/*@section('content')*/--}}
+@section('content')--}}
 <div class="container">
     <h1>Liste des Détails de Vente</h1>
     <a href="{{ route('detailsvente.create') }}" class="btn btn-primary mb-3">Ajouter un Détail de Vente</a>

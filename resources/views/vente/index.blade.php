@@ -1,6 +1,8 @@
 {{-- resources/views/ventes/index.blade.php --}}
+@extends('layouts.app')
 
-<a href="{{ route('vente.create') }}">Ajouter la client </a>
+@section('content')
+<a href="{{ route('vente.create') }}">Ajouter vente </a>
 <div class="container">
     <h1>Liste des Ventes</h1>
     
@@ -9,7 +11,7 @@
             <tr>
                 <th>ID</th>
                 <th>Date</th>
-                <th>Client</th>
+                <th>vente</th>
                 <th>Actions</th>
             </tr>
         </thead>
@@ -25,4 +27,4 @@
         </tbody>
     </table>
 </div>
-
+@endsection
