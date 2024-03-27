@@ -58,7 +58,6 @@ class BonreseptionController extends Controller
     public function destroy(Bonreseption $bonreception)
     {
         $bonreception->delete();
-
-        return redirect('/bonreseption')->with('success', 'Bon de réception supprimé avec succès');
-    }
+        return redirect()->route('bonreseption.index')->with('success', 'Bon de réception supprimé avec succès!');
+     }
 }

@@ -87,8 +87,9 @@ class ClientController extends Controller
      * @param  \App\Models\famille  $famille
      * @return \Illuminate\Http\Response
      */
-    public function destroy(famille $famille)
+    public function destroy(client $client)
     {
-        //
+        $client->delete();
+        return redirect()->route('client.index');
     }
 }

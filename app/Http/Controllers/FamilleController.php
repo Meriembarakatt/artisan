@@ -87,6 +87,8 @@ class FamilleController extends Controller
      */
     public function destroy(famille $famille)
     {
-        //
+        $famille->delete();
+        return redirect()->route('familles.index');
+
     }
 }

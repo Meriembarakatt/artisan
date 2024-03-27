@@ -17,7 +17,14 @@
                         <td>{{ $sousFamille->id }}</td>
                         <td>{{ $sousFamille->name }}</td>
                         <td>{{ $sousFamille->famille->famille }}</td>
-                        
+                        <td>
+                        <form action="{{ route('sous-familles.destroy', ['sousFamille' => $sousFamille->id]) }}" method="POST">
+                            @csrf
+                            @method('DELETE')
+                            <!-- Le reste de votre formulaire pour la suppression -->
+                            <button type="submit">Supprimer</button>
+                        </form>
+                        </td>
                     </tr>
                 @endforeach
             </tbody>

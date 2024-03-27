@@ -17,8 +17,11 @@
                     <td>{{ $bonreception->date }}</td>
                     <td>{{ $bonreception->artisan->nom }}</td>
                     <td>
-                        <!-- Ajoutez ici les boutons pour les actions telles que modifier et supprimer -->
-                    </td>
+                    <form action="{{ route('bonreseption.destroy', ['bonreception' => $bonreception->id]) }}" method="POST">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="btn btn-danger">Supprimer</button>
+                        </form> </td>
                 </tr>
             @endforeach
         </tbody>

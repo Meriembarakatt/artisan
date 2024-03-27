@@ -18,6 +18,7 @@
             <th>Ville</th>
             <th>Téléphone</th>
             <th>Fonction</th>
+            <th>Action</th>
         </tr>
     </thead>
     <tbody>
@@ -31,6 +32,13 @@
             <td>{{ $artisan->ville }}</td>
             <td>{{ $artisan->tell }}</td>
             <td>{{ $artisan->fonction }}</td>
+            <td>
+            <form action="{{ route('artisan.destroy', ['artisan' => $artisan->id]) }}" method="POST" style="display: inline;">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="btn btn-danger">Delete</button>
+                        </form>
+            </td>
         </tr>
         @endforeach
     </tbody>

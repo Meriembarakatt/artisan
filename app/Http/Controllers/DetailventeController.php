@@ -105,7 +105,6 @@ class DetailventeController extends Controller
     public function destroy(Detailvente $detailvente)
     {
         $detailvente->delete();
-
-        return redirect('/details')->with('success', 'Détail de vente supprimé avec succès');
+        return redirect()->route('detailsvente.index')->with('success', 'Détail de vente supprimé avec succès');
     }
 }

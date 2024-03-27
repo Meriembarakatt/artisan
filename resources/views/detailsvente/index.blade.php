@@ -25,6 +25,13 @@
                     <td>{{ $detail->vente->date }}</td>
                     <td>{{ $detail->qte }}</td>
                     <td>{{ $detail->prix }}</td>
+                    <td>
+                         <form action="{{ route('detailsvente.destroy', ['detailvente' => $detail->id]) }}" method="POST" style="display: inline;">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit" class="btn btn-danger">Delete</button>
+                    </form>
+                </td>
                   
                 </tr>
             @endforeach

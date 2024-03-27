@@ -60,10 +60,9 @@ class DetailBrController extends Controller
         return redirect('/details')->with('success', 'Détail de bon de réception mis à jour avec succès');
     }
 
-    public function destroy(Detail_Br $detail_Br)
+    public function destroy(DetailBr $detail)
     {
-        $detail_Br->delete();
-
-        return redirect('/details')->with('success', 'Détail de bon de réception supprimé avec succès');
+        $detail->delete();
+        return redirect()->route('details.index')->with('success', 'Détail de bon de réception supprimé avec succès');
     }
 }

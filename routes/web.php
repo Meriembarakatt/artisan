@@ -13,9 +13,12 @@ use App\Http\Controllers\VenteController;
 Route::get('/', function () {
     return view('welcome');
 });
-Route::get('/client', [ClientController::class, 'index']);
+
+Route::get('/client', [ClientController::class, 'index'])->name('client.index');
 Route::get('/ajouterclient', [ClientController::class, 'create'])->name('client.create');
 Route::post('/client/store', [ClientController::class, 'store'])->name('client.store');
+Route::delete('/client/{client}',[ ClientController::class,'destroy'])->name('client.destroy');
+
 
 Route::get('/ventes', [VenteController::class, 'index'])->name('vente.index');
 Route::get('/ventes/create', [VenteController::class, 'create'])->name('vente.create');
@@ -36,24 +39,19 @@ Route::delete('/detailsvente/{detailvente}', [DetailventeController::class, 'des
 
 
 
-
-
-
-
 Route::get('/artisan', [ArtisanController::class, 'index'])->name('artisan.index');
 Route::get('/artisan/create', [ArtisanController::class, 'create'])->name('artisan.create');
 Route::post('/artisan/store', [ArtisanController::class, 'store'])->name('artisan.store');
 Route::get('/artisan/{artisan}', [ArtisanController::class, 'show'])->name('artisan.show');
 Route::get('/artisan/{artisan}/edit', [ArtisanController::class, 'edit'])->name('artisan.edit');
 Route::put('/artisan/{artisan}', [ArtisanController::class, 'update'])->name('artisan.update');
-Route::delete('/artisan/{artisan}', [ArtisanController::class, 'destroy'])->name('artisan.destroy');
+Route::delete('/artisan/{artisan}',[ ArtisanController::class,'destroy'])->name('artisan.destroy');
 
 
-
-Route::get('/bonreseption', [BonreseptionController::class, 'index']);
+Route::get('/bonreseption', [BonreseptionController::class, 'index'])->name('bonreseption.index');
 Route::get('/ajouterbonreseption', [BonreseptionController::class, 'create'])->name('bonreseption.create');
 Route::post('/bonreseption/store', [BonreseptionController::class, 'store'])->name('bonreseption.store');
-
+Route::delete('/bonreseption/{bonreception}',[ BonreseptionController::class,'destroy'])->name('bonreseption.destroy');
 
 
 Route::get('/details', [DetailBrController::class, 'index'])->name('details.index');
@@ -62,12 +60,7 @@ Route::post('/details/store', [DetailBrController::class, 'store'])->name('detai
 Route::get('/details/{detail_Br}', [DetailBrController::class, 'show'])->name('details.show');
 Route::get('/details/{detail_Br}/edit', [DetailBrController::class, 'edit'])->name('details.edit');
 Route::put('/details/{detail_Br}', [DetailBrController::class, 'update'])->name('details.update');
-Route::delete('/details/{detail_Br}', [DetailBrController::class, 'destroy'])->name('details.destroy');
-
-
-
-
-
+Route::delete('/details/{detail}', [DetailBrController::class, 'destroy'])->name('details.destroy');
 
 
 
@@ -75,13 +68,16 @@ Route::delete('/details/{detail_Br}', [DetailBrController::class, 'destroy'])->n
 Route::get('/familles', [FamilleController::class, 'index'])->name('familles.index');
 Route::get('/create', [FamilleController::class, 'create'])->name('familles.create');
 Route::post('/familles/store', [FamilleController::class, 'store'])->name('familles.store');
+Route::delete('/familles/{famille}',[ FamilleController::class,'destroy'])->name('familles.destroy');
+
 Route::get('/article', [ArticleController::class, 'index']);
 Route::get('/ajouterarticle', [ArticleController::class, 'create'])->name('article.create');
 Route::post('/article/store', [ArticleController::class, 'store'])->name('article.store');
 
-Route::get('/sousfamille', [SousFamilleController::class, 'index']);
+Route::get('/sousfamille', [SousFamilleController::class, 'index'])->name('sousfamille.index');
 Route::get('/ajoutersousfamille', [SousFamilleController::class, 'create'])->name('sous-familles.create');
 Route::post('/sousfamille/store', [SousFamilleController::class, 'store'])->name('sous-familles.store');
+Route::delete('/sousfamille/{sousFamille}',[ SousFamilleController::class,'destroy'])->name('sous-familles.destroy');
 
 
 Route::get('/article', [ArticleController::class, 'index']);

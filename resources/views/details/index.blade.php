@@ -21,7 +21,13 @@
                         <td>{{ $detail->bonreception->id }}</td>
                         <td>{{ $detail->qte }}</td>
                         <td>{{ $detail->prix }}</td>
-                       
+                       <td>
+                       <form action="{{ route('details.destroy', ['detail' => $detail->id]) }}" method="POST" style="display: inline;">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="btn btn-danger">Delete</button>
+                        </form>
+                       </td>
                     </tr>
                 @endforeach
             </tbody>

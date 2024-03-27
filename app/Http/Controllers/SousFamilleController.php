@@ -98,7 +98,7 @@ class SousFamilleController extends Controller
     public function destroy(SousFamille $sousFamille)
     {
         $sousFamille->delete();
-
-        return redirect('/sous-familles')->with('success', 'Sous-famille supprimée avec succès');
+        return redirect()->route('sousfamille.index');
+        
     }
 }

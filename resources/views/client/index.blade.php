@@ -10,6 +10,7 @@
             <th>Adresse</th>
             <th>Ville</th>
             <th>Téléphone</th>
+            <th>Action</th>
             
         </tr>
     </thead>
@@ -22,6 +23,13 @@
             <td>{{ $client->adress }}</td>
             <td>{{ $client->ville }}</td>
             <td>{{ $client->tell }}</td>
+            <td>
+            <form action="{{ route('client.destroy', ['client' => $client->id]) }}" method="POST" style="display: inline;">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="btn btn-danger">Delete</button>
+                        </form>
+            </td>
            
         </tr>
         @endforeach

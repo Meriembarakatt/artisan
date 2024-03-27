@@ -51,6 +51,7 @@ class ArtisanController extends Controller
 
     public function destroy(Artisan $artisan)
     {
-        // Vous pouvez implémenter la logique pour supprimer un artisan ici
-    }
+        $artisan->delete();
+        return redirect()->route('artisan.index');
+     }
 }

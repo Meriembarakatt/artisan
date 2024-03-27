@@ -10,12 +10,18 @@
         <thead>
             <tr>
                 <th>famille</th>
+                <th>Action</th>
             </tr>
         </thead>
         <tbody>
             @foreach ($familles as $famille)
                 <tr>
                     <td>{{ $famille->famille }}</td>
+                    <td>  <form action="{{ route('familles.destroy', ['famille' => $famille->id]) }}" method="POST" style="display: inline;">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="btn btn-danger">Delete</button>
+                        </form></td>
                 </tr>
             @endforeach
         </tbody>
