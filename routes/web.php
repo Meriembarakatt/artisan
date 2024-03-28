@@ -78,15 +78,23 @@ Route::get('/familles', [FamilleController::class, 'index'])->name('familles.ind
 Route::get('/create', [FamilleController::class, 'create'])->name('familles.create');
 Route::post('/familles/store', [FamilleController::class, 'store'])->name('familles.store');
 Route::delete('/familles/{famille}',[ FamilleController::class,'destroy'])->name('familles.destroy');
+Route::get('/familles/{famille}/edit', [FamilleController::class, 'edit'])->name('familles.edit');
+Route::get('/familles/{famille}', [FamilleController::class, 'show'])->name('familles.show');
+Route::put('/familles/{famille}', [FamilleController::class, 'update'])->name('familles.update');
+ 
+
 
 Route::get('/article', [ArticleController::class, 'index']);
 Route::get('/ajouterarticle', [ArticleController::class, 'create'])->name('article.create');
 Route::post('/article/store', [ArticleController::class, 'store'])->name('article.store');
 
-Route::get('/sousfamille', [SousFamilleController::class, 'index'])->name('sousfamille.index');
-Route::get('/ajoutersousfamille', [SousFamilleController::class, 'create'])->name('sous-familles.create');
-Route::post('/sousfamille/store', [SousFamilleController::class, 'store'])->name('sous-familles.store');
-Route::delete('/sousfamille/{sousFamille}',[ SousFamilleController::class,'destroy'])->name('sous-familles.destroy');
+Route::get('/sousfamilles', [SousFamilleController::class, 'index'])->name('sousfamille.index');
+Route::get('/sousfamilles/create', [SousFamilleController::class, 'create'])->name('sousfamille.create');
+Route::post('/sousfamilles/store', [SousFamilleController::class, 'store'])->name('sousfamille.store');
+Route::get('/sousfamilles/{sousFamille}', [SousFamilleController::class, 'show'])->name('sousfamille.show');
+Route::get('/sousfamilles/{sousFamille}/edit', [SousFamilleController::class, 'edit'])->name('sousfamille.edit');
+Route::put('/sousfamilles/{sousFamille}', [SousFamilleController::class, 'update'])->name('sousfamille.update');
+Route::delete('/sousfamilles/{sousFamille}', [SousFamilleController::class, 'destroy'])->name('sousfamille.destroy');
 
 
 Route::get('/article', [ArticleController::class, 'index']);
