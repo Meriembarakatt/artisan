@@ -8,7 +8,7 @@
                 <th>Prix HT</th>
                 <th>Quantité</th>
                 <th>Stock</th>
-                <th>Photo</th>
+                <th>Photo</th>n
                 <th>Famille</th>
                 <th>Actions</th>
             </tr>
