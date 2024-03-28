@@ -47,5 +47,11 @@ class VenteController extends Controller
         return redirect('/ventes')->with('success', 'Vente ajoutée avec succès');
     }
 
+    public function destroy(vente $vente)
+    {
+        $vente->delete();
+        return redirect()->route('vente.index');
+
+    }
     // Other methods like show(), edit(), update(), destroy() can be added as needed
 }

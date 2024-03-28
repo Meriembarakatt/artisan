@@ -10,6 +10,10 @@ use App\Http\Controllers\SousFamilleController;
 use App\Http\Controllers\BonreseptionController;
 use App\Http\Controllers\DetailBrController;
 use App\Http\Controllers\VenteController;
+use App\Http\Controllers\ReglementClController;
+use App\Http\Controllers\ModeController;
+use App\Http\Controllers\ReglementArtisanController;
+
 Route::get('/', function () {
     return view('welcome');
 });
@@ -62,7 +66,12 @@ Route::get('/details/{detail_Br}/edit', [DetailBrController::class, 'edit'])->na
 Route::put('/details/{detail_Br}', [DetailBrController::class, 'update'])->name('details.update');
 Route::delete('/details/{detail}', [DetailBrController::class, 'destroy'])->name('details.destroy');
 
+Route::get('/reglementCl', [ReglementClController::class, 'index'])->name('reglement_cl.index');
 
+Route::get('/regArtisan', [ReglementArtisanController::class, 'index'])->name('reglement_artisan.index');
+
+
+Route::get('/mode', [ModeController::class, 'index'])->name('mode.index');
 
 
 Route::get('/familles', [FamilleController::class, 'index'])->name('familles.index');

@@ -13,12 +13,12 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('reglement_ventes', function (Blueprint $table) {
+        Schema::create('reglement_artisans', function (Blueprint $table) {
             $table->id();
             $table->foreignId('artisan_id')->constrained('artisans');
             $table->foreignId('mode_id')->constrained('modes');
             $table->date('date');
-            $table->string('montant');
+            $table->string('montant ');
             $table->timestamps();
         });
     }
@@ -30,6 +30,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('reglement_ventes');
+        Schema::dropIfExists('reglement_artisans');
     }
 };

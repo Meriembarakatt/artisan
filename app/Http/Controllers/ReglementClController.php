@@ -14,7 +14,8 @@ class ReglementClController extends Controller
      */
     public function index()
     {
-        //
+        $reglementCls = reglementCl::all();
+        return view('reglement_cl.index', compact('reglementCls'));
     }
 
     /**

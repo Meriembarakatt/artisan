@@ -5,20 +5,20 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class reglementCl extends Model
+class reglementArtisan extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'client_id',
+        'artisan_id',
         'mode_id',
         'date',
         'motant',
         
     ];
 
-    public function client()
+    public function artisan()
     {
-        return $this->belongsTo(Client::class  ,'client_id');
+        return $this->belongsTo(Artisan::class  ,'artisan_id');
     }
 
     public function mode()

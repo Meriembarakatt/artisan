@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\reglementVente;
+use App\Models\reglementArtisan;
 use Illuminate\Http\Request;
 
-class ReglementVenteController extends Controller
+class ReglementArtisanController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,7 +14,9 @@ class ReglementVenteController extends Controller
      */
     public function index()
     {
-        //
+        $regArtisans = reglementArtisan::all();
+        return view('reglement_artisan.index', compact('regArtisans'));
+ 
     }
 
     /**
@@ -41,10 +43,10 @@ class ReglementVenteController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\reglementVente  $reglementVente
+     * @param  \App\Models\reglementArtisan  $reglementArtisan
      * @return \Illuminate\Http\Response
      */
-    public function show(reglementVente $reglementVente)
+    public function show(reglementArtisan $reglementArtisan)
     {
         //
     }
@@ -52,10 +54,10 @@ class ReglementVenteController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\reglementVente  $reglementVente
+     * @param  \App\Models\reglementArtisan  $reglementArtisan
      * @return \Illuminate\Http\Response
      */
-    public function edit(reglementVente $reglementVente)
+    public function edit(reglementArtisan $reglementArtisan)
     {
         //
     }
@@ -64,10 +66,10 @@ class ReglementVenteController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\reglementVente  $reglementVente
+     * @param  \App\Models\reglementArtisan  $reglementArtisan
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, reglementVente $reglementVente)
+    public function update(Request $request, reglementArtisan $reglementArtisan)
     {
         //
     }
@@ -75,10 +77,10 @@ class ReglementVenteController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\reglementVente  $reglementVente
+     * @param  \App\Models\reglementArtisan  $reglementArtisan
      * @return \Illuminate\Http\Response
      */
-    public function destroy(reglementVente $reglementVente)
+    public function destroy(reglementArtisan $reglementArtisan)
     {
         //
     }

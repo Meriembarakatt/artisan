@@ -21,6 +21,14 @@
                     <td>{{ $vente->id }}</td>
                     <td>{{ $vente->date }}</td>
                     <td>{{ $vente->client->nom }}</td>
+                    <td>
+                    <form action="{{ route('vente.destroy', ['vente' => $vente->id]) }}" method="POST">
+                            @csrf
+                            @method('DELETE')
+                            <!-- Le reste de votre formulaire pour la suppression -->
+                            <button type="submit">Supprimer</button>
+                        </form>
+                    </td>
                    
                 </tr>
             @endforeach
