@@ -101,13 +101,10 @@ Route::get('/familles/{famille}', [FamilleController::class, 'show'])->name('fam
 Route::put('/familles/{famille}', [FamilleController::class, 'update'])->name('familles.update');
  
 
-<<<<<<< HEAD
-=======
 
 Route::get('/article', [ArticleController::class, 'index'])->name('article.index');
 Route::get('/ajouterarticle', [ArticleController::class, 'create'])->name('article.create');
 Route::post('/article/store', [ArticleController::class, 'store'])->name('article.store');
->>>>>>> 1b6dedf2719e1223c0255e8f067072482982708d
 
 Route::get('/sousfamilles', [SousFamilleController::class, 'index'])->name('sousfamille.index');
 Route::get('/sousfamilles/create', [SousFamilleController::class, 'create'])->name('sousfamille.create');

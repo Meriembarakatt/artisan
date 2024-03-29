@@ -10,6 +10,9 @@
         @csrf
         <label for="nom">Nom</label>
         <input type="text" id="nom" name="nom">
+        @error('nom')
+                <div class="text-danger">{{ $message }}</div>
+            @enderror
         <label for="prenom">Prénom</label>
         <input type="text" id="prenom" name="prenom">
         <label for="email">Email</label>
