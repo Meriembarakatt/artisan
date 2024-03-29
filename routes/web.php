@@ -18,6 +18,11 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/article', [ArticleController::class, 'index'])->name('article.index');
+Route::get('/ajouterarticle', [ArticleController::class, 'create'])->name('article.create');
+Route::post('/article/store', [ArticleController::class, 'store'])->name('article.store');
+
+
 Route::get('/client', [ClientController::class, 'index'])->name('client.index');
 Route::get('/ajouterclient', [ClientController::class, 'create'])->name('client.create');
 Route::post('/client/store', [ClientController::class, 'store'])->name('client.store');
@@ -79,9 +84,6 @@ Route::get('/create', [FamilleController::class, 'create'])->name('familles.crea
 Route::post('/familles/store', [FamilleController::class, 'store'])->name('familles.store');
 Route::delete('/familles/{famille}',[ FamilleController::class,'destroy'])->name('familles.destroy');
 
-Route::get('/article', [ArticleController::class, 'index']);
-Route::get('/ajouterarticle', [ArticleController::class, 'create'])->name('article.create');
-Route::post('/article/store', [ArticleController::class, 'store'])->name('article.store');
 
 Route::get('/sousfamille', [SousFamilleController::class, 'index'])->name('sousfamille.index');
 Route::get('/ajoutersousfamille', [SousFamilleController::class, 'create'])->name('sous-familles.create');

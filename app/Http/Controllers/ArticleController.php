@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\article;
+use App\Models\Article;
 use App\Models\SousFamille;
 use Illuminate\Http\Request;
 
@@ -15,7 +15,7 @@ class ArticleController extends Controller
      */
     public function index()
     {
-        $articles = article::with('sousFamille')->get();
+        $articles = Article::with('sousFamille')->get();
         return view('article.index', compact('articles'));
     }
     
@@ -26,7 +26,6 @@ class ArticleController extends Controller
      */
     public function create()
     {
-        
         $sousFamilles = SousFamille::all();
         return view('article.create', compact('sousFamilles'));
     }
@@ -38,37 +37,32 @@ class ArticleController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-   
     {
+        // Validation des données du formulaire
         $validatedData = $request->validate([
             'designation' => 'required|max:255',
             'prix_ht' => 'required|numeric',
             'qte' => 'required|numeric',
             'stock' => 'required|numeric',
             'sousfamille_id' => 'required|exists:sous_familles,id', // Assurez-vous que la sous-famille existe en base de données
-            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048', // Validation pour le champ image (facultatif et ajustable selon vos besoins)
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:20480', // Validation pour le champ image (facultatif et ajustable selon vos besoins)
         ]);
-
+    
         // Vérifiez si une image a été téléchargée
         if ($request->hasFile('image')) {
-            $image = $request->file('image');
-            $imageName = time() . '.' . $image->getClientOriginalExtension();
-            $image->storeAs('public/images', $imageName); // Stockez l'image dans le répertoire de stockage
-        } else {
-            $imageName = 'default.jpg'; // Utilisez une image par défaut si aucune image n'est téléchargée
+            // Stockez l'image dans le répertoire public/images
+            $imagePath = $request->file('image')->store('images', 'public');
+    
+            // Ajoutez le chemin de l'image aux données validées
+            $validatedData['image_path'] = $imagePath;
         }
-
-        // Créez l'article avec les données validées et l'image
-        Article::create([
-            'designation' => $validatedData['designation'],
-            'prix_ht' => $validatedData['prix_ht'],
-            'qte' => $validatedData['qte'],
-            'stock' => $validatedData['stock'],
-            'image' => $imageName,
-            'sousfamille_id' => $validatedData['sousfamille_id'],
-        ]);
-
-        return redirect('/article')->with('success', 'Article ajouté avec succès');
+    
+        // Créez l'article avec les données validées
+        Article::create($validatedData);
+    
+        // Redirigez l'utilisateur vers la liste des articles avec un message de succès
+        return redirect()->route('article.index')->with('success', 'Article ajouté avec succès');
     }
+    
 
 }

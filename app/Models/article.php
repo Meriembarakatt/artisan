@@ -16,12 +16,15 @@ class article extends Model
         'prix_ht',
         'qte',
         'stock',
-        'photo',
+        'image',
         'sousfamille_id'
     ];
 
     public function SousFamille()
-    {
-        return $this->belongsTo(SousFamille::class, 'sousfamille_id');
+   {
+       return $this->belongsTo(SousFamille::class, 'sousfamille_id');
     }
+  //   public function getImageAttribute(){
+      //   return $value??'images/image1.jpg';
+  //  } 
 }

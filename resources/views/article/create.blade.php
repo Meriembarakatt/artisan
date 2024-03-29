@@ -4,8 +4,12 @@
         @csrf
         <div class="form-group">
             <label for="designation">Désignation</label>
-            <input type="text" class="form-control" id="designation" name="designation" required>
+            <input type="text" class="form-control" id="designation" name="designation">
+            @error('designation')
+                <div class="text-danger">{{ $message }}</div>
+            @enderror
         </div>
+
         <div class="form-group">
             <label for="prix_ht">Prix HT</label>
             <input type="text" class="form-control" id="prix_ht" name="prix_ht" required>

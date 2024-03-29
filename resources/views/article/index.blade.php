@@ -1,14 +1,16 @@
 <a href="{{ route('article.create') }}">Ajouter un article</a>
+
 <div class="container">
     <h1>Liste des Articles</h1>
-    <table class="table">
+               
+    <table class="table" border=2>
         <thead>
             <tr>
                 <th>Designation</th>
                 <th>Prix HT</th>
                 <th>Quantité</th>
                 <th>Stock</th>
-                <th>Photo</th>n
+                <th>Photo</th>
                 <th>Famille</th>
                 <th>Actions</th>
             </tr>
@@ -20,17 +22,16 @@
                     <td>{{ $article->prix_ht }}</td>
                     <td>{{ $article->qte }}</td>
                     <td>{{ $article->stock }}</td>
-                    <td>
-                        @if ($article->photo)
-                            <img src="{{ asset('storage/' . $article->photo) }}" alt="{{ $article->designation }}" style="max-width: 100px;">
-                        @else
+                    <td>          
+                    @if ($article->image)
+                            <img src="{{ asset('storage/'.$article->image) }}"  style="max-width: 100px;">
+                     @else
                             Pas de photo
                         @endif
                     </td>
                     <td>{{ $article->sousFamille->name }}</td>
-                   
                     <td>
-                       
+                        <!-- Ajoutez ici les liens pour les actions -->
                     </td>
                 </tr>
             @endforeach
