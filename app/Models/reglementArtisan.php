@@ -12,7 +12,7 @@ class reglementArtisan extends Model
         'artisan_id',
         'mode_id',
         'date',
-        'motant',
+        'montant',
         
     ];
 

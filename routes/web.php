@@ -73,22 +73,49 @@ Route::delete('/details/{detail}', [DetailBrController::class, 'destroy'])->name
 
 Route::get('/reglementCl', [ReglementClController::class, 'index'])->name('reglement_cl.index');
 
-Route::get('/regArtisan', [ReglementArtisanController::class, 'index'])->name('reglement_artisan.index');
+Route::get('/reglement_artisan', [ReglementArtisanController::class, 'index'])->name('reglement_artisan.index');
+Route::get('/reglement_artisan/create', [ReglementArtisanController::class, 'create'])->name('reglement_artisan.create');
+Route::post('/reglement_artisan/store', [ReglementArtisanController::class, 'store'])->name('reglement_artisan.store');
+Route::get('/reglement_artisan/{reglementArtisan}/edit', [ReglementArtisanController::class, 'edit'])->name('reglement_artisan.edit');
+Route::put('/reglement_artisan/{reglementArtisan}', [ReglementArtisanController::class, 'update'])->name('reglement_artisan.update');
+Route::delete('/reglement_artisan/{reglementArtisan}', [ReglementArtisanController::class, 'destroy'])->name('reglement_artisan.destroy');
+Route::get('/reglement-artisan/{reglementArtisan}', [ReglementArtisanController::class, 'show'])->name('reglement_artisan.show');
 
 
-Route::get('/mode', [ModeController::class, 'index'])->name('mode.index');
+
+Route::get('/modes', [ModeController::class, 'index'])->name('modes.index');
+Route::get('/modes/create', [ModeController::class, 'create'])->name('modes.create');
+Route::post('/modes/store', [ModeController::class, 'store'])->name('modes.store');
+Route::get('/modes/{mode}', [ModeController::class, 'show'])->name('modes.show');
+Route::get('/modes/{mode}/edit', [ModeController::class, 'edit'])->name('modes.edit');
+Route::put('/modes/{mode}', [ModeController::class, 'update'])->name('modes.update');
+Route::delete('/modes/{mode}', [ModeController::class, 'destroy'])->name('modes.destroy');
 
 
 Route::get('/familles', [FamilleController::class, 'index'])->name('familles.index');
 Route::get('/create', [FamilleController::class, 'create'])->name('familles.create');
 Route::post('/familles/store', [FamilleController::class, 'store'])->name('familles.store');
 Route::delete('/familles/{famille}',[ FamilleController::class,'destroy'])->name('familles.destroy');
+Route::get('/familles/{famille}/edit', [FamilleController::class, 'edit'])->name('familles.edit');
+Route::get('/familles/{famille}', [FamilleController::class, 'show'])->name('familles.show');
+Route::put('/familles/{famille}', [FamilleController::class, 'update'])->name('familles.update');
+ 
 
+<<<<<<< HEAD
+=======
 
-Route::get('/sousfamille', [SousFamilleController::class, 'index'])->name('sousfamille.index');
-Route::get('/ajoutersousfamille', [SousFamilleController::class, 'create'])->name('sous-familles.create');
-Route::post('/sousfamille/store', [SousFamilleController::class, 'store'])->name('sous-familles.store');
-Route::delete('/sousfamille/{sousFamille}',[ SousFamilleController::class,'destroy'])->name('sous-familles.destroy');
+Route::get('/article', [ArticleController::class, 'index'])->name('article.index');
+Route::get('/ajouterarticle', [ArticleController::class, 'create'])->name('article.create');
+Route::post('/article/store', [ArticleController::class, 'store'])->name('article.store');
+>>>>>>> 1b6dedf2719e1223c0255e8f067072482982708d
+
+Route::get('/sousfamilles', [SousFamilleController::class, 'index'])->name('sousfamille.index');
+Route::get('/sousfamilles/create', [SousFamilleController::class, 'create'])->name('sousfamille.create');
+Route::post('/sousfamilles/store', [SousFamilleController::class, 'store'])->name('sousfamille.store');
+Route::get('/sousfamilles/{sousFamille}', [SousFamilleController::class, 'show'])->name('sousfamille.show');
+Route::get('/sousfamilles/{sousFamille}/edit', [SousFamilleController::class, 'edit'])->name('sousfamille.edit');
+Route::put('/sousfamilles/{sousFamille}', [SousFamilleController::class, 'update'])->name('sousfamille.update');
+Route::delete('/sousfamilles/{sousFamille}', [SousFamilleController::class, 'destroy'])->name('sousfamille.destroy');
 
 
 Route::get('/article', [ArticleController::class, 'index']);

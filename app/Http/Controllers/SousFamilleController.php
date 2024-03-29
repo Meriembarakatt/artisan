@@ -15,7 +15,7 @@ class SousFamilleController extends Controller
     public function index()
     {
         $sousFamilles = SousFamille::all();
-        return view('sous_famille.index', compact('sousFamilles'));
+        return view('sousfamille.index', compact('sousFamilles'));
     }
 
     /**
@@ -26,7 +26,7 @@ class SousFamilleController extends Controller
     public function create()
     {
         $familles = Famille::all();
-        return view('sous_famille.create', compact('familles'));
+        return view('sousfamille.create', compact('familles'));
     }
     
 
@@ -45,7 +45,7 @@ class SousFamilleController extends Controller
 
         SousFamille::create($validatedData);
 
-        return redirect('/sousfamille')->with('success', 'sousfamille ajoutée avec succès');
+        return redirect('/sousfamilles')->with('success', 'sousfamille ajoutée avec succès');
     }
 
     /**
@@ -55,9 +55,10 @@ class SousFamilleController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show(SousFamille $sousFamille)
-    {
-        return view('sous_famille.show', compact('sousFamille'));
-    }
+{
+    $famille = $sousFamille->famille;
+    return view('sousfamille.show', compact('sousFamille', 'famille'));
+}
 
     /**
      * Show the form for editing the specified resource.
@@ -67,8 +68,10 @@ class SousFamilleController extends Controller
      */
     public function edit(SousFamille $sousFamille)
     {
-        return view('sous_famille.edit', compact('sousFamille'));
+        $familles = Famille::all();
+        return view('sousfamille.edit', compact('sousFamille', 'familles'));
     }
+    
 
     /**
      * Update the specified resource in storage.
@@ -86,7 +89,7 @@ class SousFamilleController extends Controller
 
         $sousFamille->update($validatedData);
 
-        return redirect('/sous-familles')->with('success', 'Sous-famille mise à jour avec succès');
+        return redirect('/sousfamilles')->with('success', 'Sous-famille mise à jour avec succès');
     }
 
     /**

@@ -51,10 +51,10 @@ class FamilleController extends Controller
      * @param  \App\Models\famille  $famille
      * @return \Illuminate\Http\Response
      */
-    public function show(famille $famille)
-    {
-        //
-    }
+    public function show(Famille $famille)
+{
+    return view('familles.show', ['famille' => $famille]);
+}
 
     /**
      * Show the form for editing the specified resource.
@@ -62,22 +62,30 @@ class FamilleController extends Controller
      * @param  \App\Models\famille  $famille
      * @return \Illuminate\Http\Response
      */
-    public function edit(famille $famille)
+    public function edit(Famille $famille)
     {
-        //
+        return view('familles.edit', ['famille' => $famille]);
     }
 
-    /**
+/**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\famille  $famille
+     * @param  \App\Models\Famille  $famille
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, famille $famille)
+    public function update(Request $request, Famille $famille)
     {
-        //
+        $validatedData = $request->validate([
+            'famille' => 'required|max:255',
+            // Ajoutez ici d'autres règles de validation pour les autres champs
+        ]);
+
+        $famille->update($validatedData);
+
+        return redirect('/familles')->with('success', 'Famille mise à jour avec succès');
     }
+
 
     /**
      * Remove the specified resource from storage.
