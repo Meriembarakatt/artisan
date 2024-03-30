@@ -9,7 +9,7 @@ use Illuminate\Http\Request;
 class ArticleController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Affiche une liste des articles.
      *
      * @return \Illuminate\Http\Response
      */
@@ -20,7 +20,7 @@ class ArticleController extends Controller
     }
     
     /**
-     * Show the form for creating a new resource.
+     * Affiche le formulaire de création d'un nouvel article.
      *
      * @return \Illuminate\Http\Response
      */
@@ -29,55 +29,99 @@ class ArticleController extends Controller
         $sousFamilles = SousFamille::all();
         return view('article.create', compact('sousFamilles'));
     }
-
+    
     /**
-     * Store a newly created resource in storage.
+     * Valide et stocke un nouvel article.
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
-        // Validation des données du formulaire
-        // $validatedData = $request->validate([
-        //     'designation' => 'required|max:255',
-        //     'prix_ht' => 'required|numeric',
-        //     'qte' => 'required|numeric',
-        //     'stock' => 'required|numeric',
-        //     'sousfamille_id' => 'required|exists:sous_familles,id', // Assurez-vous que la sous-famille existe en base de données
-        //     'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:20480', // Validation pour le champ image (facultatif et ajustable selon vos besoins)
-        // ]);
-    
-        // // Vérifiez si une image a été téléchargée
-        // if ($request->hasFile('image')) {
-        //     // Stockez l'image dans le répertoire public/images
-        //     $imagePath = $request->file('image')->store('images', 'public');
-    
-        //     // Ajoutez le chemin de l'image aux données validées
-        //     $validatedData['image'] = "123";
-        // };
-        
-        // dd($validatedData);
-        // // Créez l'article avec les données validées
-        $article=new Article();
-        $article->designation="test";
-        $article->prix_ht=123;
-        $article->stock=345;
-        $article->qte=345;
-        $article->sousfamille_id=2;
-         $article->image="test";
-        Article::create([
-            "designation"=>"test",
-        "prix_ht"=>123,
-        "stock"=>345,
-       "qte"=>345,
-        "sousfamille_id"=>2,
-        "image"=>"test"
+        $validatedData = $request->validate([
+            'designation' => 'required|max:255',
+            'prix_ht' => 'required|numeric',
+            'qte' => 'required|numeric',
+            'stock' => 'required|numeric',
+            'sousfamille_id' => 'required|exists:sous_familles,id',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:20480',
         ]);
     
-        // Redirigez l'utilisateur vers la liste des articles avec un message de succès
+        if ($request->hasFile('image')) {
+            $imagePath = $request->file('image')->store('images', 'public');
+            $validatedData['image'] = $imagePath;
+        }
+    
+        Article::create($validatedData);
+    
         return redirect()->route('article.index')->with('success', 'Article ajouté avec succès');
     }
     
+    public function show($id)
+    {
+        $article = Article::findOrFail($id);
+        return view('article.show', compact('article'));
+    }
 
+    /**
+     * Affiche le formulaire de modification d'un article.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+   
+   
+    public function edit($id)
+{
+    $article = Article::findOrFail($id);
+    $sousFamilles = SousFamille::all();
+    
+    return view('article.edit', compact('article', 'sousFamilles'));
+}
+
+
+    /**
+     * Met à jour un article spécifique dans la base de données.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Request $request, $id)
+    {
+        $validatedData = $request->validate([
+            'designation' => 'required|max:255',
+            'prix_ht' => 'required|numeric',
+            'qte' => 'required|numeric',
+            'stock' => 'required|numeric',
+            'sousfamille_id' => 'required|exists:sous_familles,id',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+        ]);
+
+        $article = Article::findOrFail($id);
+        $article->fill($validatedData);
+
+        if ($request->hasFile('image')) {
+            $imagePath = $request->file('image')->store('images', 'public');
+            $article->image = $imagePath;
+        }
+
+        $article->save();
+
+        return redirect()->route('article.index')->with('success', 'Article mis à jour avec succès');
+    }
+
+    /**
+     * Supprime un article spécifique de la base de données.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy($id)
+    {
+        $article = Article::findOrFail($id);
+        $article->delete();
+
+        return redirect()->route('article.index')->with('success', 'Article supprimé avec succès');
+    }
 }

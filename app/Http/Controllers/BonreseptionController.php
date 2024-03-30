@@ -33,6 +33,7 @@ class BonreseptionController extends Controller
         return redirect('/bonreseption')->with('success', 'Bon de réception ajouté avec succès');
     }
 
+    
     public function show(Bonreseption $bonreception)
     {
         return view('bonreseption.show', compact('bonreception'));

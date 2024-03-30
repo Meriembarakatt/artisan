@@ -20,12 +20,18 @@
         <label for="password">Mot de passe</label>
         <input type="password" id="password" name="password">
         <label for="adresse">Adresse</label>
-        <input type="text" id="adresse" name="adresse">
+        <input type="text" id="adress" name="adress">
         <label for="ville">Ville</label>
         <input type="text" id="ville" name="ville">
+
         <label for="fonction">Fonction</label>
         <input type="text" id="fonction" name="fonction">
+
+        <label for="tell">tell</label>
+        <input type="text" id="tell" name="tell">
+       
         <button type="submit">Ajouter l'artisan</button>
     </form>
+    
 </body>
 </html>

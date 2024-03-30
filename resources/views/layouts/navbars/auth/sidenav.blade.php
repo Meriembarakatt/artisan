@@ -65,7 +65,7 @@
                 </a>
             </li>
            
-            
+
            
             <li class="nav-item">
                 <a class="nav-link {{ Route::currentRouteName() == 'client' ? 'active' : '' }}" href="{{ route('client.index') }}">

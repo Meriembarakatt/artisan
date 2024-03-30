@@ -5,8 +5,9 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Article extends Model
-{ use HasFactory;
+class Article extends Model{
+    use HasFactory;
+
 
    
 
@@ -19,11 +20,13 @@ class Article extends Model
         'sousfamille_id'
     ];
 
-    public function SousFamille()
-   {
-       return $this->belongsTo(SousFamille::class, 'sousfamille_id');
+    public function getImageAttribute($value)
+    {
+        return $value ?: 'images/default.jpg';
     }
-  //   public function getImageAttribute(){
-      //   return $value??'images/image1.jpg';
-  //  } 
+    
+    public function sousFamille()
+    {
+        return $this->belongsTo(SousFamille::class, 'sousfamille_id');
+    }
 }

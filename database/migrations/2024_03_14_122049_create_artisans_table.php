@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('tell');
             $table->string('ville');
             $table->string('fonction');
+            
             $table->timestamps();
         });
     }

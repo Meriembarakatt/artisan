@@ -18,9 +18,6 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/article', [ArticleController::class, 'index'])->name('article.index');
-Route::get('/ajouterarticle', [ArticleController::class, 'create'])->name('article.create');
-Route::post('/article/store', [ArticleController::class, 'store'])->name('article.store');
 
 
 Route::get('/client', [ClientController::class, 'index'])->name('client.index');
@@ -50,12 +47,12 @@ Route::delete('/detailsvente/{detailvente}', [DetailventeController::class, 'des
 
 Route::get('/artisan', [ArtisanController::class, 'index'])->name('artisan.index');
 Route::get('/artisan/create', [ArtisanController::class, 'create'])->name('artisan.create');
-Route::post('/artisan/store', [ArtisanController::class, 'store'])->name('artisan.store');
+
 Route::get('/artisan/{artisan}', [ArtisanController::class, 'show'])->name('artisan.show');
 Route::get('/artisan/{artisan}/edit', [ArtisanController::class, 'edit'])->name('artisan.edit');
 Route::put('/artisan/{artisan}', [ArtisanController::class, 'update'])->name('artisan.update');
 Route::delete('/artisan/{artisan}',[ ArtisanController::class,'destroy'])->name('artisan.destroy');
-
+Route::post('/artisan', [ArtisanController::class, 'store'])->name('artisan.store');
 
 Route::get('/bonreseption', [BonreseptionController::class, 'index'])->name('bonreseption.index');
 Route::get('/ajouterbonreseption', [BonreseptionController::class, 'create'])->name('bonreseption.create');
@@ -102,9 +99,31 @@ Route::put('/familles/{famille}', [FamilleController::class, 'update'])->name('f
  
 
 
-Route::get('/article', [ArticleController::class, 'index'])->name('article.index');
-Route::get('/ajouterarticle', [ArticleController::class, 'create'])->name('article.create');
-Route::post('/article/store', [ArticleController::class, 'store'])->name('article.store');
+
+// Route::get('/article', [ArticleController::class, 'index'])->name('article.index');
+// Route::get('/ajouterarticle', [ArticleController::class, 'create'])->name('article.create');
+// Route::post('/article/store', [ArticleController::class, 'store'])->name('article.store');
+// Route pour afficher la liste des articles
+Route::get('/articles', [ArticleController::class, 'index'])->name('article.index');
+
+// Route pour afficher le formulaire de création d'un nouvel article
+Route::get('/articles/create', [ArticleController::class, 'create'])->name('article.create');
+
+// Route pour stocker un nouvel article dans la base de données
+Route::post('/articles', [ArticleController::class, 'store'])->name('article.store');
+
+// Route pour afficher les détails d'un article spécifique
+Route::get('/articles/{article}', [ArticleController::class, 'show'])->name('article.show');
+
+// Route pour afficher le formulaire de modification d'un article
+Route::get('/articles/{article}/edit', [ArticleController::class, 'edit'])->name('article.edit');
+
+// Route pour mettre à jour un article dans la base de données
+Route::put('/articles/{article}', [ArticleController::class, 'update'])->name('article.update');
+
+// Route pour supprimer un article de la base de données
+Route::delete('/articles/{article}', [ArticleController::class, 'destroy'])->name('article.destroy');
+
 
 Route::get('/sousfamilles', [SousFamilleController::class, 'index'])->name('sousfamille.index');
 Route::get('/sousfamilles/create', [SousFamilleController::class, 'create'])->name('sousfamille.create');
@@ -113,11 +132,6 @@ Route::get('/sousfamilles/{sousFamille}', [SousFamilleController::class, 'show']
 Route::get('/sousfamilles/{sousFamille}/edit', [SousFamilleController::class, 'edit'])->name('sousfamille.edit');
 Route::put('/sousfamilles/{sousFamille}', [SousFamilleController::class, 'update'])->name('sousfamille.update');
 Route::delete('/sousfamilles/{sousFamille}', [SousFamilleController::class, 'destroy'])->name('sousfamille.destroy');
-
-
-Route::get('/article', [ArticleController::class, 'index']);
-Route::get('/ajouterarticle', [ArticleController::class, 'create'])->name('article.create');
-Route::post('/article/store', [ArticleController::class, 'store'])->name('article.store');
 
 
 

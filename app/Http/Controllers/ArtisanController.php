@@ -27,13 +27,23 @@ class ArtisanController extends Controller
             'password' => 'required|min:6',
             'adress' => 'required',
             'ville' => 'required',
+            'tell' => 'nullable',
             'fonction' => 'required',
+            
         ]);
+    
+        // Hasher le mot de passe avant de le stocker dans la base de données
+     //   $validatedData['password'] = bcrypt($validatedData['password']);
+    
+        // Créer l'artisan avec les données validées
+         Artisan::create($validatedData);
         
-        Artisan::create($validatedData);
-        return redirect('/artisan')->with('success', 'Artisan ajouté avec succès');
+    
+     
+            return redirect('/artisan')->with('success', 'Artisan ajouté avec succès');
+       
     }
-
+    
     public function show(Artisan $artisan)
     {
         // Vous pouvez implémenter la logique pour afficher un artisan spécifique ici
@@ -49,8 +59,10 @@ class ArtisanController extends Controller
         // Vous pouvez implémenter la logique pour mettre à jour un artisan ici
     }
 
-    public function destroy(Artisan $artisan)
-    {
+    public function destroy(Artisan $artisan )
+  {
+        
+       // $artisan=Artisan::find($id);
         $artisan->delete();
         return redirect()->route('artisan.index');
      }
