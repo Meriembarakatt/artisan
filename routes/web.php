@@ -33,6 +33,8 @@ Route::get('/ventes/{vente}', [VenteController::class, 'show'])->name('vente.sho
 Route::get('/ventes/{vente}/edit', [VenteController::class, 'edit'])->name('vente.edit');
 Route::put('/ventes/{vente}', [VenteController::class, 'update'])->name('vente.update');
 Route::delete('/ventes/{vente}', [VenteController::class, 'destroy'])->name('vente.destroy');
+Route::post('/ventes/detail/bulkstore', 'App\Http\Controllers\VenteController@bulkStore')->name('vente.detail.bulkstore');
+
 
 
 Route::get('/detailsvente', [DetailventeController::class, 'index'])->name('detailsvente.index');

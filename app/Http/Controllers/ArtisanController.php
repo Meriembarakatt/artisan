@@ -30,7 +30,7 @@ class ArtisanController extends Controller
             'tell' => 'nullable',
             'fonction' => 'required',
             
-        ]);
+        ]); 
     
         // Hasher le mot de passe avant de le stocker dans la base de données
      //   $validatedData['password'] = bcrypt($validatedData['password']);
@@ -60,8 +60,7 @@ class ArtisanController extends Controller
     }
 
     public function destroy(Artisan $artisan )
-  {
-        
+  {   
        // $artisan=Artisan::find($id);
         $artisan->delete();
         return redirect()->route('artisan.index');

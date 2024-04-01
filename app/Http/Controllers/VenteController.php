@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use App\Models\Client;
 use App\Models\Vente;
+use App\Models\Article;
 use Illuminate\Http\Request;
 
 class VenteController extends Controller
@@ -13,7 +14,7 @@ class VenteController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {
+    { 
         $ventes = Vente::all();
         return view('vente.index', compact('ventes'));
     }
@@ -24,9 +25,10 @@ class VenteController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function create()
-    {
-        $clients = Client::all(); 
-        return view('vente.create', compact('clients'));
+    {$articles = Article::all();
+        $clients = Client::all();
+        $ventes = Vente::all(); 
+        return view('vente.create', compact('clients','articles','ventes'));
     }
 
     /**
@@ -46,6 +48,23 @@ class VenteController extends Controller
 
         return redirect('/ventes')->with('success', 'Vente ajoutée avec succès');
     }
+
+
+
+    public function bulkStore(Request $request) {
+        foreach ($request->all() as $enregistrement) {
+            $detailVente = new DetailVente(); // Remplacez DetailVente par le nom de votre modèle pour les détails de vente
+            $detailVente->vente_id = $enregistrement['vente'];
+            $detailVente->article_id = $enregistrement['article'];
+            $detailVente->quantite = $enregistrement['quantite'];
+            $detailVente->prix = $enregistrement['prix'];
+            $detailVente->save();
+        }
+    
+        return response()->json(['message' => 'Enregistrements de détails de vente enregistrés avec succès'], 200);
+    }
+
+
 
     public function destroy(vente $vente)
     {
