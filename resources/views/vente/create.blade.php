@@ -130,9 +130,11 @@
         alert('Enregistrements sauvegardés avec succès !');
     })
     .catch(error => {
-        console.error('Erreur:', error);
-        alert('Une erreur s\'est produite lors de l\'enregistrement des enregistrements');
-    });
+    console.error('Erreur lors de l\'enregistrement:', error);
+    alert('Une erreur s\'est produite lors de l\'enregistrement des enregistrements');
+});
+
 }
+
 
 </script>

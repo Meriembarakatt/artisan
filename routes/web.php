@@ -24,6 +24,7 @@ Route::get('/client', [ClientController::class, 'index'])->name('client.index');
 Route::get('/ajouterclient', [ClientController::class, 'create'])->name('client.create');
 Route::post('/client/store', [ClientController::class, 'store'])->name('client.store');
 Route::delete('/client/{client}',[ ClientController::class,'destroy'])->name('client.destroy');
+Route::get('/clients/{client}/reglement', [ReglementController::class, 'show'])->name('reglement_cl.show');
 
 
 Route::get('/ventes', [VenteController::class, 'index'])->name('vente.index');
@@ -33,7 +34,7 @@ Route::get('/ventes/{vente}', [VenteController::class, 'show'])->name('vente.sho
 Route::get('/ventes/{vente}/edit', [VenteController::class, 'edit'])->name('vente.edit');
 Route::put('/ventes/{vente}', [VenteController::class, 'update'])->name('vente.update');
 Route::delete('/ventes/{vente}', [VenteController::class, 'destroy'])->name('vente.destroy');
-Route::post('/ventes/detail/bulkstore', 'App\Http\Controllers\VenteController@bulkStore')->name('vente.detail.bulkstore');
+Route::post('/ventes/detail/bulkstore', [VenteController::class, 'store'])->name('vente.detail.bulkstore');
 
 
 

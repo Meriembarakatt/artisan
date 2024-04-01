@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use App\Models\Client;
 use App\Models\Vente;
 use App\Models\Article;
+use App\Models\DetailVente;
 use Illuminate\Http\Request;
 
 class VenteController extends Controller
@@ -45,6 +46,7 @@ class VenteController extends Controller
         ]);
 
         Vente::create($validatedData);
+        
 
         return redirect('/ventes')->with('success', 'Vente ajoutée avec succès');
     }
