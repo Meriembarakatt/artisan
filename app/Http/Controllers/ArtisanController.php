@@ -8,17 +8,27 @@ use Illuminate\Http\Request;
 class ArtisanController extends Controller
 {
     public function index()
+<<<<<<< HEAD
     {  $artisans = Artisan::orderBy('id', 'desc')->paginate(10); 
+=======
+    {
+        // Récupère tous les artisans depuis la base de données
+        $artisans = Artisan::all();
+
+        // Retourne la vue 'artisan.index' avec la liste des artisans
+>>>>>>> 2fe731ca63081007984f7172faeb9965c81b43d0
         return view('artisan.index', ['artisans' => $artisans]);
     }
 
     public function create()
     {
+        // Retourne la vue 'artisan.create' pour créer un nouvel artisan
         return view('artisan.create');
     }
 
     public function store(Request $request)
     {
+        // Valide les données du formulaire
         $validatedData = $request->validate([
             'nom' => 'required|max:255',
             'prenom' => 'required|max:255',
@@ -28,40 +38,54 @@ class ArtisanController extends Controller
             'ville' => 'required',
             'tell' => 'nullable',
             'fonction' => 'required',
-            
-        ]); 
-    
-        // Hasher le mot de passe avant de le stocker dans la base de données
-     //   $validatedData['password'] = bcrypt($validatedData['password']);
-    
-        // Créer l'artisan avec les données validées
-         Artisan::create($validatedData);
-        
-    
-     
-            return redirect('/artisan')->with('success', 'Artisan ajouté avec succès');
-       
+        ]);
+
+        // Crée un nouvel artisan avec les données validées
+        Artisan::create($validatedData);
+
+        // Redirige vers la liste des artisans avec un message de succès
+        return redirect('/artisan')->with('success', 'Artisan ajouté avec succès');
     }
-    
+
     public function show(Artisan $artisan)
     {
-        // Vous pouvez implémenter la logique pour afficher un artisan spécifique ici
+        // Affiche les détails d'un artisan spécifique (non implémenté dans cet exemple)
+        return view('artisan.show', ['artisan' => $artisan]);
     }
 
     public function edit(Artisan $artisan)
     {
-        // Vous pouvez implémenter la logique pour afficher le formulaire d'édition ici
+        // Affiche le formulaire d'édition pour un artisan donné (non implémenté dans cet exemple)
+        return view('artisan.edit', ['artisan' => $artisan]);
     }
 
     public function update(Request $request, Artisan $artisan)
     {
-        // Vous pouvez implémenter la logique pour mettre à jour un artisan ici
+        // Valide les données du formulaire d'édition
+        $validatedData = $request->validate([
+            'nom' => 'required|max:255',
+            'prenom' => 'required|max:255',
+            'email' => 'required|email|unique:artisans,email,' . $artisan->id,
+            'password' => 'required|min:6',
+            'adress' => 'required',
+            'ville' => 'required',
+            'tell' => 'nullable',
+            'fonction' => 'required',
+        ]);
+
+        // Met à jour les informations de l'artisan avec les données validées
+        $artisan->update($validatedData);
+
+        // Redirige vers la liste des artisans avec un message de succès
+        return redirect('/artisan')->with('success', 'Artisan mis à jour avec succès');
     }
 
-    public function destroy(Artisan $artisan )
-  {   
-       // $artisan=Artisan::find($id);
+    public function destroy(Artisan $artisan)
+    {
+        // Supprime l'artisan de la base de données
         $artisan->delete();
-        return redirect()->route('artisan.index');
-     }
+
+        // Redirige vers la liste des artisans avec un message de succès
+        return redirect('/artisan')->with('success', 'Artisan supprimé avec succès');
+    }
 }

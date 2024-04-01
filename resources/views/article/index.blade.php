@@ -1,16 +1,21 @@
 @extends('layouts.app')
 
 @section('content')
+@include('layouts.navbars.auth.topnav', ['title' => 'Dashboard'])
     <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-md-8">
+        <div class="row">
+            <div class="col-md-12">
                 <div class="card">
-                    <div class="card-header">Liste des Articles</div>
-
+                    <div class="card-header">
+                        Liste des article
+                        <a href="{{ route('article.create') }}" class="btn btn-success mb-3">Ajouter un article</a>
+                    </div>
                     <div class="card-body">
-                        <a href="{{ route('article.create') }}" class="btn btn-success mb-3">Ajouter un Article</a>
+                        @if(session('success'))
+                            <div class="alert alert-success">{{ session('success') }}</div>
+                        @endif
 
-                        <table class="table">
+                             <table class="table">
                             <thead>
                                 <tr>
                                     <th>ID</th>

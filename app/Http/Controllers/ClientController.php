@@ -1,96 +1,76 @@
 <?php
 
-
 namespace App\Http\Controllers;
 
 use App\Models\Client;
-
 use Illuminate\Http\Request;
 
 class ClientController extends Controller
 {
-      /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
+<<<<<<< HEAD
     {   $clients = Client::orderBy('id', 'desc')->paginate(10); 
        
        
+=======
+    {   
+        $clients = Client::all();
+>>>>>>> 2fe731ca63081007984f7172faeb9965c81b43d0
         return view('client.index', ['clients' => $clients]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
         return view('client.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
         $validatedData = $request->validate([
             'nom' => 'required|max:255',
-            // Ajoutez ici les autres règles de validation pour les autres champs
+            'prenom' => 'required|max:255',
+            'tell' => 'required|max:20',
+            'email' => 'required|email|max:255',
+            'adress' => 'required|max:255',
+            'ville' => 'required|max:255',
         ]);
-        Client::create($request->all()) ;
-            return redirect('/client')->with('succes','client Ajoute avec succes');
-        
+
+        Client::create($validatedData);
+
+        return redirect('/clients')->with('success', 'Client ajouté avec succès');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\famille  $famille
-     * @return \Illuminate\Http\Response
-     */
-    public function show(famille $famille)
+    public function show(Client $client)
+{
+    return view('client.show', compact('client'));
+}
+
+
+    public function edit(Client $client)
     {
-        //
+        return view('client.edit', compact('client'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\famille  $famille
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(famille $famille)
+    public function update(Request $request, Client $client)
     {
-        //
+        $validatedData = $request->validate([
+            'nom' => 'required|max:255',
+            'prenom' => 'required|max:255',
+            'tell' => 'required|max:20',
+            'email' => 'required|email|max:255',
+            'adress' => 'required|max:255',
+            'ville' => 'required|max:255',
+        ]);
+
+        $client->update($validatedData);
+
+        return redirect()->route('client.index')->with('success', 'Client mis à jour avec succès');
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\famille  $famille
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, famille $famille)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\famille  $famille
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(client $client)
+    public function destroy(Client $client)
     {
         $client->delete();
-        return redirect()->route('client.index');
+
+        return redirect()->route('client.index')->with('success', 'Client supprimé avec succès');
     }
 }

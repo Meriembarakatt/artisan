@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use App\Models\Artisan;
 use App\Models\Mode;
 use App\Models\reglementArtisan;
@@ -8,27 +9,16 @@ use Illuminate\Http\Request;
 
 class ReglementArtisanController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
         $regArtisans = reglementArtisan::all();
         return view('reglement_artisan.index', compact('regArtisans'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
         $artisans = Artisan::all();
         $modes = Mode::all();
-        
         return view('reglement_artisan.create', compact('artisans', 'modes'));
     }
 
@@ -36,12 +26,7 @@ class ReglementArtisanController extends Controller
     {
         return view('reglement_artisan.show', compact('reglementArtisan'));
     }
-        
- 
 
-       
-
-        
     public function store(Request $request)
     {
         $validatedData = $request->validate([
@@ -52,7 +37,6 @@ class ReglementArtisanController extends Controller
         ]);
 
         reglementArtisan::create($validatedData);
-           
 
         return redirect()->route('reglement_artisan.index')->with('success', 'Reglement artisan ajouté avec succès.');
     }
@@ -61,7 +45,6 @@ class ReglementArtisanController extends Controller
     {
         $artisans = Artisan::all();
         $modes = Mode::all();
-        
         return view('reglement_artisan.edit', compact('reglementArtisan', 'artisans', 'modes'));
     }
 

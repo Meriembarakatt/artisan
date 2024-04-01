@@ -20,11 +20,22 @@ Route::get('/', function () {
 
 
 
+<<<<<<< HEAD
 Route::get('/client', [ClientController::class, 'index'])->name('client.index');
 Route::get('/ajouterclient', [ClientController::class, 'create'])->name('client.create');
 Route::post('/client/store', [ClientController::class, 'store'])->name('client.store');
 Route::delete('/client/{client}',[ ClientController::class,'destroy'])->name('client.destroy');
 Route::get('/clients/{client}/reglement', [ReglementController::class, 'show'])->name('reglement_cl.show');
+=======
+
+Route::get('/clients', [ClientController::class, 'index'])->name('client.index');
+Route::get('/clients/create', [ClientController::class, 'create'])->name('client.create');
+Route::post('/clients/store', [ClientController::class, 'store'])->name('client.store');
+Route::get('/clients/{client}', [ClientController::class, 'show'])->name('client.show');
+Route::get('/clients/{client}/edit', [ClientController::class, 'edit'])->name('client.edit');
+Route::put('/clients/{client}', [ClientController::class, 'update'])->name('client.update');
+Route::delete('/clients/{client}', [ClientController::class, 'destroy'])->name('client.destroy');
+>>>>>>> 2fe731ca63081007984f7172faeb9965c81b43d0
 
 
 Route::get('/ventes', [VenteController::class, 'index'])->name('vente.index');
