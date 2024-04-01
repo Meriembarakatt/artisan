@@ -5,14 +5,14 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class reglementCl extends Model
+class ReglementCl extends Model
 {
     use HasFactory;
     protected $fillable = [
         'client_id',
         'mode_id',
         'date',
-        'motant',
+        'montant',
         
     ];
 

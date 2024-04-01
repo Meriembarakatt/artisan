@@ -70,7 +70,15 @@ Route::get('/details/{detail_Br}/edit', [DetailBrController::class, 'edit'])->na
 Route::put('/details/{detail_Br}', [DetailBrController::class, 'update'])->name('details.update');
 Route::delete('/details/{detail}', [DetailBrController::class, 'destroy'])->name('details.destroy');
 
-Route::get('/reglementCl', [ReglementClController::class, 'index'])->name('reglement_cl.index');
+
+
+Route::get('/reglements', [ReglementClController::class, 'index'])->name('reglement_cl.index');
+Route::get('/reglements/create', [ReglementClController::class, 'create'])->name('reglement_cl.create');
+Route::post('/reglements/store', [ReglementClController::class, 'store'])->name('reglement_cl.store');
+Route::get('/reglements/{reglementCl}', [ReglementClController::class, 'show'])->name('reglement_cl.show');
+Route::get('/reglements/{reglementCl}/edit', [ReglementClController::class, 'edit'])->name('reglement_cl.edit');
+Route::put('/reglements/{reglementCl}', [ReglementClController::class, 'update'])->name('reglement_cl.update');
+Route::delete('/reglements/{reglementCl}', [ReglementClController::class, 'destroy'])->name('reglement_cl.destroy');
 
 Route::get('/reglement_artisan', [ReglementArtisanController::class, 'index'])->name('reglement_artisan.index');
 Route::get('/reglement_artisan/create', [ReglementArtisanController::class, 'create'])->name('reglement_artisan.create');
