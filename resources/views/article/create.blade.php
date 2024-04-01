@@ -1,29 +1,6 @@
 
 
-        <div class="form-group">
-            <label for="prix_ht">Prix HT</label>
-            <input type="text" class="form-control" id="prix_ht" name="prix_ht" >
-        </div>
-        <div class="form-group">
-            <label for="qte">Quantité</label>
-            <input type="text" class="form-control" id="qte" name="qte" >
-        </div>
-        <div class="form-group">
-            <label for="stock">Stock</label>
-            <input type="text" class="form-control" id="stock" name="stock" >
-        </div>
-        <div class="form-group">
-            <label for="sous_famille_id">Sous-Famille</label>
-            <select class="form-control" id="sous_famille_id" name="sous_famille_id" >
-                @foreach ($sousFamilles as $sousFamille)
-                    <option value="{{$sousFamille->id }}">{{ $sousFamille->name }}</option>
-                @endforeach
-            </select>
-        </div>
-        <div class="form-group">
-            <label for="photo">Photo</label>
-            <input type="file" class="form-control-file" id="photo" name="photo">
-        </div>
+    
         
         <!-- Ajoutez d'autres champs si nécessaire -->
 

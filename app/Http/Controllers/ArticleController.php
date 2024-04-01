@@ -14,8 +14,8 @@ class ArticleController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {
-        $articles = Article::with('sousFamille')->get();
+    { $articles = Article::orderBy('id', 'desc')->with('sousFamille')->paginate(10);
+
         return view('article.index', compact('articles'));
     }
     

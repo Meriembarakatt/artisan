@@ -9,8 +9,8 @@ use Illuminate\Http\Request;
 class BonreseptionController extends Controller
 {
     public function index()
-    {
-        $bonreceptions = Bonreseption::with('artisan')->get();
+    {$bonreceptions = Bonreseption::orderBy('id', 'desc')->paginate(10); 
+       
         return view('bonreseption.index', compact('bonreceptions'));
     }
 

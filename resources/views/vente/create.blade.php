@@ -118,20 +118,17 @@
     // Envoi des données au serveur
     fetch('{{ route("vente.detail.bulkstore") }}', {
         method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-            'X-CSRF-TOKEN': '{{ csrf_token() }}'
-        },
+       
         body: JSON.stringify(data)
     })
     .then(response => response.json())
     .then(data => {
         console.log(data); // Gérer la réponse du serveur si nécessaire
-        alert('Enregistrements sauvegardés avec succès !');
+        alert("Enregistrements sauvegardés avec succès !");
     })
     .catch(error => {
-    console.error('Erreur lors de l\'enregistrement:', error);
-    alert('Une erreur s\'est produite lors de l\'enregistrement des enregistrements');
+    console.log("Erreur lors de l'enregistrement:");
+    alert("Une erreur s'est produite lors de l'enregistrement des enregistrements");
 });
 
 }

@@ -29,8 +29,7 @@
                             @method('DELETE')
                             <button type="submit" class="btn btn-danger">Delete</button>
                         </form>
-                        
-            <a href="{{ route('reglement_cl.show', ['client' => $client->id]) }}" class="btn btn-primary">Règlement</a>
+            
 
             </td>
            

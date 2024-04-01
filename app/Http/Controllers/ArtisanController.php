@@ -8,8 +8,7 @@ use Illuminate\Http\Request;
 class ArtisanController extends Controller
 {
     public function index()
-    {
-        $artisans = Artisan::all();
+    {  $artisans = Artisan::orderBy('id', 'desc')->paginate(10); 
         return view('artisan.index', ['artisans' => $artisans]);
     }
 

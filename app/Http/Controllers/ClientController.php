@@ -15,8 +15,9 @@ class ClientController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {   
-        $clients=Client::all();
+    {   $clients = Client::orderBy('id', 'desc')->paginate(10); 
+       
+       
         return view('client.index', ['clients' => $clients]);
     }
 

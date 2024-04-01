@@ -17,6 +17,7 @@ class VenteController extends Controller
     public function index()
     { 
         $ventes = Vente::all();
+        
         return view('vente.index', compact('ventes'));
     }
 
@@ -50,10 +51,8 @@ class VenteController extends Controller
 
         return redirect('/ventes')->with('success', 'Vente ajoutée avec succès');
     }
-
-
-
     public function bulkStore(Request $request) {
+        dd($request->all);
         foreach ($request->all() as $enregistrement) {
             $detailVente = new DetailVente(); // Remplacez DetailVente par le nom de votre modèle pour les détails de vente
             $detailVente->vente_id = $enregistrement['vente'];
