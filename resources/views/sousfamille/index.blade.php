@@ -1,5 +1,6 @@
+
 <div class="container">
-    <h2>Liste des Sous-familles</h2>
+    <h2>Liste des sous-Familles</h2>
     @if(session('success'))
     <div class="alert alert-success">
         {{ session('success') }}
@@ -24,17 +25,18 @@
                 <td>{{ $sousFamille->name }}</td>
                 <td>{{ $sousFamille->famille->famille }}</td>
                 <td>
-                    <form action="{{ route('sousfamille.edit', $sousFamille->id) }}" method="get" style="display: inline;">
-                        <button type="submit">Éditer</button>
+                    <form action="{{ route('sousfamille.edit', $sousFamille->id) }}" method="GET" style="display: inline;">
+                        @csrf
+                        <button type="submit" class="btn btn-primary">Éditer</button>
                     </form>
                     <form action="{{ route('sousfamille.destroy', $sousFamille->id) }}" method="POST" style="display: inline;">
                         @csrf
                         @method('DELETE')
-                        <button type="submit">Supprimer</button>
+                        <button type="submit" class="btn btn-danger" onclick="return confirm('Êtes-vous sûr de vouloir supprimer cette sous-famille ?')">Supprimer</button>
                     </form>
-                    <form action="{{ route('sousfamille.show', $sousFamille->id) }}" method="get" style="display: inline;">
+                    <form action="{{ route('sousfamille.show', $sousFamille->id) }}" method="GET" style="display: inline;">
                         @csrf
-                        <button type="submit">Détails</button>
+                        <button type="submit" class="btn btn-info">Détails</button>
                     </form>
                 </td>
             </tr>
@@ -42,3 +44,4 @@
         </tbody>
     </table>
 </div>
+
