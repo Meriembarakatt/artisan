@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-
+use App\Models\DetailVente;
 class Vente extends Model
 {
     use HasFactory;
@@ -18,4 +18,11 @@ class Vente extends Model
     {
         return $this->belongsTo(Client::class,'client_id');
     }
+    public function details()
+    {
+        return $this->hasMany(DetailVente::class);
+    }
 }
+
+
+

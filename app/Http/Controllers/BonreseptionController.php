@@ -9,17 +9,16 @@ use Illuminate\Http\Request;
 class BonreseptionController extends Controller
 {
     public function index()
-    {$bonreceptions = Bonreseption::orderBy('id', 'desc')->paginate(10); 
-       
+    {
+        $bonreceptions = Bonreseption::orderBy('id', 'desc')->paginate(10);
         return view('bonreseption.index', compact('bonreceptions'));
     }
 
     public function create()
     {
-        $artisans = Artisan::all(); 
+        $artisans = Artisan::all();
         return view('bonreseption.create', compact('artisans'));
     }
-    
 
     public function store(Request $request)
     {
@@ -33,16 +32,17 @@ class BonreseptionController extends Controller
         return redirect('/bonreseption')->with('success', 'Bon de réception ajouté avec succès');
     }
 
-    
     public function show(Bonreseption $bonreception)
     {
         return view('bonreseption.show', compact('bonreception'));
     }
 
     public function edit(Bonreseption $bonreception)
-    {
-        return view('bonreseption.edit', compact('bonreception'));
-    }
+{
+    $artisans = Artisan::all();
+    return view('bonreseption.edit', compact('bonreception', 'artisans'));
+}
+
 
     public function update(Request $request, Bonreseption $bonreception)
     {
@@ -60,5 +60,5 @@ class BonreseptionController extends Controller
     {
         $bonreception->delete();
         return redirect()->route('bonreseption.index')->with('success', 'Bon de réception supprimé avec succès!');
-     }
+    }
 }
