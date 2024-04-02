@@ -8,14 +8,8 @@ use Illuminate\Http\Request;
 class ClientController extends Controller
 {
     public function index()
-<<<<<<< HEAD
-    {   $clients = Client::orderBy('id', 'desc')->paginate(10); 
-       
-       
-=======
     {   
         $clients = Client::all();
->>>>>>> 2fe731ca63081007984f7172faeb9965c81b43d0
         return view('client.index', ['clients' => $clients]);
     }
 
