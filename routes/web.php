@@ -20,22 +20,13 @@ Route::get('/', function () {
 
 
 
-<<<<<<< HEAD
 Route::get('/client', [ClientController::class, 'index'])->name('client.index');
 Route::get('/ajouterclient', [ClientController::class, 'create'])->name('client.create');
 Route::post('/client/store', [ClientController::class, 'store'])->name('client.store');
 Route::delete('/client/{client}',[ ClientController::class,'destroy'])->name('client.destroy');
-Route::get('/clients/{client}/reglement', [ReglementController::class, 'show'])->name('reglement_cl.show');
-=======
-
-Route::get('/clients', [ClientController::class, 'index'])->name('client.index');
-Route::get('/clients/create', [ClientController::class, 'create'])->name('client.create');
-Route::post('/clients/store', [ClientController::class, 'store'])->name('client.store');
-Route::get('/clients/{client}', [ClientController::class, 'show'])->name('client.show');
-Route::get('/clients/{client}/edit', [ClientController::class, 'edit'])->name('client.edit');
-Route::put('/clients/{client}', [ClientController::class, 'update'])->name('client.update');
-Route::delete('/clients/{client}', [ClientController::class, 'destroy'])->name('client.destroy');
->>>>>>> 2fe731ca63081007984f7172faeb9965c81b43d0
+Route::get('/client/{client}', [ClientController::class, 'show'])->name('client.show');
+Route::get('/client/{client}/edit', [ClientController::class, 'edit'])->name('client.edit');
+Route::put('/client/{client}', [ClientController::class, 'update'])->name('client.update');
 
 
 Route::get('/ventes', [VenteController::class, 'index'])->name('vente.index');
@@ -68,11 +59,15 @@ Route::put('/artisan/{artisan}', [ArtisanController::class, 'update'])->name('ar
 Route::delete('/artisan/{artisan}',[ ArtisanController::class,'destroy'])->name('artisan.destroy');
 Route::post('/artisan', [ArtisanController::class, 'store'])->name('artisan.store');
 
-Route::get('/bonreseption', [BonreseptionController::class, 'index'])->name('bonreseption.index');
-Route::get('/ajouterbonreseption', [BonreseptionController::class, 'create'])->name('bonreseption.create');
-Route::post('/bonreseption/store', [BonreseptionController::class, 'store'])->name('bonreseption.store');
-Route::delete('/bonreseption/{bonreception}',[ BonreseptionController::class,'destroy'])->name('bonreseption.destroy');
 
+
+Route::get('/bonreseption', [BonreseptionController::class, 'index'])->name('bonreseption.index');
+Route::get('/bonreseption/create', [BonreseptionController::class, 'create'])->name('bonreseption.create');
+Route::post('/bonreseption/store', [BonreseptionController::class, 'store'])->name('bonreseption.store');
+Route::get('/bonreseption/{bonreception}', [BonreseptionController::class, 'show'])->name('bonreseption.show');
+Route::get('/bonreseption/{bonreception}/edit', [BonreseptionController::class, 'edit'])->name('bonreseption.edit');
+Route::put('/bonreseption/{bonreception}', [BonreseptionController::class, 'update'])->name('bonreseption.update');
+Route::delete('/bonreseption/{bonreception}', [BonreseptionController::class, 'destroy'])->name('bonreseption.destroy');
 
 Route::get('/details', [DetailBrController::class, 'index'])->name('details.index');
 Route::get('/details/create', [DetailBrController::class, 'create'])->name('details.create');

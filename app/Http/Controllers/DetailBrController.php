@@ -11,9 +11,13 @@ class DetailBrController extends Controller
 {
     public function index()
     {
-        $detail__brs=DetailBr::all();
-        return view('details.index',compact('detail__brs'));
+        $articles=article::orderBy('id', 'desc')->paginate(10);
+        $bonreceptions=Bonreseption::orderBy('id', 'desc')->paginate(10);
+        $detail__brs=DetailBr::orderBy('id', 'desc')->paginate(10);
+        return view('details.index',compact('detail__brs','bonreceptions'));
     }
+   
+
 
     public function create()
     {
@@ -42,9 +46,12 @@ class DetailBrController extends Controller
     }
 
     public function edit(DetailBr $detail_Br)
-    {
-        return view('details.edit', compact('detail_Br'));
-    }
+{
+    $articles = Article::all(); 
+    $bonreceptions = Bonreseption::all();
+    // Utilisez le modèle Article au lieu de article
+    return view('details.edit', compact('detail_Br', 'articles','bonreceptions'));
+}
 
     public function update(Request $request, DetailBr $detail_Br)
     {

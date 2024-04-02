@@ -8,15 +8,7 @@ use Illuminate\Http\Request;
 class ArtisanController extends Controller
 {
     public function index()
-<<<<<<< HEAD
     {  $artisans = Artisan::orderBy('id', 'desc')->paginate(10); 
-=======
-    {
-        // Récupère tous les artisans depuis la base de données
-        $artisans = Artisan::all();
-
-        // Retourne la vue 'artisan.index' avec la liste des artisans
->>>>>>> 2fe731ca63081007984f7172faeb9965c81b43d0
         return view('artisan.index', ['artisans' => $artisans]);
     }
 
