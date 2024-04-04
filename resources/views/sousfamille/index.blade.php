@@ -8,7 +8,7 @@
             <div class="card">
                 <div class="card-header">
                     Liste des sous-familles
-                    <a href="{{ route('sousfamille.create') }}" class="btn btn-primary float-right">Ajouter un paiement</a>
+                    <a href="{{ route('sousfamille.create') }}" class="btn btn-primary float-right">Ajouter sous famille</a>
                 </div>
                 <div class="card-body">
                     @if(session('success'))

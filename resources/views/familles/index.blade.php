@@ -3,21 +3,22 @@
 @section('content')
 @include('layouts.navbars.auth.topnav', ['title' => 'Dashboard'])
    
-<div class="container">
+<div class="container mt-10">
     <div class="row">
         <div class="col-md-12">
             <div class="card">
                 <div class="card-header">
-                    Liste des familles
-                    <a href="{{ route('familles.create') }}" class="btn btn-primary float-right">Ajouter une famille</a>
+                    <a href="{{ route('familles.create') }}" class="btn btn-success float-right">Ajouter une famille</a>
                 </div>
+                
                 <div class="card-body">
                     @if(session('success'))
                         <div class="alert alert-success">{{ session('success') }}</div>
                     @endif
                      
-                    <table class="table">
+                    <table class="table"class="container mt-10">
                         <thead>
+                            <h1> Liste des familles</h1>
                             <tr>
                                 <th>Famille</th>
                                 <th>Actions</th>

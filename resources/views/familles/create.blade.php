@@ -1,17 +1,35 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ajouter une famille</title>
-</head>
-<body>
-    <h1>Ajouter une famille</h1>
-    <form method="POST" action="{{ route('familles.store') }}">
-        @csrf
-        <label for="famille">Nom de la famille :</label>
-        <input type="text" id="famille" name="famille" required>
-        <button type="submit">Ajouter la famille</button>
-    </form>
-</body>
-</html>
+@extends('layouts.app')
+
+@section('content')
+@include('layouts.navbars.auth.topnav', ['title' => 'Dashboard'])
+   
+<div class="container mt-10">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                 
+                   </div>
+                <div class="card-body">
+                    @if(session('success'))
+                        <div class="alert alert-success">{{ session('success') }}</div>
+                    @endif
+
+                    <h1>Ajouter une famille</h1>
+                    <form method="POST" action="{{ route('familles.store') }}">
+                        @csrf
+                        <div class="form-group">
+                            <label for="famille">Nom de la famille :</label>
+                            <input type="text" id="famille" name="famille" class="form-control @error('famille') is-invalid @enderror" required>
+                            @error('famille')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
+                        </div>
+                        <button type="submit" class="btn btn-success float-right">Ajouter la famille</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@endsection

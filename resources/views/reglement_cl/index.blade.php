@@ -14,7 +14,7 @@
                     @endif
 
                     <div class="mb-3">
-                        <a href="{{ route('reglement_cl.create') }}" class="btn btn-primary">Ajouter un Règlement</a>
+                        <a href="{{ route('reglement_cl.create') }}" class="btn btn-success">Ajouter un Règlement</a>
                     </div>
 
                     <table class="table">
@@ -33,7 +33,7 @@
                                 <tr>
                                     <td>{{ $reglement->id }}</td>
                                     <td>{{ $reglement->client->nom }}</td>
-                                    <td>{{ $reglement->mode->nom }}</td>
+                                    <td>{{ $reglement->mode->mode }}</td>
                                     <td>{{ $reglement->date }}</td>
                                     <td>{{ $reglement->montant }}</td>
                                     <td>
