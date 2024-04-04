@@ -40,6 +40,8 @@
                                                 @method('DELETE')
                                                 <button type="submit" class="btn btn-danger" onclick="return confirm('Êtes-vous sûr de vouloir supprimer cette vente ?')">Supprimer</button>
                                             </form>
+                                            <a href="{{ route('detailsvente.index') }}" class="btn btn-primary">detail</a>
+                                           
                                         </td>
                                     </tr>
                                 @endforeach

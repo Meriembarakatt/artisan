@@ -29,6 +29,7 @@
                         </a>
                     </form>
                 </li>
+               
                 <li class="nav-item d-xl-none ps-3 d-flex align-items-center">
                     <a href="javascript:;" class="nav-link text-white p-0" id="iconNavbarSidenav">
                         <div class="sidenav-toggler-inner">
@@ -43,6 +44,11 @@
                         <i class="fa fa-cog fixed-plugin-button-nav cursor-pointer"></i>
                     </a>
                 </li>
+<<<<<<< HEAD
+=======
+               
+
+>>>>>>> e47b2a506ec653c1d414007bea4d131a0a21f621
                
                     </ul>
                 </li>

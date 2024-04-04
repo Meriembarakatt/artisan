@@ -19,4 +19,8 @@ class Client extends Model
         'ville',
       
     ];
+    public function reglements()
+    {
+        return $this->hasMany(ReglementCl::class);
+    }
 }

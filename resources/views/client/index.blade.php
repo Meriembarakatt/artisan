@@ -2,9 +2,9 @@
 
 @section('content')
 @include('layouts.navbars.auth.topnav', ['title' => 'Dashboard'])
-    <div class="container">
+    <div class="container mt-10">
         <div class="row">
-            <div class="col-md-12">
+            <div class="col-md-14">
                 <div class="card">
                     <div class="card-header">
                         Liste des clients
@@ -46,7 +46,7 @@
                                                 @method('DELETE')
                                                 <button type="submit" class="btn btn-danger">Supprimer</button>
                                             </form>
-                                        </td>
+                                            <a href="{{ route('reglements.client', $client->id) }}" class="btn btn-success">Règlement</a></td>
                                     </tr>
                                 @endforeach
                             </tbody>

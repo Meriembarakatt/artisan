@@ -32,9 +32,17 @@ class ClientController extends Controller
 
         Client::create($validatedData);
 
-        return redirect('/clients')->with('success', 'Client ajouté avec succès');
+        return redirect('/client')->with('success', 'Client ajouté avec succès');
     }
-
+    public function reglements(Client $client)
+    {
+        // Chargez la relation "reglements" pour le client donné
+        $client->load('reglements');
+    
+        // Retournez la vue avec les données des règlements et du client
+        return view('client.reglements', compact('client'));
+    }
+    
     public function show(Client $client)
 {
     return view('client.show', compact('client'));

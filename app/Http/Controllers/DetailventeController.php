@@ -56,6 +56,7 @@ class DetailventeController extends Controller
         // $quantites = $validatedData['qte'];
         // $prix = $validatedData['prix'];
     
+<<<<<<< HEAD
         // // Bouclez sur les tableaux pour insérer chaque détail de vente dans la base de données
         // foreach ($articles as $key => $articleId) {
         //     Detailvente::create([
@@ -65,6 +66,19 @@ class DetailventeController extends Controller
         //         'prix' => $prix[$key],
         //     ]);
         // }
+=======
+        // Bouclez sur les tableaux pour insérer chaque détail de vente dans la base de données
+        foreach ($articles as $key => $articleId) {
+            Detailvente::create([
+                'vente_id' => $venteId,
+                'article_id' => $articleId,
+                'qte' => $quantites[$key],
+                'prix' => $prix[$key],
+            ]);
+        }
+        
+        
+>>>>>>> e47b2a506ec653c1d414007bea4d131a0a21f621
     
         return redirect('/detailsvente')->with('success', 'Détails de vente ajoutés avec succès');
     }

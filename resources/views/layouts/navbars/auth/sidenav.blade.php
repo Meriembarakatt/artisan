@@ -6,7 +6,7 @@
         <a class="navbar-brand m-0" href="{{ route('home') }}"
             target="_blank">
             <img src="./img/logo-ct-dark.png" class="navbar-brand-img h-100" alt="main_logo">
-            <span class="ms-1 font-weight-bold">Argon Dashboard 2 Laravel</span>
+            <span class="ms-1 font-weight-bold">GESTION DE STOCK</span>
         </a>
     </div>
     <hr class="horizontal dark mt-0">
@@ -28,7 +28,7 @@
                 <h6 class="ms-2 text-uppercase text-xs font-weight-bolder opacity-6 mb-0">Laravel Examples</h6>
             </li> -->
             <li class="nav-item">
-                <a class="nav-link {{ Route::currentRouteName() == 'profile' ? 'active' : '' }}" href="{{ route('profile-static') }}">
+                <a class="nav-link {{ Route::currentRouteName() == 'profile' ? 'active' : '' }}" href="{{ route('profile') }}">
                     <div
                         class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
                         <i class="ni ni-single-02 text-dark text-sm opacity-10"></i>
@@ -162,7 +162,7 @@
                     <span class="nav-link-text ms-1">Billing</span>
                 </a>
             </li>
-           {{-- <li class="nav-item">
+            <li class="nav-item">
                 <a class="nav-link {{ Route::currentRouteName() == 'virtual-reality' ? 'active' : '' }}" href="{{ route('virtual-reality') }}">
                     <div
                         class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
@@ -170,7 +170,7 @@
                     </div>
                     <span class="nav-link-text ms-1">Virtual Reality</span>
                 </a>
-            </li>--}}
+            </li>
             <li class="nav-item">
                 <a class="nav-link {{ Route::currentRouteName() == 'rtl' ? 'active' : '' }}" href="{{ route('rtl') }}">
                     <div

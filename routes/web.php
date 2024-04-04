@@ -13,6 +13,7 @@ use App\Http\Controllers\VenteController;
 use App\Http\Controllers\ReglementClController;
 use App\Http\Controllers\ModeController;
 use App\Http\Controllers\ReglementArtisanController;
+use App\Http\Controllers\ReglementController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -27,6 +28,10 @@ Route::delete('/client/{client}',[ ClientController::class,'destroy'])->name('cl
 Route::get('/client/{client}', [ClientController::class, 'show'])->name('client.show');
 Route::get('/client/{client}/edit', [ClientController::class, 'edit'])->name('client.edit');
 Route::put('/client/{client}', [ClientController::class, 'update'])->name('client.update');
+<<<<<<< HEAD
+=======
+Route::get('/clients/{client}/reglements', [ReglementController::class, 'reglementsClient'])->name('reglements.client');
+>>>>>>> e47b2a506ec653c1d414007bea4d131a0a21f621
 
 
 Route::get('/ventes', [VenteController::class, 'index'])->name('vente.index');
@@ -175,7 +180,7 @@ use App\Http\Controllers\ChangePassword;
 	Route::post('/change-password', [ChangePassword::class, 'update'])->middleware('guest')->name('change.perform');
 	Route::get('/dashboard', [HomeController::class, 'index'])->name('home')->middleware('auth');
     Route::group(['middleware' => 'auth'], function () {
-	//Route::get('/virtual-reality', [PageController::class, 'vr'])->name('virtual-reality');
+	Route::get('/virtual-reality', [PageController::class, 'vr'])->name('virtual-reality');
 	Route::get('/rtl', [PageController::class, 'rtl'])->name('rtl');
 	Route::get('/profile', [UserProfileController::class, 'show'])->name('profile');
 	Route::post('/profile', [UserProfileController::class, 'update'])->name('profile.update');

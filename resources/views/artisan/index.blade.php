@@ -2,11 +2,11 @@
 
 @section('content')
 @include('layouts.navbars.auth.topnav', ['title' => 'Dashboard'])
-    <div class="container">
-        <div class="row">
-            <div >
-                <div class="card">
-                    <div class="card-header">
+<div class="container mt-10">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
                        <h1> Liste des artisan</h1>
                         <a href="{{ route('artisan.create') }}" class="btn btn-success mb-3">Ajouter un artisan</a>
                     </div>

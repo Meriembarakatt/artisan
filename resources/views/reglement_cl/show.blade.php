@@ -10,7 +10,7 @@
                 <div class="card-body">
                     <p><strong>ID:</strong> {{ $reglementCl->id }}</p>
                     <p><strong>Client:</strong> {{ $reglementCl->client->nom }}</p>
-                    <p><strong>Mode de paiement:</strong> {{ $reglementCl->mode->nom }}</p>
+                    <p><strong>Mode de paiement:</strong> {{ $reglementCl->mode->mode }}</p>
                     <p><strong>Date:</strong> {{ $reglementCl->date }}</p>
                     <p><strong>Montant:</strong> {{ $reglementCl->montant }}</p>
                 </div>
