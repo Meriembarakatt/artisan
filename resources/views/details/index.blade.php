@@ -51,5 +51,6 @@
                 @endforeach
             </tbody>
         </table>
+        {{ $detail__brs->links() }}
     </div>
 @endsection

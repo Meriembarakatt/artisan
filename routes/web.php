@@ -20,31 +20,13 @@ Route::get('/', function () {
 
 
 
-<<<<<<< HEAD
-
-=======
->>>>>>> 60f2f8a5e9d9613e10a1dab896754d82c68f95a0
 Route::get('/client', [ClientController::class, 'index'])->name('client.index');
 Route::get('/ajouterclient', [ClientController::class, 'create'])->name('client.create');
 Route::post('/client/store', [ClientController::class, 'store'])->name('client.store');
 Route::delete('/client/{client}',[ ClientController::class,'destroy'])->name('client.destroy');
-<<<<<<< HEAD
-Route::get('/clients/{client}/reglement', [ReglementController::class, 'show'])->name('reglement_cl.show');
-
-
-Route::get('/clients', [ClientController::class, 'index'])->name('client.index');
-Route::get('/clients/create', [ClientController::class, 'create'])->name('client.create');
-Route::post('/clients/store', [ClientController::class, 'store'])->name('client.store');
-Route::get('/clients/{client}', [ClientController::class, 'show'])->name('client.show');
-Route::get('/clients/{client}/edit', [ClientController::class, 'edit'])->name('client.edit');
-Route::put('/clients/{client}', [ClientController::class, 'update'])->name('client.update');
-Route::delete('/clients/{client}', [ClientController::class, 'destroy'])->name('client.destroy');
-
-=======
 Route::get('/client/{client}', [ClientController::class, 'show'])->name('client.show');
 Route::get('/client/{client}/edit', [ClientController::class, 'edit'])->name('client.edit');
 Route::put('/client/{client}', [ClientController::class, 'update'])->name('client.update');
->>>>>>> 60f2f8a5e9d9613e10a1dab896754d82c68f95a0
 
 
 Route::get('/ventes', [VenteController::class, 'index'])->name('vente.index');
@@ -54,7 +36,7 @@ Route::get('/ventes/{vente}', [VenteController::class, 'show'])->name('vente.sho
 Route::get('/ventes/{vente}/edit', [VenteController::class, 'edit'])->name('vente.edit');
 Route::put('/ventes/{vente}', [VenteController::class, 'update'])->name('vente.update');
 Route::delete('/ventes/{vente}', [VenteController::class, 'destroy'])->name('vente.destroy');
-Route::post('/ventes/detail/bulkstore', [VenteController::class, 'store'])->name('vente.detail.bulkstore');
+Route::post('/ventes/detail/bulkstore', [VenteController::class, 'store'])->name('vente.bulkstore');
 
 
 

@@ -49,6 +49,7 @@
                             @endforeach
                         </tbody>
                     </table>
+                    {{ $reglements->links() }}
                 </div>
             </div>
         </div>

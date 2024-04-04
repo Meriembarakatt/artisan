@@ -46,6 +46,7 @@
                             @endforeach
                         </tbody>
                     </table>
+                    {{ $familles->links() }}
                 </div>
             </div>
         </div>

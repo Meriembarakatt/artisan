@@ -37,5 +37,6 @@
             @endforeach
         </tbody>
     </table>
+    {{ $detailsvente->links() }}
 </div>
 {{--@endsection--}}

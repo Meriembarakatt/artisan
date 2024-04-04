@@ -13,8 +13,7 @@ class FamilleController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {   
-        $familles=Famille::all();
+    {   $familles = Famille::orderBy('id', 'desc')->paginate(10); 
         return view('familles.index', ['familles' => $familles]);
     }
 

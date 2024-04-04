@@ -41,6 +41,7 @@
                                 @endforeach
                             </tbody>
                         </table>
+                        {{ $modes->links() }}
                     </div>
                 </div>
             </div>

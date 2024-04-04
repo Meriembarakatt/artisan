@@ -34,6 +34,7 @@
                                         <td>
                                             <a href="{{ route('vente.show', $vente->id) }}" class="btn btn-info">Voir</a>
                                             <a href="{{ route('vente.edit', $vente->id) }}" class="btn btn-primary">Modifier</a>
+                                            <a href="{{ route('detailsvente.create', $vente->id) }}" class="btn btn-primary">detail</a>
                                             <form action="{{ route('vente.destroy', $vente->id) }}" method="POST" style="display: inline;">
                                                 @csrf
                                                 @method('DELETE')
@@ -44,6 +45,7 @@
                                 @endforeach
                             </tbody>
                         </table>
+                        {{ $ventes->links() }}
                     </div>
                 </div>
             </div>

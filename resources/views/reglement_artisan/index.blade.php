@@ -47,6 +47,7 @@
                                 @endforeach
                             </tbody>
                         </table>
+                        {{ $regArtisan->links() }}
                     </div>
                 </div>
             </div>

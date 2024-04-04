@@ -45,5 +45,6 @@
                 @endforeach
             </tbody>
         </table>
+        {{ $artisans->links() }}
     </div>
 @endsection

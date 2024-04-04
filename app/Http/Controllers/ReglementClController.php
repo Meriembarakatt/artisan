@@ -16,8 +16,13 @@ class ReglementClController extends Controller
      */
     public function index()
 {
-    $reglements = ReglementCl::all();
-    return view('reglement_cl.index', ['reglements' => $reglements]);
+ 
+    $reglements=ReglementCl::orderBy('id', 'desc')->paginate(10);
+    $clients=Client::orderBy('id', 'desc')->paginate(10);
+    $modes=Mode::orderBy('id', 'desc')->paginate(10);
+    return view('reglement_cl.index',compact('reglements','clients','modes'));
+
+
 }
     /**
      * Show the form for creating a new resource.
