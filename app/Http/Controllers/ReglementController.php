@@ -13,4 +13,5 @@ class ReglementController extends Controller
     $reglements = $client->reglements; // Supposons que la relation entre Client et Reglement soit bien définie
     return view('reglements.client', compact('reglements'));
 }
+
 }

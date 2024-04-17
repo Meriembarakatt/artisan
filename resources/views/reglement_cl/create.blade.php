@@ -24,7 +24,7 @@
                             <label for="mode_id">Mode de règlement</label>
                             <select id="mode_id" name="mode_id" class="form-control">
                                 @foreach($modes as $mode)
-                                    <option value="{{ $mode->id }}">{{ $mode->nom }}</option>
+                                    <option value="{{ $mode->id }}">{{ $mode->mode }}</option>
                                 @endforeach
                             </select>
                         </div>

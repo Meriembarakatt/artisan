@@ -14,6 +14,7 @@ use App\Http\Controllers\ReglementClController;
 use App\Http\Controllers\ModeController;
 use App\Http\Controllers\ReglementArtisanController;
 use App\Http\Controllers\ReglementController;
+use App\Http\Controllers\ReglementaController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -60,6 +61,9 @@ Route::get('/artisan/{artisan}/edit', [ArtisanController::class, 'edit'])->name(
 Route::put('/artisan/{artisan}', [ArtisanController::class, 'update'])->name('artisan.update');
 Route::delete('/artisan/{artisan}',[ ArtisanController::class,'destroy'])->name('artisan.destroy');
 Route::post('/artisan', [ArtisanController::class, 'store'])->name('artisan.store');
+Route::get('/artisan/{artisan}/reglementsa', [ReglementaController::class, 'reglementsartisan'])->name('reglements.artisan');
+
+// Route::get('reglementsartisan/{id}', 'ReglementArtisanController@reglementsartisan')->name('reglements.artisan');
 
 
 

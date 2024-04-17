@@ -4,10 +4,10 @@
 @include('layouts.navbars.auth.topnav', ['title' => 'Dashboard'])
     <div class="container mt-10">
         <div class="row">
-            <div class="col-md-14">
+            <div class="col-md-20">
                 <div class="card">
                     <div class="card-header">
-                        Liste des clients
+                        <h1> liste des clients</h1>
                         <a href="{{ route('client.create') }}" class="btn btn-primary float-right">Ajouter un client</a>
                     </div>
                     <div class="card-body">
@@ -46,7 +46,8 @@
                                                 @method('DELETE')
                                                 <button type="submit" class="btn btn-danger">Supprimer</button>
                                             </form>
-                                            <a href="{{ route('reglements.client', $client->id) }}" class="btn btn-success">Règlement</a></td>
+                                            <a href="{{ route('reglements.client', $client->id) }}" class="btn btn-success">Voir les paiements des client</a>
+                                        </td>
                                     </tr>
                                 @endforeach
                             </tbody>

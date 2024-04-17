@@ -14,7 +14,8 @@ class FamilleController extends Controller
      */
     public function index()
     {   
-        $familles=Famille::all();
+        $familles=Famille::orderBy('id', 'desc')->paginate(10);
+
         return view('familles.index', ['familles' => $familles]);
     }
 

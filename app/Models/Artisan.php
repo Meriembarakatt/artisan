@@ -4,11 +4,10 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Artisan extends Model
 {
-    use HasFactory, softDeletes;
+    use HasFactory;
 
     protected $table = 'artisans';
 
@@ -24,4 +23,12 @@ class Artisan extends Model
         'tell',
         'deleted_at',
     ];
+
+    public function reglements()
+    {
+        return $this->hasMany(reglementArtisan::class);
+    }
+    
 }
+
+

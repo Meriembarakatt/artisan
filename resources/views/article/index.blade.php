@@ -2,10 +2,10 @@
 
 @section('content')
 @include('layouts.navbars.auth.topnav', ['title' => 'Dashboard'])
-    <div class="container">
-        <div class="row">
-            <div class="col-md-12">
-                <div class="card">
+<div class="container mt-10">
+    <div class="row">
+        <div class="col-md-20">
+            <div class="card">
                     <div class="card-header">
                         Liste des article
                         <a href="{{ route('article.create') }}" class="btn btn-success mb-3">Ajouter un article</a>

@@ -40,6 +40,7 @@
 
             @endif
             @include('layouts.navbars.auth.sidenav')
+            {{-- @include('layouts.navbars.auth.confiq') --}}
                 <main class="main-content border-radius-lg">
                     @yield('content')
                 </main>

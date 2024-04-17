@@ -9,6 +9,7 @@
                 <div class="card-header">
                        <h1> Liste des artisan</h1>
                         <a href="{{ route('artisan.create') }}" class="btn btn-success mb-3">Ajouter un artisan</a>
+                       
                     </div>
                     <div class="card-body">
                         @if(session('success'))
@@ -40,7 +41,9 @@
                                 @method('DELETE')
                                 <button type="submit" class="btn btn-danger" onclick="return confirm('Êtes-vous sûr de vouloir supprimer cet artisan ?')">Supprimer</button>
                             </form>
-                        </td>
+                            <a href="{{ route('reglements.artisan', $artisan->id) }}" class="btn btn-success">Voir les paiements des artisans</a>
+                                
+                            </td>
                     </tr>
                 @endforeach
             </tbody>

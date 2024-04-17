@@ -10,7 +10,8 @@ class SousFamilleController extends Controller
 {
     public function index()
     {
-        $sousFamilles = SousFamille::all();
+        $sousFamilles = SousFamille::orderBy('id', 'desc')->paginate(10);
+
         return view('sousfamille.index', compact('sousFamilles'));
     }
 
