@@ -38,7 +38,7 @@
     </tbody>
 </table>
 
-<button type="button" onclick="enregistrerEnregistrements()" class="btn btn-primary">Enregistrer Enregistrements</button>
+<button type="button" onclick="enregistrerEnregistrements()" class="btn btn-primary">Enregistrer table</button>
 
 
 <script>

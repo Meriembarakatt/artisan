@@ -3,11 +3,12 @@
 @section('content')
 @include('layouts.navbars.auth.topnav', ['title' => 'Dashboard'])
    
-<div class="container mt-10">
-    <div class="row">
+<div class="container ">
+    <div class="row justify-content-center">
         <div class="col-md-12">
             <div class="card">
                 <div class="card-header">
+                    <h2>liste des familles</h2>
                     <a href="{{ route('familles.create') }}" class="btn btn-success float-right">Ajouter une famille</a>
                 </div>
                 
@@ -16,9 +17,9 @@
                         <div class="alert alert-success">{{ session('success') }}</div>
                     @endif
                      
-                    <table class="table"class="container mt-10">
+                    <table class="table" class="container mt-10">
                         <thead>
-                            <h1> Liste des familles</h1>
+                            
                             <tr>
                                 <th>Famille</th>
                                 <th>Actions</th>
@@ -38,12 +39,32 @@
                                             @method('DELETE')
                                             <button type="submit" class="btn btn-danger" onclick="return confirm('Êtes-vous sûr de vouloir supprimer cette famille ?')">Supprimer</button>
                                         </form>
-                                        <form action="{{ route('familles.show', $famille->id) }}" method="GET" style="display: inline;">
-                                            @csrf
-                                            <button type="submit" class="btn btn-info">Détails</button>
-                                        </form>
+                                        <button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#modalFamille{{ $famille->id }}">
+                                            Détails
+                                        </button>
                                     </td>
                                 </tr>
+
+                                <!-- Modal spécifique à chaque famille -->
+                                <div class="modal fade" id="modalFamille{{ $famille->id }}" tabindex="-1" aria-labelledby="modalFamilleLabel{{ $famille->id }}" aria-hidden="true">
+                                    <div class="modal-dialog modal-dialog-centered">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="modalFamilleLabel{{ $famille->id }}">Détails de la famille</h5>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <p><strong>ID de la famille :</strong> {{ $famille->id }}</p>
+                                                <p><strong>Nom de la famille :</strong> {{ $famille->famille }}</p>
+                                                <!-- Ajoutez ici d'autres détails de la famille si nécessaire -->
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+                                               
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             @endforeach
                         </tbody>
                     </table>

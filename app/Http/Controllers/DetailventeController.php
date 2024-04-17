@@ -41,49 +41,37 @@ class DetailventeController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    // public function store(Request $request)
+    // {
+    //     $validatedData = $request->validate([
+    //         'article_id' => 'required|exists:articles,id', // Utilisez article_id.* pour valider un tableau
+    //         'vente_id' => 'required|exists:ventes,id',
+    //         'qte' => 'required', // Utilisez qte.* pour valider un tableau
+    //         'prix' => 'required', // Utilisez prix.* pour valider un tableau
+    //     ]);
+    
+    //     $detail = Detailvente::create($validatedData);
+    
+    //     return response()->json($detail, 201);
+    
+    //     // return redirect('/detailsvente')->with('success', 'Détails de vente ajoutés avec succès');
+    // }
+    
+    public function enregistrerDetailsVente(Request $request)
     {
-        $validatedData = $request->validate([
-            'article_id' => 'required|exists:articles,id', // Utilisez article_id.* pour valider un tableau
-            'vente_id' => 'required|exists:ventes,id',
-            'qte' => 'required', // Utilisez qte.* pour valider un tableau
-            'prix' => 'required', // Utilisez prix.* pour valider un tableau
-        ]);
-    
-        // // Récupérez  les données du formulaire
-        // $venteId = $validatedData['vente_id'];
-        // $articles = $validatedData['article_id'];
-        // $quantites = $validatedData['qte'];
-        // $prix = $validatedData['prix'];
-    
-<<<<<<< HEAD
-        // // Bouclez sur les tableaux pour insérer chaque détail de vente dans la base de données
-        // foreach ($articles as $key => $articleId) {
-        //     Detailvente::create([
-        //         'vente_id' => $venteId,
-        //         'article_id' => $articleId,
-        //         'quantite' => $quantites[$key],
-        //         'prix' => $prix[$key],
-        //     ]);
-        // }
-=======
-        // Bouclez sur les tableaux pour insérer chaque détail de vente dans la base de données
-        foreach ($articles as $key => $articleId) {
+        // Valider les données reçues, puis insérer dans la base de données
+        foreach ($request->all() as $detail) {
             Detailvente::create([
-                'vente_id' => $venteId,
-                'article_id' => $articleId,
-                'qte' => $quantites[$key],
-                'prix' => $prix[$key],
+                'article_id' => $detail['article'],
+                'vente_id' => $detail['vente'],
+                'quantite' => $detail['quantite'],
+                'prix' => $detail['prix'],
             ]);
         }
-        
-        
->>>>>>> e47b2a506ec653c1d414007bea4d131a0a21f621
     
-        return redirect('/detailsvente')->with('success', 'Détails de vente ajoutés avec succès');
+        return response()->json(['message' => 'Enregistrement réussi']);
     }
     
-
     /**
      * Display the specified resource.
      *

@@ -1,25 +1,76 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-</head>
-<body>
+@extends('layouts.app')
+
+@section('content')
+@include('layouts.navbars.auth.topnav', ['title' => 'Dashboard'])
+
+<div class="container mt-10">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                 
+                   </div>
+                <div class="card-body">
+                    @if(session('success'))
+                        <div class="alert alert-success">{{ session('success') }}</div>
+                    @endif
+
+                    <h1>Ajouter une client</h1>
+
     <form method="POST" action="{{route('client.store')}}">
         @csrf
-        <label for="nom">Nom</label>
-        <input type="text" id="nom" name="nom" required>
-        <label for="prenom">Prénom</label>
-        <input type="text" id="prenom" name="prenom" required>
-        <label for="tell">Téléphone</label>
-        <input type="text" id="tell" name="tell" required>
-        <label for="email">Email</label>
-        <input type="email" id="email" name="email" required>
-        <label for="adress">Adresse</label>
-        <input type="text" id="adress" name="adress" required>
-        <label for="ville">Ville</label>
-        <input type="text" id="ville" name="ville" required>
-        <button type="submit">Ajouter</button>
-</html>
+        <div class="form-group">
+            <label for="nom">Nom:</label>
+            <input type="text" id="nom" name="nom" class="form-control @error('nom') is-invalid @enderror" required>
+            @error('nom')
+            <div class="invalid-feedback">{{ $message }}</div>
+            @enderror
+        </div>
+
+        <div class="form-group">
+            <label for="prenom">Prénom:</label>
+            <input type="text" id="prenom" name="prenom" class="form-control @error('prenom') is-invalid @enderror" required>
+            @error('prenom')
+            <div class="invalid-feedback">{{ $message }}</div>
+            @enderror
+        </div>
+        
+        <div class="form-group">
+            <label for="tell">Téléphone:</label>
+            <input type="text" id="tell" name="tell" class="form-control @error('tell') is-invalid @enderror" required>
+            @error('tell')
+            <div class="invalid-feedback">{{ $message }}</div>
+            @enderror
+        </div>
+
+        <div class="form-group">
+            <label for="email">Email:</label>
+            <input type="text" id="email" name="email" class="form-control @error('email') is-invalid @enderror" required>
+            @error('email')
+            <div class="invalid-feedback">{{ $message }}</div>
+            @enderror
+        </div>
+        <div class="form-group">
+            <label for="adress">Adresse:</label>
+            <input type="text" id="adress" name="adress" class="form-control @error('adress') is-invalid @enderror" required>
+            @error('adress')
+            <div class="invalid-feedback">{{ $message }}</div>
+            @enderror
+        </div>
+
+        <div class="form-group">
+            <label for="ville">Ville:</label>
+            <input type="text" id="ville" name="ville" class="form-control @error('ville') is-invalid @enderror" required>
+            @error('ville')
+            <div class="invalid-feedback">{{ $message }}</div>
+            @enderror
+        </div>
+       
+        <button type="submit"  class="btn btn-success float-right">Ajouter</button>
+    </form>
+    </div>
+            </div>
+        </div>
+    </div>
+</div>
+@endsection

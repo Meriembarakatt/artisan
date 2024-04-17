@@ -29,19 +29,19 @@ class ClientController extends Controller
             'adress' => 'required|max:255',
             'ville' => 'required|max:255',
         ]);
-
+    
+        $existingClient = Client::where('email', $validatedData['email'])->first();
+    
+        if ($existingClient) {
+            return redirect()->back()->with('error', 'Cet email est déjà utilisé.');
+        }
+    
         Client::create($validatedData);
-
+    
         return redirect('/client')->with('success', 'Client ajouté avec succès');
     }
-    public function reglements(Client $client)
-    {
-        // Chargez la relation "reglements" pour le client donné
-        $client->load('reglements');
+   
     
-        // Retournez la vue avec les données des règlements et du client
-        return view('client.reglements', compact('client'));
-    }
     
     public function show(Client $client)
 {
