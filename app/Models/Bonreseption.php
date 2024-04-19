@@ -20,4 +20,8 @@ class Bonreseption extends Model
     {
         return $this->belongsTo(Artisan::class, 'artisan_id');
     }
+    public function details()
+    {
+        return $this->hasMany(DetailBr::class);
+    }// Dans votre modèle Vente (app\Models\Vente.php)
 }

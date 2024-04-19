@@ -56,21 +56,36 @@ class DetailventeController extends Controller
     
     //     // return redirect('/detailsvente')->with('success', 'Détails de vente ajoutés avec succès');
     // }
-    
-    public function enregistrerDetailsVente(Request $request)
+    public function store(Request $request)
     {
-        // Valider les données reçues, puis insérer dans la base de données
-        foreach ($request->all() as $detail) {
-            Detailvente::create([
-                'article_id' => $detail['article'],
-                'vente_id' => $detail['vente'],
-                'quantite' => $detail['quantite'],
-                'prix' => $detail['prix'],
-            ]);
+        // Récupérer les données des ventes depuis la requête
+        $ventesData = $request->input();
+      
+        // Créer une nouvelle vente dans la table 'vente'
+        $vente = new Vente();
+        $vente->date = now(); // Vous pouvez modifier la date selon vos besoins
+        $vente->client_id = 1; // Remplacez par l'ID du client si vous le gérez
+        
+        // Enregistrer la vente dans la base de données
+        $vente->save();
+        
+        // Enregistrer les détails des ventes dans la table 'detailsvente'
+        foreach ($ventesData as $venteData) {
+            $detailsVente = new Detailvente();
+            $detailsVente->article_id = $venteData['article_id'];
+            $detailsVente->vente_id = $vente->id; // Assigner l'ID de la vente créée
+            $detailsVente->qte = $venteData['qte'];
+            $detailsVente->prix = $venteData['prix'];
+            
+            // Enregistrer les détails de vente dans la base de données
+            $detailsVente->save();
         }
-    
-        return response()->json(['message' => 'Enregistrement réussi']);
+        
+        // Répondre avec succès
+        return response()->json(['message' => 'Ventes validées avec succès !'], 200);
     }
+
+    
     
     /**
      * Display the specified resource.

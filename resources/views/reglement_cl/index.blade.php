@@ -39,11 +39,15 @@
                                 <td>{{ $reglement->date }}</td>
                                 <td>{{ $reglement->montant }}</td>
                                 <td>
+<<<<<<< HEAD
                                     {{-- <a href="{{ route('reglement_cl.show', $reglement->id) }}" class="btn btn-primary btn-sm">Voir</a> --}}
                                     {{-- <a href="{{ route('reglement_cl.edit', $reglement->id) }}" class="btn btn-success btn-sm">Éditer</a> --}}
                                     <button type="button" class="btn btn-info btn-sm" data-bs-toggle="modal" data-bs-target="#modalmodifierReglementt{{ $reglement->id }}">
                                         modifier
                                     </button>
+=======
+                                    <a href="{{ route('reglement_cl.edit', $reglement->id) }}" class="btn btn-success btn-sm">Éditer</a>
+>>>>>>> e96ba3cece79a1ed9fea8ee00cb696cb54d9e581
                                     <form action="{{ route('reglement_cl.destroy', $reglement->id) }}" method="POST" style="display: inline-block;">
                                         @csrf
                                         @method('DELETE')

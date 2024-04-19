@@ -13,7 +13,8 @@ class VenteController extends Controller
     public function index()
     {
         $ventes = Vente::orderBy('id', 'desc')->paginate(10);
-        return view('vente.index', compact('ventes'));
+        $detailsVente = DetailVente::all();
+        return view('vente.index', compact('ventes','detailsVente'));
     
        
     }
@@ -24,6 +25,18 @@ class VenteController extends Controller
         $clients = Client::all();
         $ventes = Vente::all();
         return view('vente.create', compact('clients', 'articles', 'ventes'));
+    }
+
+     public function totalMontantParClient()
+    {
+        // Utilisez une requête pour calculer le total de montant (qte * prix) de chaque client
+        $totals = Vente::select(DB::raw('SUM(detailsvente.qte * detailsvente.prix) as total'), 'clients.nom')
+            ->join('clients', 'ventes.client_id', '=', 'clients.id')
+            ->join('detailsvente', 'ventes.id', '=', 'detailsvente.vente_id')
+            ->groupBy('clients.nom')
+            ->get();
+
+        return view('ventes.total_montant_par_client', ['totals' => $totals]);
     }
 
     public function store(Request $request)

@@ -38,10 +38,14 @@
     </tbody>
 </table>
 
-<button type="button" onclick="enregistrerEnregistrements()" class="btn btn-primary">Enregistrer table</button>
-
+<button type="button" onclick="validerVentes()" class="btn btn-primary">Enregistrer table</button>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 <script>
+    let ventes = [];
+   
+
+
     function updateDetailDate() {
         var venteDate = document.getElementById('date').value;
         document.getElementById('vente_id').value = venteDate;
@@ -69,10 +73,39 @@
 
         var cellPrix = newRow.insertCell();
         cellPrix.innerText = prix;
-
+        ventes.push({
+                article_id: article,
+                date_vente: vente,
+                qte: quantite,
+                prix: prix
+            });
+            console.log('ventes',ventes)
         // Réinitialiser le formulaire après l'ajout
         document.getElementById('formAjoutdetail').reset();
     }
-
+    function validerVentes() {
+            // Créer une requête AJAX
+            
+            $.ajax({
+                url: '/detailsvente/store', // Remplacez '/votre-url-de-validation-de-ventes' par votre URL de validation des ventes
+                type: 'POST',
+                data: JSON.stringify(ventes),
+                contentType: 'application/json',
+                headers: {
+            'X-CSRF-TOKEN': '{{ csrf_token() }}' // Inclure le jeton CSRF dans les en-têtes de la requête
+        },
+                success: function(response) {
+                    // Réponse du serveur (vous pouvez effectuer des actions ici)
+                    alert('Ventes validées avec succès !');
+                    // Réinitialiser le tableau des ventes après la validation
+                    ventes = [];
+                    // Optionnel : réinitialiser la table
+                    document.getElementById('tbodydetail').innerHTML = '';
+                },
+                error: function() {
+                    alert('Erreur lors de la validation des ventes.');
+                }
+            });
+        }
 
 </script>

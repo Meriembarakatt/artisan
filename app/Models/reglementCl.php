@@ -25,4 +25,6 @@ class ReglementCl extends Model
     {
         return $this->belongsTo(Mode::class, 'mode_id');
     }
+  
+    
 }
