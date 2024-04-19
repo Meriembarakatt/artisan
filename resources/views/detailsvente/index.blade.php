@@ -2,7 +2,7 @@
 
 @section('content')
 @include('layouts.navbars.auth.topnav', ['title' => 'Dashboard'])
-<div class="container mt-10">
+<div class="container ">
     <div class="row">
         <div class="col-md-12">
             <div class="card">
@@ -27,10 +27,14 @@
                                 <th>Vente</th>
                                 <th>Quantité</th>
                                 <th>Prix</th>
+                                <th>Montant</th>
                                 <th>Actions</th>
                             </tr>
                         </thead>
                         <tbody>
+                        @php
+                            $totalMontant = 0; // Initialisation de la variable de total
+                            @endphp
                             @foreach ($detailsvente as $detail)
                                 <tr>
                                     <td>{{ $detail->id }}</td>
@@ -38,6 +42,7 @@
                                     <td>{{ $detail->vente->date }}</td>
                                     <td>{{ $detail->qte }}</td>
                                     <td>{{ $detail->prix }}</td>
+                                    <td>{{ $detail->qte * $detail->prix }}</td>
                                     <td>
                                         <form action="{{ route('detailsvente.destroy', ['detailvente' => $detail->id]) }}" method="POST" style="display: inline;">
                                             @csrf
@@ -46,7 +51,16 @@
                                         </form>
                                     </td>
                                 </tr>
-                            @endforeach
+                                @php
+                    $totalMontant += $detail->qte * $detail->prix; // Ajout du montant actuel au total
+                    @endphp
+          @endforeach
+          <!-- Affichage du total après la boucle -->
+                <tr>
+                    <td colspan="4"></td>
+                    <td>Total Montant</td>
+                    <td>{{ $totalMontant }}</td>
+                </tr>
                         </tbody>
                     </table>
                 </div>

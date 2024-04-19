@@ -18,10 +18,12 @@ class Vente extends Model
     {
         return $this->belongsTo(Client::class,'client_id');
     }
-    public function details()
-    {
-        return $this->hasMany(DetailVente::class);
-    }
+ 
+public function detailsVente()
+{
+    return $this->hasMany(Detailvente::class);
+}
+
 }
 
 

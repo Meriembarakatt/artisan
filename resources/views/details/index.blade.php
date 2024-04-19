@@ -18,8 +18,7 @@
                             {{ session('success') }}
                         </div>
                     @endif
-
-                    
+  
 
                     <table class="table">
                         <thead>

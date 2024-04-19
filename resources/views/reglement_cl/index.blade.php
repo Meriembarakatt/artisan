@@ -39,7 +39,6 @@
                                 <td>{{ $reglement->date }}</td>
                                 <td>{{ $reglement->montant }}</td>
                                 <td>
-                                    <a href="{{ route('reglement_cl.show', $reglement->id) }}" class="btn btn-primary btn-sm">Voir</a>
                                     <a href="{{ route('reglement_cl.edit', $reglement->id) }}" class="btn btn-success btn-sm">Éditer</a>
                                     <form action="{{ route('reglement_cl.destroy', $reglement->id) }}" method="POST" style="display: inline-block;">
                                         @csrf
