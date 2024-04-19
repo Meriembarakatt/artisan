@@ -1,11 +1,20 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="container">
-        <div class="row">
-            <div class="col-md-12">
-                <div class="card">
-                    <div class="card-header">
+@include('layouts.navbars.auth.topnav', ['title' => 'Dashboard'])
+
+<div class="container mt-10">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                 
+                   </div>
+                <div class="card-body">
+                    @if(session('success'))
+                        <div class="alert alert-success">{{ session('success') }}</div>
+                    @endif
+
                         Modifier le client
                         <a href="{{ route('client.index') }}" class="btn btn-primary float-right">Retour</a>
                     </div>

@@ -26,6 +26,8 @@
                             @enderror
                         </div>
                         <button type="submit" class="btn btn-success float-right">Ajouter la famille</button>
+                        <a href="{{ route('familles.index') }}" class="btn btn-success float-right">Annuler</a>
+                       
                     </form>
                 </div>
             </div>

@@ -11,8 +11,13 @@ class ReglementArtisanController extends Controller
 {
     public function index()
     {
-        $regArtisans = reglementArtisan::all();
-        return view('reglement_artisan.index', compact('regArtisans'));
+       
+        $regArtisans=reglementArtisan::orderBy('id', 'desc')->paginate(10);
+        $artisans=Artisan::orderBy('id', 'desc')->paginate(10);
+        $modes=Mode::orderBy('id', 'desc')->paginate(10);
+        return view('reglement_artisan.index',compact('regArtisans','artisans','modes'));
+   
+    
     }
 
     public function create()

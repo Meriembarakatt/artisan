@@ -1,8 +1,26 @@
-@extends('layouts.app')
+{{-- @extends('layouts.app')
 
-@section('content')
-    @include('layouts.navbars.auth.topnav', ['title' => 'Dashboard'])
-   
+@section('content') --}}
+    {{-- @include('layouts.navbars.auth.topnav', ['title' => 'Dashboard']) --}}
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        /* Styles CSS personnalisés */
+        .form-group label {
+            font-weight: bold;
+            color: #333;
+        }
+
+        .form-control {
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            padding: 8px;
+        }
+
+        .btn-primary {
+            background-color: #007bff;
+        }
+    </style>
+    
     <div class="container mt-10">
         <div class="row">
             <div class="col-md-12">
@@ -14,12 +32,12 @@
                         @if(session('success'))
                             <div class="alert alert-success">{{ session('success') }}</div>
                         @endif
-                        <h1>Ajouter une article</h1>
+                        <h1>Ajouter un article</h1>
                         <form method="POST" action="{{ route('article.store') }}">
                             @csrf
                             <div class="form-group">
                                 <label for="designation">Désignation:</label>
-                                <input type="text" name="designation"class="form-control" id="designation" required>
+                                <input type="text" name="designation" class="form-control" id="designation" required>
                             </div>
                             <div class="form-group">
                                 <label for="prix_ht">Prix HT :</label>
@@ -45,11 +63,12 @@
                                 <label for="image">Image :</label>
                                 <input type="file" name="image" class="form-control-file" id="image">
                             </div>
-                            <button type="submit" class="btn btn-primary">Créer l'Article</button>
+                            <button type="submit" class="btn btn-primary">ajouter Article</button>
+                            <button><a href="{{ route('article.index') }}" class="btn btn-primary">Annuler</a></button>
                         </form>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-@endsection
+{{-- @endsection --}}

@@ -9,11 +9,11 @@ use App\Models\Famille;
 class SousFamilleController extends Controller
 {
     public function index()
-    {
-        $sousFamilles = SousFamille::orderBy('id', 'desc')->paginate(10);
+    {$sousFamilles = SousFamille::orderBy('id', 'desc')->paginate(10);
+        $familles=Famille::orderBy('id', 'desc')->paginate(10);
+        return view('sousfamille.index', compact('sousFamilles','familles'));
 
-        return view('sousfamille.index', compact('sousFamilles'));
-    }
+        }
 
     public function create()
     {

@@ -19,6 +19,7 @@ use App\Http\Controllers\ReglementaController;
 Route::get('/', function () {
     return view('welcome');
 });
+Route::post('/enregistrer-details-vente', 'DetailventeController@enregistrerDetailsVente')->name('enregistrer.details.vente');
 
 
 
@@ -29,8 +30,6 @@ Route::delete('/client/{client}',[ ClientController::class,'destroy'])->name('cl
 Route::get('/client/{client}', [ClientController::class, 'show'])->name('client.show');
 Route::get('/client/{client}/edit', [ClientController::class, 'edit'])->name('client.edit');
 Route::put('/client/{client}', [ClientController::class, 'update'])->name('client.update');
-Route::get('/clients/{client}/reglements', [ReglementController::class, 'reglementsClient'])->name('reglements.client');
-
 
 Route::get('/ventes', [VenteController::class, 'index'])->name('vente.index');
 Route::get('/ventes/create', [VenteController::class, 'create'])->name('vente.create');
@@ -39,7 +38,7 @@ Route::get('/ventes/{vente}', [VenteController::class, 'show'])->name('vente.sho
 Route::get('/ventes/{vente}/edit', [VenteController::class, 'edit'])->name('vente.edit');
 Route::put('/ventes/{vente}', [VenteController::class, 'update'])->name('vente.update');
 Route::delete('/ventes/{vente}', [VenteController::class, 'destroy'])->name('vente.destroy');
-Route::post('/ventes/detail/bulkstore', [VenteController::class, 'store'])->name('vente.detail.bulkstore');
+Route::post('/ventes/detail/bulkstore', [VenteController::class, 'store'])->name('vente.bulkstore');
 
 
 
@@ -84,6 +83,7 @@ Route::put('/details/{detail_Br}', [DetailBrController::class, 'update'])->name(
 Route::delete('/details/{detail}', [DetailBrController::class, 'destroy'])->name('details.destroy');
 
 
+Route::get('/client/reglements/{id}', [ReglementClController::class, 'afficherReglement'])->name('reglements.client');
 
 Route::get('/reglements', [ReglementClController::class, 'index'])->name('reglement_cl.index');
 Route::get('/reglements/create', [ReglementClController::class, 'create'])->name('reglement_cl.create');
