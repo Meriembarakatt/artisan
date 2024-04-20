@@ -60,7 +60,7 @@
                                 <label for="sousfamille_id">Sous-famille:</label>
                                 <select name="sousfamille_id" class="form-control" id="sousfamille_id" required>
                                     @foreach ($sousFamilles as $sousFamille)
-                                        <option value="{{ $sousFamille->id }}" {{ $article->sousfamille_id == $sousFamille->id ? 'selected' : '' }}>{{ $sousFamille->nom }}</option>
+                                        <option value="{{ $sousFamille->id }}" {{ $article->sousfamille_id == $sousFamille->id ? 'selected' : '' }}>{{ $sousFamille->name }}</option>
                                     @endforeach
                                 </select>
                             </div>

@@ -8,8 +8,9 @@
             <div class="card">
                 <div class="card-header">
                     <h2> Liste des artisans </h2>
-                   <a href="{{ route('artisan.create') }}" class="btn btn-success">Ajouter un artisan</a>
-                </div>
+                    <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modalAjouterArtisan">
+                        Ajouter un artisan
+                    </button> </div>
                 <div class="card-body">
                     @if(session('success'))
                     <div class="alert alert-success">{{ session('success') }}</div>
@@ -62,6 +63,66 @@
                                 </td>
                             </tr>
                             @endforeach
+                            @foreach($artisans as $artisan)
+<div class="modal fade" id="modalArtisanedit{{ $artisan->id }}" tabindex="-1" aria-labelledby="modalArtisan{{ $artisan->id }}Label" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalArtisan{{ $artisan->id }}Label">modifier l'artisan</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+
+            <form action="{{ route('artisan.update', $artisan->id) }}" method="POST">
+                @csrf
+                @method('PUT')
+    
+                <div class="form-group">
+                    <label for="nom">Nom</label>
+                    <input type="text" class="form-control" id="nom" name="nom" value="{{ $artisan->nom }}">
+                </div>
+    
+                <div class="form-group">
+                    <label for="prenom">Prénom</label>
+                    <input type="text" class="form-control" id="prenom" name="prenom" value="{{ $artisan->prenom }}">
+                </div>
+    
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" class="form-control" id="email" name="email" value="{{ $artisan->email }}">
+                </div>
+    
+                <div class="form-group">
+                    <label for="password">Mot de passe</label>
+                    <input type="password" class="form-control" id="password" name="password" placeholder="Entrez un nouveau mot de passe">
+                </div>
+    
+                <div class="form-group">
+                    <label for="adress">Adresse</label>
+                    <input type="text" class="form-control" id="adress" name="adress" value="{{ $artisan->adress }}">
+                </div>
+    
+                <div class="form-group">
+                    <label for="ville">Ville</label>
+                    <input type="text" class="form-control" id="ville" name="ville" value="{{ $artisan->ville }}">
+                </div>
+    
+                <div class="form-group">
+                    <label for="tell">Téléphone</label>
+                    <input type="text" class="form-control" id="tell" name="tell" value="{{ $artisan->tell }}">
+                </div>
+    
+                <div class="form-group">
+                    <label for="fonction">Fonction</label>
+                    <input type="text" class="form-control" id="fonction" name="fonction" value="{{ $artisan->fonction }}">
+                </div>
+    
+                <button type="submit" class="btn btn-primary">Enregistrer les modifications</button>
+            </form>
+    
+    <a href="{{ route('artisan.index') }}" class="btn btn-secondary mt-3">Annuler</a>
+</div>
+    </div>
+    @endforeach
                         </tbody>
                     </table>
 
@@ -146,65 +207,83 @@
 </div>
 @endforeach
 
-{{-- modal pour modifier --}}
-@foreach($artisans as $artisan)
-<div class="modal fade" id="modalArtisanedit{{ $artisan->id }}" tabindex="-1" aria-labelledby="modalArtisan{{ $artisan->id }}Label" aria-hidden="true">
+{{-- modal pour ajouter --}}
+<div class="modal fade" id="modalAjouterArtisan" tabindex="-1" aria-labelledby="modalAjouterArtisanLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="modalArtisan{{ $artisan->id }}Label">modifier l'artisan</h5>
+                <h5 class="modal-title" id="modalAjouterArtisanLabel">Ajouter un artisan</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-
-    <form action="{{ route('artisan.update', $artisan->id) }}" method="POST">
-        @csrf
-        @method('PUT')
-
-        <div class="form-group">
-            <label for="nom">Nom</label>
-            <input type="text" class="form-control" id="nom" name="nom" value="{{ $artisan->nom }}">
+            <div class="modal-body">
+                <form method="POST" action="{{ route('artisan.store') }}">
+                    @csrf
+                    <div class="mb-3">
+                        <label for="nom" class="form-label">Nom</label>
+                        <input type="text" class="form-control" id="nom" name="nom">
+                        @error('nom')
+                            <div class="text-danger">{{ $message }}</div>
+                        @enderror
+                    </div>
+                    <!-- Ajoutez les autres champs avec des classes form-group et form-control -->
+                    <div class="mb-3">
+                        <label for="prenom" class="form-label">Prénom</label>
+                        <input type="text" class="form-control" id="prenom" name="prenom">
+                        @error('prenom')
+                            <div class="text-danger">{{ $message }}</div>
+                        @enderror
+                    </div>
+                    <div class="mb-3">
+                    <label for="email" class="form-label">Email</label>
+                     <input type="email" id="email" name="email" class="form-control">
+                     @error('email')
+                    <div class="text-danger">{{ $message }}</div>
+                    @enderror
+                    <div class="mb-3">
+        <label for="password" class="form-label">Mot de passe</label>
+        <input type="password" id="password" name="password" class="form-control">
+        @error('password')
+        <div class="text-danger">{{ $message }}</div>
+        @enderror
+        <div class="mb-3">
+        <label for="adresse" class="form-label">Adresse</label>
+        <input type="text" id="adress" name="adress" class="form-control">
+        @error('adress')
+        <div class="text-danger">{{ $message }}</div>
+        @enderror
         </div>
-
-        <div class="form-group">
-            <label for="prenom">Prénom</label>
-            <input type="text" class="form-control" id="prenom" name="prenom" value="{{ $artisan->prenom }}">
-        </div>
-
-        <div class="form-group">
-            <label for="email">Email</label>
-            <input type="email" class="form-control" id="email" name="email" value="{{ $artisan->email }}">
-        </div>
-
-        <div class="form-group">
-            <label for="password">Mot de passe</label>
-            <input type="password" class="form-control" id="password" name="password" placeholder="Entrez un nouveau mot de passe">
-        </div>
-
-        <div class="form-group">
-            <label for="adress">Adresse</label>
-            <input type="text" class="form-control" id="adress" name="adress" value="{{ $artisan->adress }}">
-        </div>
-
-        <div class="form-group">
-            <label for="ville">Ville</label>
-            <input type="text" class="form-control" id="ville" name="ville" value="{{ $artisan->ville }}">
-        </div>
-
-        <div class="form-group">
-            <label for="tell">Téléphone</label>
-            <input type="text" class="form-control" id="tell" name="tell" value="{{ $artisan->tell }}">
-        </div>
-
-        <div class="form-group">
-            <label for="fonction">Fonction</label>
-            <input type="text" class="form-control" id="fonction" name="fonction" value="{{ $artisan->fonction }}">
-        </div>
-
-        <button type="submit" class="btn btn-primary">Enregistrer les modifications</button>
-    </form>
-
-    <a href="{{ route('artisan.index') }}" class="btn btn-secondary mt-3">Annuler</a>
-</div>
+        <div class="mb-3">
+        <label for="ville" class="form-label">Ville</label>
+        <input type="text" id="ville" name="ville" class="form-control">
+        @error('ville')
+        <div class="text-danger">{{ $message }}</div>
+        @enderror
     </div>
-    @endforeach
+                     <div class="mb-3">
+                        <label for="fonction" class="form-label">Fonction</label>
+                    <input type="text"  class="form-control" id="fonction" name="fonction">
+                    @error('fonction')
+                    <div class="text-danger">{{ $message }}</div>
+                    @enderror
+                        </div>
+                    <!-- Ajoutez les autres champs de la même manière -->
+                    <div class="mb-3">
+                        <label for="tell" class="form-label">Téléphone</label>
+                        <input type="text" class="form-control" id="tell" name="tell">
+                        @error('tell')
+                            <div class="text-danger">{{ $message }}</div>
+                        @enderror
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+                        <button type="submit" class="btn btn-success">Ajouter l'artisan</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+{{-- modal pour modifier --}}
+
 @endsection

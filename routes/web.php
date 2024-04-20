@@ -141,6 +141,7 @@ Route::get('/articles/{article}', [ArticleController::class, 'show'])->name('art
 // Route pour afficher le formulaire de modification d'un article
 Route::get('/articles/{article}/edit', [ArticleController::class, 'edit'])->name('article.edit');
 
+
 // Route pour mettre à jour un article dans la base de données
 Route::put('/articles/{article}', [ArticleController::class, 'update'])->name('article.update');
 

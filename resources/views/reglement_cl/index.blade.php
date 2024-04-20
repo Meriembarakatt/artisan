@@ -9,8 +9,10 @@
             <div class="card">
                 <div class="card-header">
                     <h2> Liste des Règlements Clients</h2>
-                    <a href="{{ route('reglement_cl.create') }}" class="btn btn-success">Ajouter un Règlement</a>
-                   </div>
+                    <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modalAddReglement">
+                        Ajouter un règlement
+                    </button>
+                </div>
 
                 <div class="card-body">
                     @if(session('success'))
@@ -39,16 +41,12 @@
                                 <td>{{ $reglement->date }}</td>
                                 <td>{{ $reglement->montant }}</td>
                                 <td>
-<<<<<<< HEAD
-                                    {{-- <a href="{{ route('reglement_cl.show', $reglement->id) }}" class="btn btn-primary btn-sm">Voir</a> --}}
-                                    {{-- <a href="{{ route('reglement_cl.edit', $reglement->id) }}" class="btn btn-success btn-sm">Éditer</a> --}}
-                                    <button type="button" class="btn btn-info btn-sm" data-bs-toggle="modal" data-bs-target="#modalmodifierReglementt{{ $reglement->id }}">
-                                        modifier
-                                    </button>
-=======
-                                    <a href="{{ route('reglement_cl.edit', $reglement->id) }}" class="btn btn-success btn-sm">Éditer</a>
->>>>>>> e96ba3cece79a1ed9fea8ee00cb696cb54d9e581
-                                    <form action="{{ route('reglement_cl.destroy', $reglement->id) }}" method="POST" style="display: inline-block;">
+                                   
+    <button type="button" class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#modalModifierReglement{{ $reglement->id }}">
+        Modifier
+    </button>
+
+<form action="{{ route('reglement_cl.destroy', $reglement->id) }}" method="POST" style="display: inline-block;">
                                         @csrf
                                         @method('DELETE')
                                         <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce règlement client ?')">Supprimer</button>
@@ -90,54 +88,107 @@
     </div>
 </div>
 {{-- modal Modifier un règlement de client --}}
-<div class="modal fade" id="modalmodifierReglementt{{ $reglement->id }}" tabindex="-1" aria-labelledby="modalDetailsReglementLabel{{ $reglement->id }}" aria-hidden="true">
+@foreach($reglements as $reglement)
+<div class="modal fade" id="modalModifierReglement{{ $reglement->id }}" tabindex="-1" aria-labelledby="modalModifierReglementLabel{{ $reglement->id }}" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="modalDetailsReglementLabel{{ $reglement->id }}">modifier règlement client</h5>
+                <h5 class="modal-title" id="modalModifierReglementLabel{{ $reglement->id }}">Modifier le règlement client</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-                <div class="card-body">
-                    <form action="{{ route('reglement_cl.update', $reglement->id) }}" method="POST">
-                        @csrf
-                        @method('PUT')
+            <div class="modal-body">
+                <form action="{{ route('reglement_cl.update', $reglement->id) }}" method="POST">
+                    @csrf
+                    @method('PUT')
 
-                        <div class="form-group">
-                            <label for="client_id">Client :</label>
-                            <select name="client_id" id="client_id" class="form-control">
-                                @foreach ($clients as $client)
-                                    <option value="{{ $client->id }}" {{ $client->id == $reglement->client_id ? 'selected' : '' }}>{{ $client->prenom }}</option>
-                                @endforeach
-                            </select>
-                        </div>
+                    <div class="form-group">
+                        <label for="client_id">Client :</label>
+                        <select name="client_id" id="client_id" class="form-control">
+                            @foreach ($clients as $client)
+                                <option value="{{ $client->id }}" {{ $client->id == $reglement->client_id ? 'selected' : '' }}>{{ $client->prenom }}</option>
+                            @endforeach
+                        </select>
+                    </div>
 
-                        <div class="form-group">
-                            <label for="mode_id">Mode de règlement :</label>
-                            <select name="mode_id" id="mode_id" class="form-control">
-                                @foreach ($modes as $mode)
-                                    <option value="{{ $mode->id }}" {{ $mode->id == $reglement->mode_id ? 'selected' : '' }}>{{ $mode->mode }}</option>
-                                @endforeach
-                            </select>
-                        </div>
+                    <div class="form-group">
+                        <label for="mode_id">Mode de règlement :</label>
+                        <select name="mode_id" id="mode_id" class="form-control">
+                            @foreach ($modes as $mode)
+                                <option value="{{ $mode->id }}" {{ $mode->id == $reglement->mode_id ? 'selected' : '' }}>{{ $mode->mode }}</option>
+                            @endforeach
+                        </select>
+                    </div>
 
-                        <div class="form-group">
-                            <label for="montant">Montant :</label>
-                            <input type="text" name="montant" id="montant" class="form-control" value="{{ $reglement->montant }}" required>
-                        </div>
+                    <div class="form-group">
+                        <label for="montant">Montant :</label>
+                        <input type="text" name="montant" id="montant" class="form-control" value="{{ $reglement->montant }}" required>
+                    </div>
 
-                        <div class="form-group">
-                            <label for="date">Date :</label>
-                            <input type="date" name="date" id="date" class="form-control" value="{{ $reglement->date }}" required>
-                        </div>
+                    <div class="form-group">
+                        <label for="date">Date :</label>
+                        <input type="date" name="date" id="date" class="form-control" value="{{ $reglement->date }}" required>
+                    </div>
 
-                        <div class="form-group">
-                            <button type="submit" class="btn btn-primary">Modifier</button>
-                            <a href="{{ route('reglement_cl.index') }}" class="btn btn-secondary">Annuler</a>
-                        </div>
-                    </form>
-                </div>
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-primary">Modifier</button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
 </div>
+@endforeach
+{{-- modal pour aajouter  --}}<!-- Modal -->
+<div class="modal fade" id="modalAddReglement" tabindex="-1" aria-labelledby="modalAddReglementLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="modalAddReglementLabel">Ajouter un règlement pour le client</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <form method="POST" action="{{ route('reglement_cl.store') }}">
+                                        @csrf
+
+                                        <div class="form-group">
+                                            <label for="client_id">Client</label>
+                                            <select id="client_id" name="client_id" class="form-control">
+                                                @foreach($clients as $client)
+                                                    <option value="{{ $client->id }}">{{ $client->nom }} {{ $client->prenom }}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="mode_id">Mode de règlement</label>
+                                            <select id="mode_id" name="mode_id" class="form-control">
+                                                @foreach($modes as $mode)
+                                                    <option value="{{ $mode->id }}">{{ $mode->mode }}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="date">Date</label>
+                                            <input id="date" type="date" class="form-control" name="date" required>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="montant">Montant</label>
+                                            <input id="montant" type="number" step="0.01" class="form-control" name="montant" required>
+                                        </div>
+
+                                        <button type="submit" class="btn btn-primary">Ajouter le règlement</button>
+                                    </form>
+                                </div>
+        </div>
+    </div>
+</div>
+                    
+                   
+                
+ 
+
+
 @endsection

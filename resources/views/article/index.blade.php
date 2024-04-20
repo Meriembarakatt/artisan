@@ -2,6 +2,8 @@
 
 @section('content')
 @include('layouts.navbars.auth.topnav', ['title' => 'Dashboard'])
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-12">
@@ -46,16 +48,18 @@
                                     @endif
                                 </td>
                                 <td>
-                                    <button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#modalArticleedit{{ $article->id }}">
-                                        modifier
-                                    </button>
+                                    <a href="{{ route('article.edit', $article->id) }}" class="btn btn-success mb-3">
+                                        <i class="bi bi-pencil"></i> Modifier
+                                    </a>
                                     <form action="{{ route('article.destroy', $article->id) }}" method="POST" style="display: inline-block;">
                                         @csrf
                                         @method('DELETE')
-                                        <button type="submit" class="btn btn-danger" onclick="return confirm('Êtes-vous sûr de vouloir supprimer cet article?')">Supprimer</button>
+                                        <button type="submit" class="btn btn-danger" onclick="return confirm('Êtes-vous sûr de vouloir supprimer cet article?')">
+                                            <i class="bi bi-trash"></i> Supprimer
+                                        </button>
                                     </form>
                                     <button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#modalArticle{{ $article->id }}">
-                                        Détails
+                                        <i class="bi bi-info-circle"></i> Détails
                                     </button>
                                 </td>
                             </tr>
@@ -101,58 +105,32 @@
 </div>
 
 @endforeach
-
-{{-- modal pour modifier article --}}
+<!-- Modal for editing an article -->
 @foreach ($articles as $article)
-<div class="modal fade" id="modalArticleedit{{ $article->id }}" tabindex="-1" aria-labelledby="modalArticleLabel{{ $article->id }}" aria-hidden="true">
+<div class="modal fade" id="modalEditArticle{{ $article->id }}" tabindex="-1" aria-labelledby="modalEditArticleLabel{{ $article->id }}" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="modalArticleLabel{{ $article->id }}">modifier  l'article</h5>
+                <h5 class="modal-title" id="modalEditArticleLabel{{ $article->id }}">Modifier l'article</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-
-                <div class="card-body">
-                    <form action="{{ route('article.update', $article->id) }}" method="POST" enctype="multipart/form-data">
-                        @csrf
-                        @method('PUT')
-                        <div class="form-group">
-                            <label for="designation">Désignation:</label>
-                            <input type="text" name="designation" class="form-control" id="designation" value="{{ $article->designation }}" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="prix_ht">Prix HT:</label>
-                            <input type="number" name="prix_ht" class="form-control" id="prix_ht" value="{{ $article->prix_ht }}" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="qte">Quantité:</label>
-                            <input type="number" name="qte" class="form-control" id="qte" value="{{ $article->qte }}" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="stock">Stock:</label>
-                            <input type="number" name="stock" class="form-control" id="stock" value="{{ $article->stock }}" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="sousfamille_id">Sous-famille:</label>
-                            {{-- <select name="sousfamille_id" class="form-control" id="sousfamille_id" >
-                                @foreach ($sousFamilles as $sousFamille)
-                                    <option value="{{ $sousFamille->id }}" {{ $article->sousfamille_id == $sousFamille->id ? 'selected' : '' }}>{{ $sousFamille->name }}</option>
-                                @endforeach
-                            </select> --}}
-                          
-                        </div>
-                        <div class="form-group">
-                            <label for="image">Image:</label>
-                            <input type="file" name="image" class="form-control-file" id="image">
-                        </div>
-                        <button type="submit" class="btn btn-primary">Enregistrer les modifications</button>
-                        <button><a href="{{ route('article.index') }}" class="btn btn-primary">Annuler</a></button>
-                   
-                    </form>
-                </div>
+            <div class="modal-body">
+                <form action="{{ route('article.update', $article->id) }}" method="POST" enctype="multipart/form-data">
+                    @csrf
+                    @method('PUT')
+                    <div class="form-group">
+                        <label for="designation{{ $article->id }}">Désignation:</label>
+                        <input type="text" name="designation" class="form-control" id="designation{{ $article->id }}" value="{{ $article->designation }}" required>
+                    </div>
+                    <!-- Add other form fields for editing -->
+                    <!-- Similar to the create form, but with values from $article -->
+                    <button type="submit" class="btn btn-primary">Enregistrer les modifications</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+                </form>
             </div>
         </div>
     </div>
 </div>
 @endforeach
+
 @endsection

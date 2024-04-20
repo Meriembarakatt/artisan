@@ -81,19 +81,19 @@
                     <span class="nav-link-text ms-1">article</span>
                 </a>
             </li>
-
-           
-           
-            
             <li class="nav-item">
-                <a class="nav-link {{ Route::currentRouteName() == 'vente' ? 'active' : '' }}" href="{{ route('vente.index') }}">
+                <a class="nav-link {{ Route::currentRouteName() == 'mode' ? 'active' : '' }}" href="{{ route('modes.index') }}">
                     <div
                         class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
                         <i class="ni ni-single-02 text-dark text-sm opacity-10"></i>
                     </div>
-                    <span class="nav-link-text ms-1">vente</span>
+                    <span class="nav-link-text ms-1">mode </span>
                 </a>
             </li>
+           
+           
+            
+            
               <li class="nav-item">
                 <a class="nav-link {{ Route::currentRouteName() == 'reglement de client' ? 'active' : '' }}" href="{{ route('reglement_cl.index') }}">
                     <div
@@ -112,6 +112,15 @@
                     <span class="nav-link-text ms-1">reglement de artisan</span>
                 </a>
             </li>  
+            <li class="nav-item">
+                <a class="nav-link {{ Route::currentRouteName() == 'vente' ? 'active' : '' }}" href="{{ route('vente.index') }}">
+                    <div
+                        class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+                        <i class="ni ni-single-02 text-dark text-sm opacity-10"></i>
+                    </div>
+                    <span class="nav-link-text ms-1">vente</span>
+                </a>
+            </li>
             <li class="nav-item">
                 <a class="nav-link {{ Route::currentRouteName() == 'detailsvente' ? 'active' : '' }}" href="{{ route('detailsvente.index') }}">
                     <div
@@ -139,15 +148,7 @@
                     <span class="nav-link-text ms-1">detail bon_reseption</span>
                 </a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link {{ Route::currentRouteName() == 'mode' ? 'active' : '' }}" href="{{ route('modes.index') }}">
-                    <div
-                        class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-                        <i class="ni ni-single-02 text-dark text-sm opacity-10"></i>
-                    </div>
-                    <span class="nav-link-text ms-1">mode </span>
-                </a>
-            </li>
+           
             <li class="nav-item">
                 <a class="nav-link {{ str_contains(request()->url(), 'user-management') == true ? 'active' : '' }}" href="{{ route('page', ['page' => 'user-management']) }}">
                     <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">

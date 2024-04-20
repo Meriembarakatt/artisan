@@ -30,6 +30,7 @@ class ArticleController extends Controller
         return view('article.create', compact('sousFamilles'));
     }
     
+    
     /**
      * Valide et stocke un nouvel article.
      *

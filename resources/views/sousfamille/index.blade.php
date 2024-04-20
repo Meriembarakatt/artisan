@@ -9,7 +9,9 @@
                 <div class="card-header">
                     <h2> Liste des sous-familles</h2>
                    
-                    <a href="{{ route('sousfamille.create') }}" class="btn btn-success float-right">Ajouter sous famille</a>
+                    <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modalAjoutersousfamille">
+                        Ajouter une Sous-famille
+                    </button>
                     
                 </div>
                 <div class="card-body">
@@ -53,6 +55,38 @@
                         </tbody>
                     </table>
                     {{ $sousFamilles->links() }}
+                </div>
+            </div>
+        </div>
+    </div>
+    {{-- modal pour ajouter sous famille --}}
+    <div class="modal fade" id="modalAjoutersousfamille" tabindex="-1" aria-labelledby="modalAjoutersousfamilleLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalAjoutersousfamilleLabel">Ajouter une Sous-famille</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form action="{{ route('sousfamille.store') }}" method="POST">
+                        @csrf
+                        <div class="form-group">
+                            <label for="famille_id" class="form-label">Famille :</label>
+                            <select name="famille_id" id="famille_id" class="form-control" required>
+                                @foreach($familles as $famille)
+                                    <option value="{{ $famille->id }}">{{ $famille->famille }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="name" class="form-label">Nom de la Sous-famille :</label>
+                            <input type="text" id="name" name="name" class="form-control" required>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="submit" class="btn btn-primary">Ajouter la Sous-famille</button>
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
@@ -115,43 +149,6 @@
     </form>
 </div>
 @endforeach
-{{-- modal pour Ajouter --}}
-@foreach($sousFamilles as $sousFamille)
-<div class="modal fade" id="modalSousFamilleajouter{{ $sousFamille->id }}" tabindex="-1" aria-labelledby="modalSousFamilleLabel{{ $sousFamille->id }}" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="modalSousFamilleLabel{{ $sousFamille->id }}">ajouter  la sous-famille</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-               
-                <div class="card-body">
-                    @if(session('success'))
-                        <div class="alert alert-success">{{ session('success') }}</div>
-                    @endif
 
-                    <form method="POST" action="{{ route('sousfamille.store') }}">
-                        @csrf
-                        <div class="form-group">
-                            <label for="famille_id" class="form-label">Famille :</label>
-                            <select name="famille_id" id="famille_id" class="form-control" required>
-                                @foreach($familles as $famille)
-                                    <option value="{{ $famille->id }}">{{ $famille->famille }}</option>
-                                @endforeach
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label for="name" class="form-label">Nom de la Sous-famille :</label>
-                            <input type="text" id="name" name="name" class="form-control" required>
-                        </div>
-                        <button type="submit" class="btn btn-primary">Ajouter la Sous-famille</button>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-@endforeach
- 
 
 @endsection
