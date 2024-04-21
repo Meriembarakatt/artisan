@@ -114,9 +114,9 @@
     function validerBon_reception() {
         var date = document.getElementById('date').value;
         var artisan_id = document.getElementById('artisan_id').value;
-
+alert("hello");
         $.ajax({
-            url: 'bonreseption/store',
+            url: '/bonreseption/store',
             type: 'POST',
             data: JSON.stringify({
                 date: date,

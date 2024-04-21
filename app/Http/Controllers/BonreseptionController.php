@@ -34,39 +34,25 @@ class BonreseptionController extends Controller
             'Bon_reception.*.prix' => 'required|numeric|min:0',
         ]);
     
-        try {
-            // Début de la transaction
-            \DB::beginTransaction();
+        $ventesData = $validatedData['Bon_reception'];
     
-            // Enregistrement du bon de réception
-            $bonReception = new BonReception();
-            $bonReception->date = $validatedData['date'];
-            $bonReception->artisan_id = $validatedData['artisan_id'];
-            $bonReception->save();
+        $bonReception = new Bonreseption();
+        $bonReception->date = $validatedData['date'];
+        $bonReception->artisan_id = $validatedData['artisan_id'];
+        $bonReception->save();
+        //dd($bonReception);
     
-            // Enregistrement des détails du bon de réception
-            $ventesData = $validatedData['Bon_reception'];
-            $details = [];
-            foreach ($ventesData as $detail) {
-                $details[] = new DetailBr([
-                    'article_id' => $detail['article_id'],
-                    'br_id' => $bonReception->id,
-                    'qte' => $detail['qte'],
-                    'prix' => $detail['prix'],
-                ]);
-            }
-            $bonReception->details()->saveMany($details);
-    
-            // Validation et confirmation de la transaction
-            \DB::commit();
-    
-            return redirect('/bonreseption')->with('success', 'Détails du bon de réception ajoutés avec succès');
-        } catch (\Exception $e) {
-            // En cas d'erreur, annulation de la transaction
-            \DB::rollBack();
-    
-            return back()->withInput()->withErrors(['error' => 'Une erreur est survenue lors de l\'enregistrement. Veuillez réessayer.']);
+        foreach ($ventesData as $detail) {
+            $detailsBonReception = new DetailBr();
+            $detailsBonReception->article_id = $detail['article_id'];
+            $detailsBonReception->br_id = $bonReception->id;
+            $detailsBonReception->qte = $detail['qte'];
+            $detailsBonReception->prix = $detail['prix'];
+            $detailsBonReception->save();
+           // dd($detailsBonReception);
         }
+    
+        return redirect('/bonreseption')->with('success', 'Détails du bon de réception ajoutés avec succès');
     }
     
 
