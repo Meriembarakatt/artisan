@@ -7,7 +7,7 @@
         <div class="col-md-12">
             <div class="card">
                 
-                <div class="card-header">Liste des   detail de  vente</div>
+               <h1> <div class="card-header">Liste des   detail de  vente</div></h1>
 
                 <div class="card-body">
                     @if (session('success'))
@@ -16,9 +16,10 @@
                         </div>
                     @endif
 
-                    <div class="mb-3">
+                    {{-- <div class="mb-3">
                         <a href="{{ route('detailsvente.create') }}" class="btn btn-success">Ajouter un detail de  vente</a>
                     </div>
+                     --}}
                     <table class="table">
                         <thead>
                             <tr>
@@ -42,7 +43,8 @@
                                     <td>{{ $detail->vente->date }}</td>
                                     <td>{{ $detail->qte }}</td>
                                     <td>{{ $detail->prix }}</td>
-                                    <td>{{ $detail->qte * $detail->prix }}</td>
+                                    <td>{{ floatval($detail->qte) * floatval($detail->prix) }}</td>
+
                                     <td>
                                         <form action="{{ route('detailsvente.destroy', ['detailvente' => $detail->id]) }}" method="POST" style="display: inline;">
                                             @csrf
@@ -52,8 +54,15 @@
                                     </td>
                                 </tr>
                                 @php
-                    $totalMontant += $detail->qte * $detail->prix; // Ajout du montant actuel au total
-                    @endphp
+                // Vérifier si les valeurs sont numériques avant de les multiplier
+                if(is_numeric($detail->qte) && is_numeric($detail->prix)) {
+                    $montant = intval($detail->qte) * floatval($detail->prix);
+                    $totalMontant += $montant;
+                   
+                } else {
+                    echo 'Valeurs non numériques';
+                }
+            @endphp
           @endforeach
           <!-- Affichage du total après la boucle -->
                 <tr>

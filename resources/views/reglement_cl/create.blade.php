@@ -1,6 +1,38 @@
-@extends('layouts.app')
+{{-- @extends('layouts.app')
 
-@section('content')
+@section('content') --}}
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ajouter un règlement pour le client</title>
+    <link href="{{ asset('css/app.css') }}" rel="stylesheet"> <!-- Inclure le CSS de Bootstrap -->
+    <style>
+        /* Style pour le formulaire */
+        .form-group {
+            margin-bottom: 20px; /* Espacement entre les groupes de champs */
+        }
+
+        /* Style pour les étiquettes */
+        label {
+            font-weight: bold; /* Texte en gras pour les étiquettes */
+        }
+
+        /* Style pour les boutons */
+        .btn-primary {
+            background-color: #007bff; /* Couleur de fond pour le bouton primaire */
+            color: #fff; /* Couleur du texte pour le bouton primaire */
+            border-color: #007bff; /* Couleur de la bordure pour le bouton primaire */
+        }
+
+        .btn-primary:hover {
+            background-color: #0056b3; /* Couleur de fond au survol pour le bouton primaire */
+            border-color: #0056b3; /* Couleur de la bordure au survol pour le bouton primaire */
+        }
+    </style>
+</head>
+<body>
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
@@ -46,4 +78,6 @@
         </div>
     </div>
 </div>
-@endsection
+</body>
+</html>
+{{-- @endsection --}}

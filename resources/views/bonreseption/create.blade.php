@@ -1,22 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ajout de détails de vente</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        /* Style pour le formulaire */
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-control {
+            width: 100%;
+        }
+
+        /* Style pour le bouton Ajouter */
+        .btn-primary {
+            margin-top: 20px;
+        }
+
+        /* Style pour la table */
+        #tabledetail {
+            margin-top: 20px;
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        #tabledetail th, #tabledetail td {
+            padding: 8px;
+            border: 1px solid #ddd;
+        }
+
+        #tabledetail th {
+            background-color: #f2f2f2;
+            font-weight: bold;
+        }
+
+        /* Style pour les actions dans le tableau */
+        .actions {
+            display: flex;
+            justify-content: space-around;
+        }
+
+        .actions button {
+            padding: 5px 10px;
+        }
+
+        /* Style pour le bouton Enregistrer table */
+        .btn-primary.valider {
+            margin-top: 20px;
+            float: right;
+        }
+    </style>
+</head>
+<body> 
 <div class="container">
     <h1>Ajouter un Bon de Réception</h1>
-    <form action="{{ route('bonreseption.store') }}" method="POST">
+    <form id="formAjoutdetail" action="{{ route('bonreseption.store') }}" method="POST">
         @csrf
         <div class="form-group">
             <label for="date">Date</label>
-            <input type="date" class="form-control" id="date" name="date" required>
+            <input type="date" class="form-control" id="date" name="date" onchange="updateDetailDate()" required>
         </div>
         <div class="form-group">
             <label for="artisan_id">Artisan</label>
             <select class="form-control" id="artisan_id" name="artisan_id" required>
-                @foreach ( $artisans as $artisan)
+                @foreach ($artisans as $artisan)
                     <option value="{{ $artisan->id }}">{{ $artisan->nom }}</option>
                 @endforeach
             </select>
         </div>
-       
-        <!-- Ajoutez d'autres champs si nécessaire -->
 
-        <button type="submit" class="btn btn-primary">Ajouter</button>
+        <h1>Ajouter un Détail de Bon de Réception</h1>
+        <div class="form-group">
+            <label for="article_id">Article</label>
+            <select class="form-control" id="article_id" name="article_id" required>
+                @foreach ($articles as $article)
+                    <option value="{{ $article->id }}">{{ $article->designation }}</option>
+                @endforeach
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="br_id">Bon de Réception</label>
+            <input type="date" class="form-control" id="br_id" name="br_id" required onchange="updateDetailDate()">
+        </div>
+        <div class="form-group">
+            <label for="qte">Quantité</label>
+            <input type="text" class="form-control" id="qte" name="qte" required>
+        </div>
+        <div class="form-group">
+            <label for="prix">Prix</label>
+            <input type="text" class="form-control" id="prix" name="prix" required>
+        </div>
+        <button type="button" onclick="ajouterdetail()" class="btn btn-primary">Ajouter détail</button>
     </form>
+
+    <table id="tabledetail" border="2">
+        <thead>
+            <tr>
+                <th>Article</th>
+                <th>Bon de Réception</th>
+                <th>Quantité</th>
+                <th>Prix</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody id="tbodydetail">
+            <!-- Les lignes d'articles seront ajoutées ici dynamiquement -->
+        </tbody>
+    </table>
+    <button type="button" onclick="validerBon_reception()" class="btn btn-primary">Enregistrer Bon de Réception</button>
+    <a href="{{ route('bonreseption.index') }}"  class="btn btn-primary">Retour</a>
 </div>
+
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    let Bon_reception = [];
+    let savedValues = {};
+
+    function saveInputValues() {
+        savedValues.date = document.getElementById('date').value;
+        savedValues.artisan_id = document.getElementById('artisan_id').value;
+        savedValues.br_id = document.getElementById('br_id').value;
+    }
+
+    function restoreInputValues() {
+        document.getElementById('date').value = savedValues.date;
+        document.getElementById('artisan_id').value = savedValues.artisan_id;
+        document.getElementById('br_id').value = savedValues.br_id;
+    }
+
+    function updateDetailDate() {
+        var BonDate = document.getElementById('date').value;
+        document.getElementById('br_id').value = BonDate;
+    }
+   
+
+    function ajouterdetail() {
+        saveInputValues();
+        var article = document.getElementById('article_id').value;
+        var br_id = document.getElementById('br_id').value;
+        var quantite = document.getElementById('qte').value;
+        var prix = document.getElementById('prix').value;
+
+        var tbody = document.getElementById('tbodydetail');
+        var newRow = tbody.insertRow();
+
+        var cellArticle = newRow.insertCell();
+        cellArticle.innerText = article;
+
+        var cellBR = newRow.insertCell();
+        cellBR.innerText = br_id;
+
+        var cellQuantite = newRow.insertCell();
+        cellQuantite.innerText = quantite;
+
+        var cellPrix = newRow.insertCell();
+        cellPrix.innerText = prix;
+
+        Bon_reception.push({
+            article_id: article,
+            br_id: br_id,
+            qte: quantite,
+            prix: prix
+        });
+        console.log('Bon_reception',Bon_reception)
+        document.getElementById('formAjoutdetail').reset();
+        restoreInputValues();
+    }
+
+    function validerBon_reception() {
+        var date = document.getElementById('date').value;
+        var artisan_id = document.getElementById('artisan_id').value;
+alert("hello");
+        $.ajax({
+            url: '/bonreseption/store',
+            type: 'POST',
+            data: JSON.stringify({
+                date: date,
+                artisan_id: artisan_id,
+                Bon_reception: Bon_reception
+            }),
+            contentType: 'application/json',
+            headers: {
+                'X-CSRF-TOKEN': '{{ csrf_token() }}'
+            },
+            success: function(response) {
+                alert('Bon de Réception enregistré avec succès !');
+                Bon_reception = [];
+                document.getElementById('tbodydetail').innerHTML= '';
+            },
+                error: function() {
+                    alert('Erreur lors de la validation des Bon_reception.');
+                }
+            });
+        }</script>
+
+</div>
+</body>
+</html>

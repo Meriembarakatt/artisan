@@ -41,14 +41,40 @@ class VenteController extends Controller
 
     public function store(Request $request)
     {
+        // Récupérer les données des ventes depuis la requête
         $validatedData = $request->validate([
-            'date' => 'required|date',
-            'client_id' => 'required|exists:clients,id',
+            'client_id' => 'required|integer', // Validation du client ID
+            'date' => 'required|date', // Validation de la date
+            'ventes' => 'required|array', // Validation des ventes (doit être un tableau)
+            'ventes.*.article_id' => 'required|integer', // Validation de chaque article ID
+            'ventes.*.qte' => 'required|integer', // Validation de chaque quantité
+            'ventes.*.prix' => 'required|numeric', // Validation de chaque prix
         ]);
-
-        Vente::create($validatedData);
-        return redirect('/ventes')->with('success', 'Vente ajoutée avec succès');
+        
+        $ventesData = $validatedData['ventes']; // Récupérer les données des ventes
+        
+        // Créer une nouvelle vente dans la table 'vente'
+        $vente = new Vente();
+        $vente->client_id = $validatedData['client_id'];
+        $vente->date = $validatedData['date'];
+        $vente->save();
+        
+        // Enregistrer les détails des ventes dans la table 'detailsvente'
+        foreach ($ventesData as $venteData) {
+            $detailsVente = new Detailvente();
+            $detailsVente->article_id = $venteData['article_id'];
+            $detailsVente->vente_id = $vente->id; // Assigner l'ID de la vente créée
+            $detailsVente->qte = $venteData['qte'];
+            $detailsVente->prix = $venteData['prix'];
+            
+            // Enregistrer les détails de vente dans la base de données
+            $detailsVente->save();
+        }
+        
+        // Répondre avec succès
+        return response()->json(['message' => 'Ventes validées avec succès !'], 200);
     }
+    
 
     // public function bulkStore(Request $request)
     // {

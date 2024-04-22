@@ -68,33 +68,50 @@
                                 @csrf
                                 <div class="form-group">
                                     <label for="designation">Désignation:</label>
-                                    <input type="text" name="designation" class="form-control" id="designation" required>
+                                    <input type="text" name="designation" class="form-control" id="designation" >
+                                    @error('designation')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
                                 </div>
                                 <div class="form-group">
                                     <label for="prix_ht">Prix HT:</label>
-                                    <input type="number" name="prix_ht" class="form-control" id="prix_ht" required>
+                                    <input type="number" name="prix_ht" class="form-control" id="prix_ht" >
+                                    @error('prix_ht')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
                                 </div>
                                 <div class="form-group">
                                     <label for="qte">Quantité:</label>
-                                    <input type="number" name="qte" class="form-control" id="qte" required>
+                                    <input type="number" name="qte" class="form-control @error('qte') is-invalid @enderror" id="qte">
+                                    @error('qte')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
                                 </div>
                                 <div class="form-group">
                                     <label for="stock">Stock:</label>
-                                    <input type="number" name="stock" class="form-control" id="stock" required>
+                                    <input type="number" name="stock" class="form-control @error('stock') is-invalid @enderror" id="stock" >
+                                    @error('stock')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
                                 </div>
                                 <div class="form-group">
                                     <label for="sousfamille_id">Sous-famille:</label>
-                                    <select name="sousfamille_id" class="form-control" id="sousfamille_id" required>
+                                    <select name="sousfamille_id" class="form-control @error('sousfamille_id') is-invalid @enderror" id="sousfamille_id" >
+                                        <option value="">Sélectionnez une sous-famille</option>
                                         @foreach ($sousFamilles as $sousFamille)
-                                            <option value="{{ $sousFamille->id }}">{{ $sousFamille->name }}</option>
+                                        <option value="{{ $sousFamille->id }}">{{ $sousFamille->name }}</option>
                                         @endforeach
                                     </select>
+                                    @error('sousfamille_id')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
                                 </div>
                                 <div class="form-group">
                                     <label for="image">Image:</label>
                                     <input type="file" name="image" class="form-control-file" id="image">
                                 </div>
-                                <button type="submit" class="btn btn-primary">Créer l'Article</button>
+                                <button type="submit" class="btn btn-primary">Ajouter</button>
+                                <a href="{{ route('article.index') }}" class="btn btn-secondary">Annuler</a>
                             </form>
                         </div>
                     </div>

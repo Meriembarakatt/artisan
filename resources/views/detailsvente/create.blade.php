@@ -1,3 +1,60 @@
+{{-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ajout de détails de vente</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        /* Style pour le formulaire */
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-control {
+            width: 100%;
+        }
+
+        /* Style pour le bouton Ajouter */
+        .btn-primary {
+            margin-top: 20px;
+        }
+
+        /* Style pour la table */
+        #tabledetail {
+            margin-top: 20px;
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        #tabledetail th, #tabledetail td {
+            padding: 8px;
+            border: 1px solid #ddd;
+        }
+
+        #tabledetail th {
+            background-color: #f2f2f2;
+            font-weight: bold;
+        }
+
+        /* Style pour les actions dans le tableau */
+        .actions {
+            display: flex;
+            justify-content: space-around;
+        }
+
+        .actions button {
+            padding: 5px 10px;
+        }
+
+        /* Style pour le bouton Enregistrer table */
+        .btn-primary.valider {
+            margin-top: 20px;
+            float: right;
+        }
+    </style>
+</head>
+<body> --}}
 <form id="formAjoutdetail">
     @csrf <!-- Pour Laravel, si vous utilisez des formulaires Blade -->
     <div class="form-group">
@@ -109,3 +166,5 @@
         }
 
 </script>
+{{-- </body>
+</html> --}}

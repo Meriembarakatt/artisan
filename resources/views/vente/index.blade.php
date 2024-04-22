@@ -9,7 +9,7 @@
                 <div class="card">
                     <div class="card-header">
                         <h2>Liste des ventes</h2>
-                        <a href="{{ route('detailsvente.create') }}" class="btn btn-success">Ajouter une vente</a>
+                        <a href="{{ route('vente.create') }}" class="btn btn-success">Ajouter une vente</a>
                     </div>
                     <div class="card-body">
                         @if(session('success'))
@@ -33,24 +33,28 @@
                                         <td>{{ $vente->date }}</td>
                                         <td>{{ $vente->client ? $vente->client->nom : 'Client non défini' }}</td>
                                         <td>
-                                            @php
-                                                $totalMontant = 0;
-                                            @endphp
-                                            @if($vente->detailsVente)
-                                                @foreach($vente->detailsVente as $detail)
-                                                    @php
-                                                        $totalMontant += $detail->qte * $detail->prix;
-                                                    @endphp
-                                                @endforeach
-                                                {{ $totalMontant }}
-                                            @else
-                                                Aucun détail de vente
-                                            @endif
+                                        @php
+    $totalMontant = 0;
+@endphp
+
+@if($vente->detailsVente)
+    @foreach($vente->detailsVente as $detail)
+        @php
+            $qte = intval($detail->qte);
+            $prix = floatval($detail->prix);
+            $totalMontant += $qte * $prix;
+        @endphp
+    @endforeach
+    {{ $totalMontant }}
+@else
+    Aucun détail de vente
+@endif
+
                                         </td>
                                         <td>
                                             <!-- Actions -->
                                             <a href="{{ route('vente.edit', $vente->id) }}" class="btn btn-primary">Modifier</a>
-                                            <a href="{{ route('detailsvente.create', $vente->id) }}" class="btn btn-primary">Détails</a>
+                                            <a href="{{ route('detailsvente.index', $vente->id) }}" class="btn btn-primary">Détails vente</a>
                                             <form action="{{ route('vente.destroy', $vente->id) }}" method="POST" style="display: inline;">
                                                 @csrf
                                                 @method('DELETE')

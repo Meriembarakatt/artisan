@@ -33,7 +33,7 @@ Route::put('/client/{client}', [ClientController::class, 'update'])->name('clien
 
 Route::get('/ventes', [VenteController::class, 'index'])->name('vente.index');
 Route::get('/ventes/create', [VenteController::class, 'create'])->name('vente.create');
-Route::post('/ventes', [VenteController::class, 'store'])->name('vente.store');
+Route::post('/ventes/store', [VenteController::class, 'store'])->name('vente.store');
 Route::get('/ventes/{vente}', [VenteController::class, 'show'])->name('vente.show');
 Route::get('/ventes/{vente}/edit', [VenteController::class, 'edit'])->name('vente.edit');
 Route::put('/ventes/{vente}', [VenteController::class, 'update'])->name('vente.update');
