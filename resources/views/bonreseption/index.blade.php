@@ -69,6 +69,7 @@
                 <p><strong>ID :</strong> {{ $bonreception->id }}</p>
                 <p><strong>Date :</strong> {{ $bonreception->date }}</p>
                 <p><strong>Artisan :</strong> {{ $bonreception->artisan->nom }}</p>
+                
                 <!-- Ajoutez d'autres détails ici -->
             </div>
             <div class="modal-footer">

@@ -7,7 +7,7 @@
         <div class="col-md-12">
             <div class="card">
                 
-                <div class="card-header">Liste des   detail de  vente</div>
+               <h1> <div class="card-header">Liste des   detail de  vente</div></h1>
 
                 <div class="card-body">
                     @if (session('success'))
@@ -16,10 +16,10 @@
                         </div>
                     @endif
 
-                    <div class="mb-3">
+                    {{-- <div class="mb-3">
                         <a href="{{ route('detailsvente.create') }}" class="btn btn-success">Ajouter un detail de  vente</a>
                     </div>
-                    
+                     --}}
                     <table class="table">
                         <thead>
                             <tr>

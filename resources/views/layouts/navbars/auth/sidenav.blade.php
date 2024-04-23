@@ -36,7 +36,7 @@
                 </a>
             </li>
            
-            <li class="nav-item">
+            {{-- <li class="nav-item">
                 <a class="nav-link {{ Route::currentRouteName() == 'familles' ? 'active' : '' }}" href="{{ route('familles.index') }}">
                     <div
                         class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
@@ -53,7 +53,7 @@
                     </div>
                     <span class="nav-link-text ms-1">sous_familles</span>
                 </a>
-            </li>
+            </li> --}}
             <li class="nav-item">
                 <a class="nav-link {{ Route::currentRouteName() == 'client' ? 'active' : '' }}" href="{{ route('client.index') }}">
                     <div
@@ -81,7 +81,7 @@
                     <span class="nav-link-text ms-1">article</span>
                 </a>
             </li>
-            <li class="nav-item">
+            {{-- <li class="nav-item">
                 <a class="nav-link {{ Route::currentRouteName() == 'mode' ? 'active' : '' }}" href="{{ route('modes.index') }}">
                     <div
                         class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
@@ -89,7 +89,7 @@
                     </div>
                     <span class="nav-link-text ms-1">mode </span>
                 </a>
-            </li>
+            </li> --}}
            
            
             
@@ -157,6 +157,30 @@
                     <span class="nav-link-text ms-1">User Management</span>
                 </a>
             </li>
+           
+            
+            <li class="nav-item">
+                <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+                    <i class="ni ni-bullet-list-67 text-dark text-sm opacity-10"></i>
+                    <select class="form-select" onchange="window.location.href = this.value;">
+                        <span class="nav-link-text ms-1">Management</span>
+                        <option selected disabled>Selectionner</option>
+                        <option value="{{ route('modes.index') }}">Modes</option>
+                        <option value="{{ route('familles.index') }}">Familles</option>
+                        <option value="{{ route('sousfamille.index') }}">sous-famille</option>
+                    </select>
+                    
+                </div>
+              
+            </li>
+            
+            
+            
+            
+            
+            
+            
+           
             
             {{-- <li class="nav-item mt-3">
                 <h6 class="ps-4 ms-2 text-uppercase text-xs font-weight-bolder opacity-6">Pages</h6>

@@ -130,16 +130,22 @@
                         @csrf
                         <div class="form-group">
                             <label for="famille_id" class="form-label">Famille :</label>
-                            <select name="famille_id" id="famille_id" class="form-control" required>
+                            <select name="famille_id" id="famille_id" class="form-control" >
+                                <option value="">Sélectionnez une famille</option>
                                 @foreach($familles as $famille)
                                     <option value="{{ $famille->id }}">{{ $famille->famille }}</option>
                                 @endforeach
                             </select>
+                            @error('famille_id')
+                            <div class="text-danger">{{ $message }}</div>
+                            @enderror
                         </div>
                         <div class="form-group">
                             <label for="name" class="form-label">Nom de la Sous-famille :</label>
-                            <input type="text" id="name" name="name" class="form-control" required>
-                        </div>
+                            <input type="text" id="name" name="name" class="form-control" >
+                            @error('name')
+                            <div class="text-danger">{{ $message }}</div>
+                            @enderror
                         <div class="modal-footer">
                             <button type="submit" class="btn btn-primary">Ajouter la Sous-famille</button>
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
@@ -197,7 +203,10 @@
         </div>
         <div class="form-group">
             <label for="name">Nom de la Sous-famille :</label>
-            <input type="text" id="name" name="name" class="form-control" value="{{ $sousFamille->name }}" required>
+            <input type="text" id="name" name="name" class="form-control" value="{{ $sousFamille->name }}" >
+            @error('name')
+            <div class="invalid-feedback">{{ $message }}</div>
+        @enderror
         </div>
         <button type="submit" class="btn btn-primary">Enregistrer les modifications</button>
         

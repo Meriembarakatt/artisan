@@ -218,33 +218,49 @@
 
                                         <div class="form-group">
                                             <label for="client_id">Client</label>
-                                            <select id="client_id" name="client_id" class="form-control">
+                                            <select id="client_id" name="client_id" class="form-control" >
+                                                <option value="">Sélectionnez un client</option>
                                                 @foreach($clients as $client)
                                                     <option value="{{ $client->id }}">{{ $client->nom }} {{ $client->prenom }}</option>
                                                 @endforeach
                                             </select>
+                                            @error('client_id')
+                                                <div class="text-danger">{{ $message }}</div>
+                                            @enderror
                                         </div>
-
+                    
                                         <div class="form-group">
                                             <label for="mode_id">Mode de règlement</label>
-                                            <select id="mode_id" name="mode_id" class="form-control">
+                                            <select id="mode_id" name="mode_id" class="form-control" >
+                                                <option value="">Sélectionnez un mode de règlement</option>
                                                 @foreach($modes as $mode)
                                                     <option value="{{ $mode->id }}">{{ $mode->mode }}</option>
                                                 @endforeach
                                             </select>
+                                            @error('mode_id')
+                                                <div class="text-danger">{{ $message }}</div>
+                                            @enderror
                                         </div>
-
+                    
                                         <div class="form-group">
                                             <label for="date">Date</label>
-                                            <input id="date" type="date" class="form-control" name="date" required>
+                                            <input id="date" type="date" class="form-control" name="date" >
+                                            @error('date')
+                                                <div class="text-danger">{{ $message }}</div>
+                                            @enderror
                                         </div>
-
+                    
                                         <div class="form-group">
                                             <label for="montant">Montant</label>
-                                            <input id="montant" type="number" step="0.01" class="form-control" name="montant" required>
+                                            <input id="montant" type="number" step="0.01" class="form-control" name="montant" >
+                                            @error('montant')
+                                                <div class="text-danger">{{ $message }}</div>
+                                            @enderror
                                         </div>
-
+                    
                                         <button type="submit" class="btn btn-primary">Ajouter le règlement</button>
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+                
                                     </form>
                                 </div>
         </div>

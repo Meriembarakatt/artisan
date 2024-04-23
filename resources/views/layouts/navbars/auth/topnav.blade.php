@@ -16,7 +16,15 @@
                     <span class="input-group-text text-body"><i class="fas fa-search" aria-hidden="true"></i></span>
                     <input type="text" class="form-control" placeholder="Type here...">
                 </div>
+<<<<<<< HEAD
             </div> 
+=======
+                {{-- <div class="search-container">
+                    <input type="text" id="searchInput" class="search-input" placeholder="Rechercher par mode..." onkeyup="searchModes()">
+                    {{-- <button type="button" class="search-btn">Rechercher</button> -
+                </div> --}}
+             </div>
+>>>>>>> effc17279296023ff94c1056abd94bb6f27a2a3f
             <ul class="navbar-nav  justify-content-end">
                 <li class="nav-item d-flex align-items-center">
                     <form role="form" method="post" action="http://127.0.0.1:8000/logout" id="logout-form">
@@ -26,7 +34,7 @@
                         </a>
                     </form>
                 </li>
-                <li class="nav-item d-xl-none ps-3 d-flex align-items-center">
+                {{--<li class="nav-item d-xl-none ps-3 d-flex align-items-center">
                     <a href="javascript:;" class="nav-link text-white p-0" id="iconNavbarSidenav">
                         <div class="sidenav-toggler-inner">
                             <i class="sidenav-toggler-line bg-white"></i>
@@ -114,7 +122,7 @@
                             </a>
                         </li>
                     </ul>
-                </li>
+                </li> --}}
             </ul>
         </div>
     </div>

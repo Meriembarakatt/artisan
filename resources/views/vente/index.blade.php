@@ -54,7 +54,7 @@
                                         <td>
                                             <!-- Actions -->
                                             <a href="{{ route('vente.edit', $vente->id) }}" class="btn btn-primary">Modifier</a>
-                                            <a href="{{ route('detailsvente.create', $vente->id) }}" class="btn btn-primary">Détails</a>
+                                            <a href="{{ route('detailsvente.index', $vente->id) }}" class="btn btn-primary">Détails vente</a>
                                             <form action="{{ route('vente.destroy', $vente->id) }}" method="POST" style="display: inline;">
                                                 @csrf
                                                 @method('DELETE')

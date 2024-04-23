@@ -20,9 +20,9 @@
                         @csrf
                         <div class="form-group">
                             <label for="famille">Nom de la famille :</label>
-                            <input type="text" id="famille" name="famille" class="form-control @error('famille') is-invalid @enderror" required>
+                            <input type="text" id="famille" name="famille" class="form-control @error('famille') is-invalid @enderror">
                             @error('famille')
-                                <div class="invalid-feedback">{{ $message }}</div>
+                            <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
                         </div>
                         <button type="submit" class="btn btn-success float-right">Ajouter la famille</button>

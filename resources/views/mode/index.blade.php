@@ -12,6 +12,10 @@
                         <button type="button" class="btn btn-success float-right" data-bs-toggle="modal" data-bs-target="#modalAddMode">Ajouter un Mode</button>
                     </div>
                     <div class="card-body">
+                        {{-- <div class="search-container">
+                            <input type="text" id="searchInput" class="search-input" placeholder="Rechercher par mode..." onkeyup="searchModes()">
+                            <button type="button" class="search-btn">Rechercher</button>
+                        </div> --}}
                         @if(session('success'))
                             <div class="alert alert-success">{{ session('success') }}</div>
                         @endif
@@ -72,7 +76,7 @@
         </div>
     </div>
     @endforeach
-{{-- modal pour ajouter mode--}}
+{{-- modal pour ajouter mode --}}
 <div class="modal fade" id="modalAddMode" tabindex="-1" aria-labelledby="modalAddModeLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
@@ -86,6 +90,9 @@
                     <div class="mb-3">
                         <label for="mode" class="form-label">Mode</label>
                         <input type="text" class="form-control" id="mode" name="mode" placeholder="Entrez le mode">
+                        @error('mode')
+                            <div class="text-danger">{{ $message }}</div>
+                        @enderror
                     </div>
                     <button type="submit" class="btn btn-primary">Ajouter</button>
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
@@ -94,6 +101,7 @@
         </div>
     </div>
 </div>
+
 {{-- modal pour modifier  --}}
 @foreach($modes as $mode)
 <div class="modal fade" id="modalEditMode{{ $mode->id }}" tabindex="-1" aria-labelledby="modalEditModeLabel{{ $mode->id }}" aria-hidden="true">
@@ -121,5 +129,24 @@
     </div>
 </div>
 @endforeach
-
+<script>
+    function searchModes() {
+        var input, filter, table, tr, td, i, txtValue;
+        input = document.getElementById("searchInput");
+        filter = input.value.toUpperCase();
+        table = document.getElementsByClassName("table")[0];
+        tr = table.getElementsByTagName("tr");
+        for (i = 0; i < tr.length; i++) {
+            td = tr[i].getElementsByTagName("td")[1]; // Index 1 correspond à la colonne "Mode"
+            if (td) {
+                txtValue = td.textContent || td.innerText;
+                if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                    tr[i].style.display = "";
+                } else {
+                    tr[i].style.display = "none";
+                }
+            }
+        }
+    }
+</script>
 @endsection

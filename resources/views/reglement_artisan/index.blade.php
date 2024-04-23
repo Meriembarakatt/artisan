@@ -136,7 +136,6 @@ modal   Modifier le Règlement Artisan --}}
 </div>
 @endforeach
 {{-- modal pour aajouter un reglement artisan --}}
-<!-- Modal pour ajouter un Règlement Artisan -->
 <div class="modal fade" id="modalAjouterReglement" tabindex="-1" aria-labelledby="modalAjouterReglementLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
@@ -150,26 +149,40 @@ modal   Modifier le Règlement Artisan --}}
                     <div class="form-group">
                         <label for="artisan_id">Artisan:</label>
                         <select name="artisan_id" id="artisan_id" class="form-control">
+                            <option value="">Sélectionnez un artisan</option>
                             @foreach($artisans as $artisan)
                                 <option value="{{ $artisan->id }}">{{ $artisan->nom }} {{ $artisan->prenom }}</option>
                             @endforeach
                         </select>
+                        @error('artisan_id')
+                            <div class="text-danger">{{ $message }}</div>
+                        @enderror
                     </div>
                     <div class="form-group">
                         <label for="mode_id">Mode:</label>
-                        <select name="mode_id" id="mode_id" class="form-control">
+                        <select name="mode_id" id="mode_id" class="form-control" >
+                            <option value="">Sélectionnez un mode</option>
                             @foreach($modes as $mode)
                                 <option value="{{ $mode->id }}">{{ $mode->mode }}</option>
                             @endforeach
                         </select>
+                        @error('mode_id')
+                            <div class="text-danger">{{ $message }}</div>
+                        @enderror
                     </div>
                     <div class="form-group">
                         <label for="date">Date:</label>
-                        <input type="date" name="date" id="date" class="form-control">
+                        <input type="date" name="date" id="date" class="form-control" >
+                        @error('date')
+                            <div class="text-danger">{{ $message }}</div>
+                        @enderror
                     </div>
                     <div class="form-group">
                         <label for="montant">Montant:</label>
-                        <input type="number" name="montant" id="montant" class="form-control" min="0" step="0.01">
+                        <input type="number" name="montant" id="montant" class="form-control" min="0" step="0.01" >
+                        @error('montant')
+                            <div class="text-danger">{{ $message }}</div>
+                        @enderror
                     </div>
                     <button type="submit" class="btn btn-primary">Ajouter</button>
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
