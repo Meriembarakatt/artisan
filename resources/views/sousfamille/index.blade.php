@@ -1,7 +1,38 @@
 @extends('layouts.app')
 
 @section('content')
-@include('layouts.navbars.auth.topnav', ['title' => 'Dashboard'])
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<nav class="navbar navbar-main navbar-expand-lg px-0 mx-4 shadow-none border-radius-xl
+        {{ str_contains(Request::url(), 'virtual-reality') == true ? ' mt-3 mx-3 bg-primary' : '' }}" id="navbarBlur"
+        data-scroll="false">
+<!-- input recherche -->
+<div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
+    <div class="ms-md-auto pe-md-3 d-flex align-items-center">
+        <div class="input-group">
+            <span class="input-group-text text-body"><i class="fas fa-search" aria-hidden="true"></i></span>
+            <input type="search" class="form-control" placeholder="Type here..." name="search2" id="search2">
+        </div>
+    </div>
+ <ul class="navbar-nav  justify-content-end">
+                <li class="nav-item d-flex align-items-center">
+                    <form role="form" method="post" action="http://127.0.0.1:8000/logout" id="logout-form">
+                        <input type="hidden" name="_token" value="565i2z501PCFGkpUT0iFXh85OU0fngfPNDa8GZmu">                        <a href="http://127.0.0.1:8000/logout" onclick="event.preventDefault(); document.getElementById('logout-form').submit();" class="nav-link text-white font-weight-bold px-0">
+                            <i class="fa fa-user me-sm-1" aria-hidden="true"></i>
+                            <span class="d-sm-inline d-none">Log out</span>
+                        </a>
+                    </form>
+                </li>
+                <li class="nav-item d-xl-none ps-3 d-flex align-items-center">
+                    <a href="javascript:;" class="nav-link text-white p-0" id="iconNavbarSidenav">
+                        <div class="sidenav-toggler-inner">
+                            <i class="sidenav-toggler-line bg-white"></i>
+                            <i class="sidenav-toggler-line bg-white"></i>
+                            <i class="sidenav-toggler-line bg-white"></i>
+                        </div>
+                    </a>
+
+    </div> 
+   </nav>
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-12">
@@ -22,16 +53,14 @@
                     <table class="table">
                         <thead>
                             <tr>
-                                <th>ID</th>
                                 <th>Nom de la sous-famille</th>
                                 <th>Famille</th>
                                 <th>Actions</th>
                             </tr>
                         </thead>
-                        <tbody>
+                        <tbody class="alldata">
                             @foreach($sousFamilles as $sousFamille)
                             <tr>
-                                <td>{{ $sousFamille->id }}</td>
                                 <td>{{ $sousFamille->name }}</td>
                                 <td>{{ $sousFamille->famille->famille }}</td>
                                 <td>
@@ -53,13 +82,42 @@
                             </tr>
                             @endforeach
                         </tbody>
+                        <tbody id="Content" class="searchdata">
+                            <!-- Les données de la recherche seront affichées ici -->
+                        </tbody>
                     </table>
                     {{ $sousFamilles->links() }}
                 </div>
             </div>
         </div>
     </div>
-    {{-- modal pour ajouter sous famille --}}
+
+    <script type="text/javascript">
+    $('#search2').on('keyup', function() {
+        $value = $(this).val();
+        if($value){
+            $('.alldata').hide();
+            $('.searchdata').show();
+
+        }
+        else{
+            $('.alldata').show();
+            $('.searchdata').hide();
+        }
+        $.ajax({
+            url: '{{ URL::to('searchSousFamilles') }}',
+            type: 'GET',
+            data: { 'search': $value },
+            success: function(data) {
+                console.log(data);
+                $('#Content').html(data);
+            }
+        })
+    })
+</script>
+
+
+  <!-- modal pour ajouter sous famille -->
     <div class="modal fade" id="modalAjoutersousfamille" tabindex="-1" aria-labelledby="modalAjoutersousfamilleLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">

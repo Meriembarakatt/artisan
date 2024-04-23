@@ -18,7 +18,51 @@ class ArticleController extends Controller
 
         return view('article.index', compact('articles'));
     }
-    
+    public function search(Request $request)
+{
+    $output = "";
+
+    // Recherche des articles par désignation
+    $articles = Article::where('designation', 'like', '%' . $request->search . '%')->get();
+
+    // Construction de la sortie pour afficher les résultats de la recherche
+    foreach ($articles as $article) {
+        $output .= '<tr>
+            <td>' . $article->designation . '</td>
+            <td>' . $article->prix_ht . '</td>
+            <td>' . $article->qte . '</td>
+            <td>' . $article->stock . '</td>
+            <td>' . $article->sousFamille->name . '</td>';
+
+        $output .= '<td>';
+        if ($article->image) {
+            $output .= '<img src="' . asset('storage/' . $article->image) . '" alt="Image de l\'article" style="max-width: 100px;">';
+        } else {
+            $output .= 'Aucune image disponible';
+        }
+        $output .= '</td>';
+
+        $output .= '<td>
+            <a href="' . route("article.edit", $article->id) . '" class="btn btn-success mb-3">
+                <i class="bi bi-pencil"></i> Modifier
+            </a>
+            <form action="' . route('article.destroy', $article->id) . '" method="POST" style="display: inline-block;">
+                ' . csrf_field() . '
+                ' . method_field("DELETE") . '
+                <button type="submit" class="btn btn-danger" onclick="return confirm(\'Êtes-vous sûr de vouloir supprimer cet article ?\')">
+                    <i class="bi bi-trash"></i> Supprimer
+                </button>
+            </form>
+            <button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#modalArticle' . $article->id . '">
+                <i class="bi bi-info-circle"></i> Détails
+            </button>
+        </td>
+    </tr>';
+    }
+
+    return response($output);
+}
+
     /**
      * Affiche le formulaire de création d'un nouvel article.
      *

@@ -1,9 +1,43 @@
 @extends('layouts.app')
 
 @section('content')
-@include('layouts.navbars.auth.topnav', ['title' => 'Dashboard'])
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<nav class="navbar navbar-main navbar-expand-lg px-0 mx-4 shadow-none border-radius-xl
+        {{ str_contains(Request::url(), 'virtual-reality') == true ? ' mt-3 mx-3 bg-primary' : '' }}" id="navbarBlur"
+        data-scroll="false">
+<!-- input recherche -->
+<div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
+    <div class="ms-md-auto pe-md-3 d-flex align-items-center">
+        <div class="input-group">
+            <span class="input-group-text text-body"><i class="fas fa-search" aria-hidden="true"></i></span>
+            <input type="search" class="form-control" placeholder="Type here..." name="search" id="search">
+        </div>
+    </div>
+    <!-- end input recherche -->
+ <ul class="navbar-nav  justify-content-end">
+                <li class="nav-item d-flex align-items-center">
+                    <form role="form" method="post" action="http://127.0.0.1:8000/logout" id="logout-form">
+                        <input type="hidden" name="_token" value="565i2z501PCFGkpUT0iFXh85OU0fngfPNDa8GZmu">                        <a href="http://127.0.0.1:8000/logout" onclick="event.preventDefault(); document.getElementById('logout-form').submit();" class="nav-link text-white font-weight-bold px-0">
+                            <i class="fa fa-user me-sm-1" aria-hidden="true"></i>
+                            <span class="d-sm-inline d-none">Log out</span>
+                        </a>
+                    </form>
+                </li>
+                <li class="nav-item d-xl-none ps-3 d-flex align-items-center">
+                    <a href="javascript:;" class="nav-link text-white p-0" id="iconNavbarSidenav">
+                        <div class="sidenav-toggler-inner">
+                            <i class="sidenav-toggler-line bg-white"></i>
+                            <i class="sidenav-toggler-line bg-white"></i>
+                            <i class="sidenav-toggler-line bg-white"></i>
+                        </div>
+                    </a>
+
+    </div> 
+   </nav>
+
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-12">
@@ -21,7 +55,6 @@
                     <table class="table">
                         <thead>
                             <tr>
-                                <th>ID</th>
                                 <th>Désignation</th>
                                 <th>Prix HT</th>
                                 <th>Quantité</th>
@@ -31,10 +64,9 @@
                                 <th>Action</th>
                             </tr>
                         </thead>
-                        <tbody>
+                        <tbody  class="alldata">
                             @foreach ($articles as $article)
                             <tr>
-                                <td>{{ $article->id }}</td>
                                 <td>{{ $article->designation }}</td>
                                 <td>{{ $article->prix_ht }}</td>
                                 <td>{{ $article->qte }}</td>
@@ -65,15 +97,39 @@
                             </tr>
                             @endforeach
                         </tbody>
+                        <tbody id="Content" class="searchdata">
+                            <!-- Les données de la recherche seront affichées ici -->
+                        </tbody>
                     </table>
                     {{ $articles->links() }}
-
                 </div>
             </div>
         </div>
     </div>
 </div>
+<script type="text/javascript">
+    $('#search').on('keyup', function() {
+        $value = $(this).val();
+        if($value){
+            $('.alldata').hide();
+            $('.searchdata').show();
 
+        }
+        else{
+            $('.alldata').show();
+            $('.searchdata').hide();
+        }
+        $.ajax({
+            url: '{{ URL::to('searcharticle') }}',
+            type: 'GET',
+            data: { 'search': $value },
+            success: function(data) {
+                console.log(data);
+                $('#Content').html(data);
+            }
+        })
+    })
+</script>
 
 <!-- Modal -->
 @foreach ($articles as $article)

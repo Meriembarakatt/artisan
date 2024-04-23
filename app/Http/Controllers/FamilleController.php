@@ -18,7 +18,33 @@ class FamilleController extends Controller
 
         return view('familles.index', ['familles' => $familles]);
     }
+    public function search(Request $request)
+    {
+        $output = "";
 
+        $familles = Famille::where('famille', 'like', '%' . $request->search . '%')->get();
+
+        foreach ($familles as $famille) {
+            $output .= '<tr><td>' . $famille->famille . '</td>
+            <td><form action="' . route("familles.edit", $famille->id) . '" method="GET" style="display: inline;">
+                ' . csrf_field() . '
+                <button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#modalFamilleedit' . $famille->id . '">
+                    Modifier
+                </button>
+            </form>
+            <form action="' . route("familles.destroy", $famille->id) . '" method="POST" style="display: inline;">
+                ' . csrf_field() . '
+                ' . method_field("DELETE") . '
+                <button type="submit" class="btn btn-danger" onclick="return confirm(\'Êtes-vous sûr de vouloir supprimer cette famille ?\')">Supprimer</button>
+            </form>
+            <button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#modalFamille' . $famille->id . '">
+                Détails
+            </button></td></tr>';
+        }
+
+        return response($output);
+    }
+    
     /**
      * Show the form for creating a new resource.
      *
@@ -100,4 +126,6 @@ class FamilleController extends Controller
         return redirect()->route('familles.index');
 
     }
+   
+
 }

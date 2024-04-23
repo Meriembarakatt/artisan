@@ -19,7 +19,48 @@ class ArtisanController extends Controller
         // Retourne la vue 'artisan.create' pour créer un nouvel artisan
         return view('artisan.create');
     }
-
+    public function search(Request $request)
+    {
+        $output = "";
+    
+        // Effectuer la requête de recherche basée sur 'nom' et 'prenom'
+        $artisans = Artisan::where('nom', 'like', '%' . $request->search . '%')
+            ->orWhere('prenom', 'like', '%' . $request->search . '%')
+            ->get();
+    
+        // Construire la sortie pour afficher les résultats de la recherche
+        foreach ($artisans as $artisan) {
+            $output .= '<tr><td>' . $artisan->nom . '</td>
+                <td>' . $artisan->prenom . '</td>
+                <td>' . $artisan->email . '</td>
+                <td>' . $artisan->password . '</td>
+                <td>' . $artisan->adress . '</td>
+                <td>' . $artisan->ville . '</td>
+                <td>' . $artisan->fonction . '</td>
+                <td>' . $artisan->tell . '</td>
+                <td>
+                    <button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#modalArtisanedit' . $artisan->id . '">
+                        Modifier
+                    </button>
+                    <form action="' . route("artisan.destroy", $artisan->id) . '" method="POST" style="display: inline-block;">
+                        ' . csrf_field() . '
+                        ' . method_field("DELETE") . '
+                        <button type="submit" class="btn btn-danger" onclick="return confirm(\'Êtes-vous sûr de vouloir supprimer cet artisan ?\')">Supprimer</button>
+                    </form>
+                    <!-- Bouton pour ouvrir le modal -->
+                    <button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#modalArtisan' . $artisan->id . '">
+                        Détails
+                    </button>
+                    <!-- Bouton pour ouvrir le modal des règlements -->
+                    <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modalReglements' . $artisan->id . '">
+                        Règlements
+                    </button>
+                </td></tr>';
+        }
+    
+        return response($output);
+    }
+    
     public function store(Request $request)
     {
         // Valide les données du formulaire

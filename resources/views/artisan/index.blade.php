@@ -1,7 +1,41 @@
 @extends('layouts.app')
 
 @section('content')
-@include('layouts.navbars.auth.topnav', ['title' => 'Dashboard'])
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<nav class="navbar navbar-main navbar-expand-lg px-0 mx-4 shadow-none border-radius-xl
+        {{ str_contains(Request::url(), 'virtual-reality') == true ? ' mt-3 mx-3 bg-primary' : '' }}" id="navbarBlur"
+        data-scroll="false">
+<!-- input recherche -->
+<div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
+    <div class="ms-md-auto pe-md-3 d-flex align-items-center">
+        <div class="input-group">
+            <span class="input-group-text text-body"><i class="fas fa-search" aria-hidden="true"></i></span>
+            <input type="search" class="form-control" placeholder="Type here..." name="search" id="search">
+        </div>
+    </div>
+    <!-- end input recherche -->
+ <ul class="navbar-nav  justify-content-end">
+                <li class="nav-item d-flex align-items-center">
+                    <form role="form" method="post" action="http://127.0.0.1:8000/logout" id="logout-form">
+                        <input type="hidden" name="_token" value="565i2z501PCFGkpUT0iFXh85OU0fngfPNDa8GZmu">                        <a href="http://127.0.0.1:8000/logout" onclick="event.preventDefault(); document.getElementById('logout-form').submit();" class="nav-link text-white font-weight-bold px-0">
+                            <i class="fa fa-user me-sm-1" aria-hidden="true"></i>
+                            <span class="d-sm-inline d-none">Log out</span>
+                        </a>
+                    </form>
+                </li>
+                <li class="nav-item d-xl-none ps-3 d-flex align-items-center">
+                    <a href="javascript:;" class="nav-link text-white p-0" id="iconNavbarSidenav">
+                        <div class="sidenav-toggler-inner">
+                            <i class="sidenav-toggler-line bg-white"></i>
+                            <i class="sidenav-toggler-line bg-white"></i>
+                            <i class="sidenav-toggler-line bg-white"></i>
+                        </div>
+                    </a>
+
+    </div> 
+   </nav>
+
+
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-mt-12">
@@ -19,30 +53,29 @@
                     <table class="table">
                         <thead>
                             <tr>
-                                <th>ID</th>
+                             
                                 <th>Nom</th>
                                 <th>Prénom</th>
                                 <th>Email</th>
-                                {{-- <th>password</th> --}}
+                                <th>password</th> 
                                 <th>ville</th>
-                                {{-- <th>Adresse</th> --}}
-                                {{-- <th>telephone</th> --}}
-                                {{-- <th>function</th> --}}
+                                <th>Adresse</th> 
+                                <th>telephone</th> 
+                               <th>function</th> 
                                 <th>Actions</th>
                             </tr>
                         </thead>
-                        <tbody>
+                        <tbody class="alldata">
                             @foreach($artisans as $artisan)
                             <tr>
-                                <td>{{ $artisan->id }}</td>
                                 <td>{{ $artisan->nom }}</td>
                                 <td>{{ $artisan->prenom }}</td>
                                 <td>{{ $artisan->email }}</td>
-                                {{-- <td>{{ $artisan->password }}</td> --}}
+                               <td>{{ $artisan->password }}</td> 
                                 <td>{{ $artisan->ville }}</td>
-                                {{-- <td>{{ $artisan->adress }}</td>
+                                 <td>{{ $artisan->adress }}</td>
                                 <td>{{ $artisan->tell }}</td>
-                                <td>{{ $artisan->fonction }}</td> --}}
+                                <td>{{ $artisan->fonction }}</td> 
                                 <td>
                                     <button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#modalArtisanedit{{ $artisan->id }}">
                                         modifier
@@ -63,12 +96,50 @@
                                 </td>
                             </tr>
                             @endforeach
-                            @foreach($artisans as $artisan)
+                            </tbody>
+                            <tbody id="Content" class="searchdata">
+                            <!-- Les données de la recherche seront affichées ici -->
+                        </tbody>
+                    </table>
+                    
+                    {{ $artisans->links() }}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    $('#search').on('keyup', function() {
+        $value = $(this).val();
+        if($value){
+            $('.alldata').hide();
+            $('.searchdata').show();
+
+        }
+        else{
+            $('.alldata').show();
+            $('.searchdata').hide();
+        }
+        $.ajax({
+            url: '{{ URL::to('searchartisant') }}',
+            type: 'GET',
+            data: { 'search': $value },
+            success: function(data) {
+                console.log(data);
+                $('#Content').html(data);
+            }
+        })
+    })
+</script>
+
+
+@foreach($artisans as $artisan)
 <div class="modal fade" id="modalArtisanedit{{ $artisan->id }}" tabindex="-1" aria-labelledby="modalArtisan{{ $artisan->id }}Label" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="modalArtisan{{ $artisan->id }}Label">modifier l'artisan</h5>
+                <h5 class="modal-title" id="modalArtisan{{ $artisan->id }}Label">Modifier l'artisan</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
 
@@ -76,62 +147,60 @@
                 @csrf
                 @method('PUT')
     
-                <div class="form-group">
-                    <label for="nom">Nom</label>
-                    <input type="text" class="form-control" id="nom" name="nom" value="{{ $artisan->nom }}">
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="nom">Nom</label>
+                        <input type="text" class="form-control" id="nom" name="nom" value="{{ $artisan->nom }}">
+                    </div>
+    
+                    <div class="form-group">
+                        <label for="prenom">Prénom</label>
+                        <input type="text" class="form-control" id="prenom" name="prenom" value="{{ $artisan->prenom }}">
+                    </div>
+    
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" class="form-control" id="email" name="email" value="{{ $artisan->email }}">
+                    </div>
+    
+                    <div class="form-group">
+                        <label for="password">Mot de passe</label>
+                        <input type="password" class="form-control" id="password" name="password" placeholder="Entrez un nouveau mot de passe">
+                    </div>
+    
+                    <div class="form-group">
+                        <label for="adresse">Adresse</label>
+                        <input type="text" class="form-control" id="adresse" name="adresse" value="{{ $artisan->adresse }}">
+                    </div>
+    
+                    <div class="form-group">
+                        <label for="ville">Ville</label>
+                        <input type="text" class="form-control" id="ville" name="ville" value="{{ $artisan->ville }}">
+                    </div>
+    
+                    <div class="form-group">
+                        <label for="tell">Téléphone</label>
+                        <input type="text" class="form-control" id="tell" name="tell" value="{{ $artisan->tell }}">
+                    </div>
+    
+                    <div class="form-group">
+                        <label for="fonction">Fonction</label>
+                        <input type="text" class="form-control" id="fonction" name="fonction" value="{{ $artisan->fonction }}">
+                    </div>
                 </div>
     
-                <div class="form-group">
-                    <label for="prenom">Prénom</label>
-                    <input type="text" class="form-control" id="prenom" name="prenom" value="{{ $artisan->prenom }}">
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary">Enregistrer les modifications</button>
+                    <a href="{{ route('artisan.index') }}" class="btn btn-secondary">Annuler</a>
                 </div>
-    
-                <div class="form-group">
-                    <label for="email">Email</label>
-                    <input type="email" class="form-control" id="email" name="email" value="{{ $artisan->email }}">
-                </div>
-    
-                <div class="form-group">
-                    <label for="password">Mot de passe</label>
-                    <input type="password" class="form-control" id="password" name="password" placeholder="Entrez un nouveau mot de passe">
-                </div>
-    
-                <div class="form-group">
-                    <label for="adress">Adresse</label>
-                    <input type="text" class="form-control" id="adress" name="adress" value="{{ $artisan->adress }}">
-                </div>
-    
-                <div class="form-group">
-                    <label for="ville">Ville</label>
-                    <input type="text" class="form-control" id="ville" name="ville" value="{{ $artisan->ville }}">
-                </div>
-    
-                <div class="form-group">
-                    <label for="tell">Téléphone</label>
-                    <input type="text" class="form-control" id="tell" name="tell" value="{{ $artisan->tell }}">
-                </div>
-    
-                <div class="form-group">
-                    <label for="fonction">Fonction</label>
-                    <input type="text" class="form-control" id="fonction" name="fonction" value="{{ $artisan->fonction }}">
-                </div>
-    
-                <button type="submit" class="btn btn-primary">Enregistrer les modifications</button>
             </form>
-    
-    <a href="{{ route('artisan.index') }}" class="btn btn-secondary mt-3">Annuler</a>
-</div>
-    </div>
-    @endforeach
-                        </tbody>
-                    </table>
-
-                    {{ $artisans->links() }}
-                </div>
-            </div>
         </div>
     </div>
 </div>
+@endforeach
+
+                       
+
 
 <!-- Modal pour afficher les détails de chaque artisan -->
 @foreach($artisans as $artisan)

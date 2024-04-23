@@ -30,6 +30,8 @@ Route::delete('/client/{client}',[ ClientController::class,'destroy'])->name('cl
 Route::get('/client/{client}', [ClientController::class, 'show'])->name('client.show');
 Route::get('/client/{client}/edit', [ClientController::class, 'edit'])->name('client.edit');
 Route::put('/client/{client}', [ClientController::class, 'update'])->name('client.update');
+Route::get('/searchclient', [ClientController::class, 'search'])->name('client.search');
+
 
 Route::get('/ventes', [VenteController::class, 'index'])->name('vente.index');
 Route::get('/ventes/create', [VenteController::class, 'create'])->name('vente.create');
@@ -61,6 +63,7 @@ Route::put('/artisan/{artisan}', [ArtisanController::class, 'update'])->name('ar
 Route::delete('/artisan/{artisan}',[ ArtisanController::class,'destroy'])->name('artisan.destroy');
 Route::post('/artisan', [ArtisanController::class, 'store'])->name('artisan.store');
 Route::get('/artisan/{artisan}/reglementsa', [ReglementaController::class, 'reglementsartisan'])->name('reglements.artisan');
+Route::get('/searchartisant', [ArtisanController::class, 'search'])->name('artisan.search');
 
 // Route::get('reglementsartisan/{id}', 'ReglementArtisanController@reglementsartisan')->name('reglements.artisan');
 
@@ -92,6 +95,9 @@ Route::get('/reglements/{reglementCl}', [ReglementClController::class, 'show'])-
 Route::get('/reglements/{reglementCl}/edit', [ReglementClController::class, 'edit'])->name('reglement_cl.edit');
 Route::put('/reglements/{reglementCl}', [ReglementClController::class, 'update'])->name('reglement_cl.update');
 Route::delete('/reglements/{reglementCl}', [ReglementClController::class, 'destroy'])->name('reglement_cl.destroy');
+Route::get('/searchreglementCl', [ReglementClController::class, 'search'])->name('reglement_cl.search');
+
+
 
 Route::get('/reglement_artisan', [ReglementArtisanController::class, 'index'])->name('reglement_artisan.index');
 Route::get('/reglement_artisan/create', [ReglementArtisanController::class, 'create'])->name('reglement_artisan.create');
@@ -120,6 +126,7 @@ Route::get('/familles/{famille}/edit', [FamilleController::class, 'edit'])->name
 Route::get('/familles/{famille}', [FamilleController::class, 'show'])->name('familles.show');
 Route::put('/familles/{famille}', [FamilleController::class, 'update'])->name('familles.update');
  
+Route::get('/searchfamille', [FamilleController::class, 'search'])->name('familles.search');
 
 
 
@@ -147,6 +154,7 @@ Route::put('/articles/{article}', [ArticleController::class, 'update'])->name('a
 
 // Route pour supprimer un article de la base de données
 Route::delete('/articles/{article}', [ArticleController::class, 'destroy'])->name('article.destroy');
+Route::get('/searcharticle', [ArticleController::class, 'search'])->name('article.search');
 
 
 Route::get('/sousfamilles', [SousFamilleController::class, 'index'])->name('sousfamille.index');
@@ -156,7 +164,7 @@ Route::get('/sousfamilles/{sousFamille}', [SousFamilleController::class, 'show']
 Route::get('/sousfamilles/{sousFamille}/edit', [SousFamilleController::class, 'edit'])->name('sousfamille.edit');
 Route::put('/sousfamilles/{sousFamille}', [SousFamilleController::class, 'update'])->name('sousfamille.update');
 Route::delete('/sousfamilles/{sousFamille}', [SousFamilleController::class, 'destroy'])->name('sousfamille.destroy');
-
+Route::get('/searchSousFamilles', [SousFamilleController::class, 'search'])->name('sousfamille.search');
 
 
 

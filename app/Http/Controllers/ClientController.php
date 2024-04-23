@@ -13,7 +13,45 @@ class ClientController extends Controller
        
         return view('client.index', ['clients' => $clients]);
     }
-
+    public function search(Request $request)
+    {
+        $output = "";
+    
+        $clients = Client::where('nom', 'like', '%' . $request->search . '%')
+            ->orWhere('prenom', 'like', '%' . $request->search . '%')
+            ->get();
+    
+        foreach ($clients as $client) {
+            $output .= '<tr><td>' . $client->nom . '</td>
+                <td>' . $client->prenom . '</td>
+                <td>' . $client->tell . '</td>
+                <td>' . $client->email . '</td>
+                <td>' . $client->adress . '</td>
+                <td>' . $client->ville . '</td>
+                <td>
+                <button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#modalClientedit' . $client->id . '">
+                modifier
+                </button>
+                <form action="' . route("client.destroy", $client->id) . '" method="POST" style="display: inline;">
+                    ' . csrf_field() . '
+                    ' . method_field("DELETE") . '
+                    <button type="submit" class="btn btn-danger">Supprimer</button>
+                </form>
+    
+                <button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#modalClient' . $client->id . '">
+                    Détails
+                </button>
+                <!-- Bouton pour ouvrir le modal des règlements -->
+                <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modalReglements' . $client->id . '">
+                    voir tous les Règlements
+                </button>
+                </td></tr>';
+        }
+    
+        return response($output);
+    }
+    
+    
     public function create()
     {
         return view('client.create');

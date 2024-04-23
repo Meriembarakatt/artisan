@@ -54,6 +54,47 @@ class ReglementClController extends Controller
         return redirect()->route('reglement_cl.index')->with('success', 'Règlement client ajouté avec succès.');
     }
 
+
+    public function search(Request $request)
+    {
+        $output = "";
+    
+        // Recherche des règlements par nom et prénom du client
+        $reglements = ReglementCl::whereHas('client', function ($query) use ($request) {
+            $query->where('nom', 'like', '%' . $request->search . '%')
+                ->orWhere('prenom', 'like', '%' . $request->search . '%');
+        })->get();
+    
+        // Construction de la sortie pour afficher les résultats de la recherche
+        foreach ($reglements as $reglement) {
+            $output .= '<tr><td>' . $reglement->client->nom . ' ' . $reglement->client->prenom . '</td>
+                <td>' . $reglement->mode->mode . '</td>
+                <td>' . $reglement->date . '</td>
+                <td>' . $reglement->montant . '</td>
+                <td>
+                    <button type="button" class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#modalModifierReglement' . $reglement->id . '">
+                        Modifier
+                    </button>
+    
+                    <form action="' . route("reglement_cl.destroy", $reglement->id) . '" method="POST" style="display: inline-block;">
+                    ' . csrf_field() . '
+                    ' . method_field("DELETE") . '
+                        <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm(\'Êtes-vous sûr de vouloir supprimer ce règlement client ?\')">Supprimer</button>
+                    </form>
+    
+                    <button type="button" class="btn btn-info btn-sm" data-bs-toggle="modal" data-bs-target="#modalDetailsReglement' . $reglement->id . '">
+                        Détails
+                    </button>
+                </td>   
+            </tr>';
+        }
+    
+        return response($output);
+    }
+    
+
+
+
     public function afficherReglement($id)
     {
         // Logique pour afficher le règlement du client avec l'ID $id
