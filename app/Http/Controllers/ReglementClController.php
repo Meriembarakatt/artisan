@@ -51,7 +51,7 @@ class ReglementClController extends Controller
 
         ReglementCl::create($validatedData);
 
-        return redirect()->route('reglement_cl.index')->with('success', 'Règlement client ajouté avec succès.');
+        return redirect()->route('client.index')->with('success', 'Règlement client ajouté avec succès.');
     }
 
 

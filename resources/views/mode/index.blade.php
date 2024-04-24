@@ -12,10 +12,10 @@
                         <button type="button" class="btn btn-success float-right" data-bs-toggle="modal" data-bs-target="#modalAddMode">Ajouter un Mode</button>
                     </div>
                     <div class="card-body">
-                        {{-- <div class="search-container">
+                        <div class="search-container">
                             <input type="text" id="searchInput" class="search-input" placeholder="Rechercher par mode..." onkeyup="searchModes()">
                             <button type="button" class="search-btn">Rechercher</button>
-                        </div> --}}
+                        </div>
                         @if(session('success'))
                             <div class="alert alert-success">{{ session('success') }}</div>
                         @endif

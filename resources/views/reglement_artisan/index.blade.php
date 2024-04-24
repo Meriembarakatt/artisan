@@ -10,6 +10,9 @@
                     <h2> Liste des reglement artisan </h2>
                     <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modalAjouterReglement">Ajouter un Règlement</button>
                 </div>
+               
+                
+                
                 <div class="card-body">
                     @if(session('success'))
                     <div class="alert alert-success">{{ session('success') }}</div>
@@ -191,5 +194,6 @@ modal   Modifier le Règlement Artisan --}}
         </div>
     </div>
 </div>
+
 
 @endsection

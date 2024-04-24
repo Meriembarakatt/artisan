@@ -90,8 +90,9 @@
                                         {{-- <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modalAddReglement{{ $client->id }}">
                                             add Règlements
                                         </button> --}}
-                                        <a href="{{ route('reglement_cl.create') }}" class="btn btn-success">Ajouter un reglement</a>
-                
+                                        <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#addReglementModal">
+                                            add Règlements
+                                        </button>
                                     </td>
                                 </tr>
 
@@ -208,6 +209,52 @@
                   
              
        @endforeach
+       {{-- modal pour ajouter un reglement --}}
+       <div class="modal fade" id="addReglementModal" tabindex="-1" role="dialog" aria-labelledby="addReglementModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="addReglementModalLabel">Ajouter un Règlement Artisan</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form action="{{ route('reglement_cl.store') }}" method="POST">
+                        @csrf
+                        <div class="form-group">
+                            <label for="client_id">client:</label>
+                            <select name="client_id" id="client_id" class="form-control">
+                                @foreach($clients as $client)
+                                    <option value="{{ $client->id }}">{{ $client->nom }} {{ $client->prenom }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="mode_id">Mode:</label>
+                            <select name="mode_id" id="mode_id" class="form-control">
+                                @foreach($modes as $mode)
+                                    <option value="{{ $mode->id }}">{{ $mode->mode }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="date">Date:</label>
+                            <input type="date" name="date" id="date" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label for="montant">Montant:</label>
+                            <input type="number" name="montant" id="montant" class="form-control" min="0" step="0.01">
+                        </div>
+                        <div class="modal-footer">
+                            <button type="submit" class="btn btn-primary">Ajouter</button>
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
 {{-- modal modifier client --}}
 
 @foreach($clients as $client)
