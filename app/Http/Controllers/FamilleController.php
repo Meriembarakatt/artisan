@@ -28,17 +28,18 @@ class FamilleController extends Controller
             $output .= '<tr><td>' . $famille->famille . '</td>
             <td><form action="' . route("familles.edit", $famille->id) . '" method="GET" style="display: inline;">
                 ' . csrf_field() . '
-                <button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#modalFamilleedit' . $famille->id . '">
-                    Modifier
+                <button type="button" class="btn-no-border" data-bs-toggle="modal" data-bs-target="#modalFamilleedit' . $famille->id . '">
+                <i class="fa-solid fa-pen-to-square green-icon"></i>
                 </button>
             </form>
             <form action="' . route("familles.destroy", $famille->id) . '" method="POST" style="display: inline;">
                 ' . csrf_field() . '
                 ' . method_field("DELETE") . '
-                <button type="submit" class="btn btn-danger" onclick="return confirm(\'Êtes-vous sûr de vouloir supprimer cette famille ?\')">Supprimer</button>
+                <button type="submit" class="btn-no-border" onclick="return confirm(\'Êtes-vous sûr de vouloir supprimer cette famille ?\')">
+                <i class="fa-solid fa-trash-can red-icon"></i></button>
             </form>
-            <button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#modalFamille' . $famille->id . '">
-                Détails
+            <button type="button" class="btn-no-border" data-bs-toggle="modal" data-bs-target="#modalFamille' . $famille->id . '">
+            <i class="fa-solid fa-eye  black-icon"></i>
             </button></td></tr>';
         }
 

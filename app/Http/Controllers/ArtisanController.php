@@ -4,14 +4,16 @@ namespace App\Http\Controllers;
 
 use App\Models\Artisan;
 use Illuminate\Http\Request;
+use App\Models\Mode;
 
 class ArtisanController extends Controller
 {
     public function index()
     
     {  
-        $artisans = Artisan::orderBy('id', 'desc')->paginate(10); 
-        return view('artisan.index', ['artisans' => $artisans]);
+        $artisans = Artisan::orderBy('id', 'desc')->paginate(10);
+        $modes = Mode::orderBy('id', 'desc')->paginate(10);  
+        return view('artisan.index', ['artisans' => $artisans,'modes' => $modes]);
     }
 
     public function create()
@@ -39,21 +41,25 @@ class ArtisanController extends Controller
                 <td>' . $artisan->fonction . '</td>
                 <td>' . $artisan->tell . '</td>
                 <td>
-                    <button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#modalArtisanedit' . $artisan->id . '">
-                        Modifier
+                    <button type="button" class="btn-no-border" data-bs-toggle="modal" data-bs-target="#modalArtisanedit' . $artisan->id . '">
+                    <i class="fa-solid fa-pen-to-square green-icon"></i>
                     </button>
                     <form action="' . route("artisan.destroy", $artisan->id) . '" method="POST" style="display: inline-block;">
                         ' . csrf_field() . '
                         ' . method_field("DELETE") . '
-                        <button type="submit" class="btn btn-danger" onclick="return confirm(\'Êtes-vous sûr de vouloir supprimer cet artisan ?\')">Supprimer</button>
+                        <button type="submit" class="btn-no-border" onclick="return confirm(\'Êtes-vous sûr de vouloir supprimer cet artisan ?\')">
+                        <i class="fa-solid fa-trash-can red-icon"></i>
+                        </button>
                     </form>
                     <!-- Bouton pour ouvrir le modal -->
-                    <button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#modalArtisan' . $artisan->id . '">
-                        Détails
+                    <button type="button" class="btn-no-border" data-bs-toggle="modal" data-bs-target="#modalArtisan' . $artisan->id . '">
+                    <i class="fa-solid fa-eye  black-icon"></i>
                     </button>
+                    </td>
+                    <td class="text-center">
                     <!-- Bouton pour ouvrir le modal des règlements -->
                     <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modalReglements' . $artisan->id . '">
-                        Règlements
+                        Règ
                     </button>
                 </td></tr>';
         }

@@ -24,30 +24,37 @@ class ClientController extends Controller
             ->get();
     
         foreach ($clients as $client) {
-            $output .= '<tr><td>' . $client->nom . '</td>
+            $output .= '<tr>
+                <td>' . $client->nom . '</td>
                 <td>' . $client->prenom . '</td>
                 <td>' . $client->tell . '</td>
                 <td>' . $client->email . '</td>
                 <td>' . $client->adress . '</td>
                 <td>' . $client->ville . '</td>
                 <td>
-                <button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#modalClientedit' . $client->id . '">
-                modifier
+                <button type="button" class="btn-no-border" data-bs-toggle="modal" data-bs-target="#modalClientedit' . $client->id . '">
+                <i class="fa-solid fa-pen-to-square green-icon"></i>
                 </button>
                 <form action="' . route("client.destroy", $client->id) . '" method="POST" style="display: inline;">
                     ' . csrf_field() . '
                     ' . method_field("DELETE") . '
-                    <button type="submit" class="btn btn-danger">Supprimer</button>
-                </form>
-    
-                <button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#modalClient' . $client->id . '">
-                    Détails
+                    <button type="submit" class="btn-no-border" onclick="return confirm(\'Êtes-vous sûr de vouloir supprimer ce client ?\')">
+                    <i class="fa-solid fa-trash-can red-icon"></i>
+                    </button>
+                </form> 
+                <button type="button" class="btn-no-border" data-bs-toggle="modal" data-bs-target="#modalClient' . $client->id . '">
+                <i class="fa-solid fa-eye  black-icon"></i>
                 </button>
+                </td>
+                <td>
                 <!-- Bouton pour ouvrir le modal des règlements -->
+                
                 <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modalReglements' . $client->id . '">
-                    voir tous les Règlements
+                   Règ
                 </button>
-                </td></tr>';
+                <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#addReglementModal">add
+                Règ
+            </button> </td></tr>';
         }
     
         return response($output);

@@ -1,6 +1,10 @@
+<link rel="stylesheet" href="{{asset('fontawesome-free-6.5.2-web/css/all.min.css')}}" >
+
 @extends('layouts.app')
 
 @section('content')
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 <nav class="navbar navbar-main navbar-expand-lg px-0 mx-4 shadow-none border-radius-xl
         {{ str_contains(Request::url(), 'virtual-reality') == true ? ' mt-3 mx-3 bg-primary' : '' }}" id="navbarBlur"
@@ -59,6 +63,7 @@
                                 <th>Adresse</th>
                                 <th>Ville</th>
                                 <th>Actions</th>
+                                <th>les Règlements</th>
                             </tr>
                         </thead>
                         <tbody  class="alldata">
@@ -71,27 +76,31 @@
                                     <td>{{ $client->adress }}</td>
                                     <td>{{ $client->ville }}</td>
                                     <td>
-                                        <button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#modalClientedit{{ $client->id }}">
-                                        modifier
+                                        <!-- modefier -->
+                                        <button type="button" class="btn-no-border" data-bs-toggle="modal" data-bs-target="#modalClientedit{{ $client->id }}">
+                                        <i class="fa-solid fa-pen-to-square green-icon"></i>
                                         </button>
-                                        <form action="{{ route('client.destroy', $client->id) }}" method="POST" style="display: inline;">
+                                        <!-- Supprimer -->
+                                        <form action="{{ route('client.destroy', $client->id) }}" method="POST" style="display: inline;" >
                                             @csrf
                                             @method('DELETE')
-                                            <button type="submit" class="btn btn-danger">Supprimer</button>
+                                            <button type="submit" class="btn-no-border" onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce client ?')">
+                                            <i class="fa-solid fa-trash-can red-icon"></i>
+                                        </button>  
                                         </form>
-                                        
-                                        <button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#modalClient{{ $client->id }}">
-                                            Détails
+                                        <!-- Détails -->
+                                        <button type="button" class="btn-no-border" data-bs-toggle="modal" data-bs-target="#modalClient{{ $client->id }}">
+                                        <i class="fa-solid fa-eye  black-icon"></i>
                                         </button>
+                                    </td>
+                                    <td>
                                         <!-- Bouton pour ouvrir le modal des règlements -->
                                         <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modalReglements{{ $client->id }}">
-                                            voir tout les Règlements
+                                            Règ
                                         </button>
-                                        {{-- <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modalAddReglement{{ $client->id }}">
-                                            add Règlements
-                                        </button> --}}
-                                        <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#addReglementModal">
-                                            add Règlements
+                                      
+                                        <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#addReglementModal">add
+                                            Règ
                                         </button>
                                     </td>
                                 </tr>
@@ -134,7 +143,52 @@
     })
 </script>
 
-
+ {{-- modal pour ajouter un reglement --}}
+ <div class="modal fade" id="addReglementModal" tabindex="-1" role="dialog" aria-labelledby="addReglementModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="addReglementModalLabel">Ajouter un Règlement Artisan</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form action="{{ route('reglement_cl.store') }}" method="POST">
+                    @csrf
+                    <div class="form-group">
+                        <label for="client_id">Client:</label>
+                        <select name="client_id" id="client_id" class="form-control">
+                            @foreach($clients as $client)
+                                <option value="{{ $client->id }}">{{ $client->nom }} {{ $client->prenom }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="mode_id">Mode:</label>
+                        <select name="mode_id" id="mode_id" class="form-control">
+                            @foreach($modes as $mode)
+                                <option value="{{ $mode->id }}">{{ $mode->mode }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="date">Date:</label>
+                        <input type="date" name="date" id="date" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="montant">Montant:</label>
+                        <input type="number" name="montant" id="montant" class="form-control" min="0" step="0.01">
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary">Ajouter</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
 
         <!-- Modal pour les détails du client -->
                      @foreach($clients as $client)
@@ -214,7 +268,7 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="addReglementModalLabel">Ajouter un Règlement Artisan</h5>
+                    <h5 class="modal-title" id="addReglementModalLabel">Ajouter un Règlement client</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -248,7 +302,8 @@
                         </div>
                         <div class="modal-footer">
                             <button type="submit" class="btn btn-primary">Ajouter</button>
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+            
                         </div>
                     </form>
                 </div>
@@ -303,51 +358,27 @@
         </div>
     </div>
 </div>
-{{-- modal pour ajouter reglement
-<div class="modal fade" id="modalAddReglement" tabindex="-1" aria-labelledby="modalAddReglementLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="modalAddReglementLabel">Ajouter un règlement pour le client</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <form method="POST" action="{{ route('reglement_cl.store') }}">
-                    @csrf
 
-                    <div class="form-group">
-                        <label for="client_id">Client</label>
-                        <select id="client_id" name="client_id" class="form-control">
-                            @foreach($clients as $client)
-                                <option value="{{ $client->id }}">{{ $client->nom }} {{ $client->prenom }}</option>
-                            @endforeach
-                        </select>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="mode_id">Mode de règlement</label>
-                        <select id="mode_id" name="mode_id" class="form-control">
-                            @foreach($modes as $mode)
-                                <option value="{{ $mode->id }}">{{ $mode->mode }}</option>
-                            @endforeach
-                        </select>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="date">Date</label>
-                        <input id="date" type="date" class="form-control" name="date" required>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="montant">Montant</label>
-                        <input id="montant" type="number" step="0.01" class="form-control" name="montant" required>
-                    </div>
-
-                    <button type="submit" class="btn btn-primary">Ajouter le règlement</button>
-                </form>
-            </div>
-</div>
-</div> --}}
 </div>
 @endforeach
 @endsection
+<style>
+    .red-icon {
+        color: red;
+        font-size: 2em;
+    }
+    .btn-no-border {
+        border: none;
+        background-color: transparent;
+        padding: 0; /* Optionnel : supprime le rembourrage par défaut du bouton */
+    }
+    .green-icon {
+        color: green;
+        font-size: 2em;
+    }
+    .black-icon{
+        
+        font-size: 2em;
+    
+    }
+</style>

@@ -1,6 +1,9 @@
+<link rel="stylesheet" href="{{asset('fontawesome-free-6.5.2-web/css/all.min.css')}}" >
+
 @extends('layouts.app')
 
 @section('content')
+
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 <nav class="navbar navbar-main navbar-expand-lg px-0 mx-4 shadow-none border-radius-xl
@@ -61,19 +64,24 @@
                             <tr>
                                 <td>{{ $famille->famille }}</td>
                                 <td>
+                                    <!-- modefier -->
                                     <form action="{{ route('familles.edit', $famille->id) }}" method="GET" style="display: inline;">
                                         @csrf
-                                        <button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#modalFamilleedit{{ $famille->id }}">
-                                            Modifier
+                                        <button type="button" class="btn-no-border" data-bs-toggle="modal" data-bs-target="#modalFamilleedit{{ $famille->id }}">
+                                        <i class="fa-solid fa-pen-to-square green-icon"></i>
                                         </button>
                                     </form>
+                                    <!-- Supprimer -->
                                     <form action="{{ route('familles.destroy', $famille->id) }}" method="POST" style="display: inline;">
                                         @csrf
                                         @method('DELETE')
-                                        <button type="submit" class="btn btn-danger" onclick="return confirm('Êtes-vous sûr de vouloir supprimer cette famille ?')">Supprimer</button>
+                                        <button type="submit" class="btn-no-border" onclick="return confirm('Êtes-vous sûr de vouloir supprimer cette famille ?')">
+                                        <i class="fa-solid fa-trash-can red-icon"></i>
+                                    </button>
                                     </form>
-                                    <button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#modalFamille{{ $famille->id }}">
-                                        Détails
+                                     <!-- Détails -->
+                                    <button type="button" class="btn-no-border" data-bs-toggle="modal" data-bs-target="#modalFamille{{ $famille->id }}">
+                                    <i class="fa-solid fa-eye  black-icon"></i>
                                     </button>
                                 </td>
                             </tr>
@@ -164,3 +172,22 @@
 
 @endsection
 
+<style>
+    .red-icon {
+        color: red;
+        font-size: 2em;
+    }
+    .btn-no-border {
+        border: none;
+        background-color: transparent;
+        padding: 0; /* Optionnel : supprime le rembourrage par défaut du bouton */
+    }
+    .green-icon {
+        color: green;
+        font-size: 2em;
+    }
+    .black-icon{
+        
+        font-size: 2em;
+    }
+</style>

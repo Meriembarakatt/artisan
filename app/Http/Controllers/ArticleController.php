@@ -43,18 +43,18 @@ class ArticleController extends Controller
         $output .= '</td>';
 
         $output .= '<td>
-            <a href="' . route("article.edit", $article->id) . '" class="btn btn-success mb-3">
-                <i class="bi bi-pencil"></i> Modifier
+            <a href="' . route("article.edit", $article->id) . '"class="btn-no-border">
+            <i class="fa-solid fa-pen-to-square green-icon"></i>
             </a>
             <form action="' . route('article.destroy', $article->id) . '" method="POST" style="display: inline-block;">
                 ' . csrf_field() . '
                 ' . method_field("DELETE") . '
-                <button type="submit" class="btn btn-danger" onclick="return confirm(\'Êtes-vous sûr de vouloir supprimer cet article ?\')">
-                    <i class="bi bi-trash"></i> Supprimer
+                <button type="submit" class="btn-no-border" onclick="return confirm(\'Êtes-vous sûr de vouloir supprimer cet article ?\')">
+                <i class="fa-solid fa-trash-can red-icon"></i>
                 </button>
             </form>
-            <button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#modalArticle' . $article->id . '">
-                <i class="bi bi-info-circle"></i> Détails
+            <button type="button" class="btn-no-border" data-bs-toggle="modal" data-bs-target="#modalArticle' . $article->id . '">
+            <i class="fa-solid fa-eye  black-icon"></i>
             </button>
         </td>
     </tr>';
