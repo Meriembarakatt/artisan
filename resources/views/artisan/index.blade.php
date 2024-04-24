@@ -1,6 +1,10 @@
+<link rel="stylesheet" href="{{asset('fontawesome-free-6.5.2-web/css/all.min.css')}}" >
+
 @extends('layouts.app')
 
 @section('content')
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 <nav class="navbar navbar-main navbar-expand-lg px-0 mx-4 shadow-none border-radius-xl
         {{ str_contains(Request::url(), 'virtual-reality') == true ? ' mt-3 mx-3 bg-primary' : '' }}" id="navbarBlur"
@@ -63,6 +67,7 @@
                                 <th>telephone</th> 
                                <th>function</th> 
                                 <th>Actions</th>
+                                <th>règlements</th>
                             </tr>
                         </thead>
                         <tbody class="alldata">
@@ -77,21 +82,28 @@
                                 <td>{{ $artisan->tell }}</td>
                                 <td>{{ $artisan->fonction }}</td> 
                                 <td>
-                                    <button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#modalArtisanedit{{ $artisan->id }}">
-                                        modifier
+                                     <!-- modefier -->
+                                    <button type="button"  class="btn-no-border" data-bs-toggle="modal" data-bs-target="#modalArtisanedit{{ $artisan->id }}">
+                                    <i class="fa-solid fa-pen-to-square green-icon"></i>
                                     </button>
+                                     <!-- Supprimer -->
                                     <form action="{{ route('artisan.destroy', $artisan->id) }}" method="POST" style="display: inline-block;">
                                         @csrf
                                         @method('DELETE')
-                                        <button type="submit" class="btn btn-danger" onclick="return confirm('Êtes-vous sûr de vouloir supprimer cet artisan ?')">Supprimer</button>
+                                        <button type="submit"  class="btn-no-border" onclick="return confirm('Êtes-vous sûr de vouloir supprimer cet artisan ?')">
+                                        <i class="fa-solid fa-trash-can red-icon"></i>
+                                    </button>
                                     </form>
                                     <!-- Bouton pour ouvrir le modal -->
-                                    <button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#modalArtisan{{ $artisan->id }}">
-                                        Détails
+                                     <!-- Détails -->
+                                    <button type="button"  class="btn-no-border" data-bs-toggle="modal" data-bs-target="#modalArtisan{{ $artisan->id }}">
+                                    <i class="fa-solid fa-eye  black-icon"></i>
                                     </button>
                                     <!-- Bouton pour ouvrir le modal des règlements -->
+                                    </td>
+                                    <td class="text-center">
                                     <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modalReglements{{ $artisan->id }}">
-                                        Règlements
+                                        Règ
                                     </button>
                                 </td>
                             </tr>
@@ -356,3 +368,22 @@
 {{-- modal pour modifier --}}
 
 @endsection
+<style>
+    .red-icon {
+        color: red;
+        font-size: 2em;
+    }
+    .btn-no-border {
+        border: none;
+        background-color: transparent;
+        padding: 0; /* Optionnel : supprime le rembourrage par défaut du bouton */
+    }
+    .green-icon {
+        color: green;
+        font-size: 2em;
+    }
+    .black-icon{
+        
+        font-size: 2em;
+    }
+</style>

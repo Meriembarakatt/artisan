@@ -1,3 +1,5 @@
+<link rel="stylesheet" href="{{asset('fontawesome-free-6.5.2-web/css/all.min.css')}}" >
+
 @extends('layouts.app')
 
 @section('content')
@@ -80,18 +82,18 @@
                                     @endif
                                 </td>
                                 <td>
-                                    <a href="{{ route('article.edit', $article->id) }}" class="btn btn-success mb-3">
-                                        <i class="bi bi-pencil"></i> Modifier
+                                    <a href="{{ route('article.edit', $article->id) }}" class="btn-no-border">
+                                    <i class="fa-solid fa-pen-to-square green-icon"></i>
                                     </a>
                                     <form action="{{ route('article.destroy', $article->id) }}" method="POST" style="display: inline-block;">
                                         @csrf
                                         @method('DELETE')
-                                        <button type="submit" class="btn btn-danger" onclick="return confirm('Êtes-vous sûr de vouloir supprimer cet article?')">
-                                            <i class="bi bi-trash"></i> Supprimer
+                                        <button type="submit" class="btn-no-border" onclick="return confirm('Êtes-vous sûr de vouloir supprimer cet article?')">
+                                        <i class="fa-solid fa-trash-can red-icon"></i>
                                         </button>
                                     </form>
-                                    <button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#modalArticle{{ $article->id }}">
-                                        <i class="bi bi-info-circle"></i> Détails
+                                    <button type="button"  class="btn-no-border" data-bs-toggle="modal" data-bs-target="#modalArticle{{ $article->id }}">
+                                    <i class="fa-solid fa-eye  black-icon"></i>
                                     </button>
                                 </td>
                             </tr>
@@ -190,3 +192,22 @@
 @endforeach
 
 @endsection
+<style>
+    .red-icon {
+        color: red;
+        font-size: 2em;
+    }
+    .btn-no-border {
+        border: none;
+        background-color: transparent;
+        padding: 0; /* Optionnel : supprime le rembourrage par défaut du bouton */
+    }
+    .green-icon {
+        color: green;
+        font-size: 2em;
+    }
+    .black-icon{
+        
+        font-size: 2em;
+    }
+</style>

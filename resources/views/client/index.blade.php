@@ -1,6 +1,10 @@
+<link rel="stylesheet" href="{{asset('fontawesome-free-6.5.2-web/css/all.min.css')}}" >
+
 @extends('layouts.app')
 
 @section('content')
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 <nav class="navbar navbar-main navbar-expand-lg px-0 mx-4 shadow-none border-radius-xl
         {{ str_contains(Request::url(), 'virtual-reality') == true ? ' mt-3 mx-3 bg-primary' : '' }}" id="navbarBlur"
@@ -59,6 +63,7 @@
                                 <th>Adresse</th>
                                 <th>Ville</th>
                                 <th>Actions</th>
+                                <th>les Règlements</th>
                             </tr>
                         </thead>
                         <tbody  class="alldata">
@@ -71,26 +76,32 @@
                                     <td>{{ $client->adress }}</td>
                                     <td>{{ $client->ville }}</td>
                                     <td>
-                                        <button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#modalClientedit{{ $client->id }}">
-                                        modifier
+                                        <!-- modefier -->
+                                        <button type="button" class="btn-no-border" data-bs-toggle="modal" data-bs-target="#modalClientedit{{ $client->id }}">
+                                        <i class="fa-solid fa-pen-to-square green-icon"></i>
                                         </button>
-                                        <form action="{{ route('client.destroy', $client->id) }}" method="POST" style="display: inline;">
+                                        <!-- Supprimer -->
+                                        <form action="{{ route('client.destroy', $client->id) }}" method="POST" style="display: inline;" >
                                             @csrf
                                             @method('DELETE')
-                                            <button type="submit" class="btn btn-danger">Supprimer</button>
+                                            <button type="submit" class="btn-no-border" onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce client ?')">
+                                            <i class="fa-solid fa-trash-can red-icon"></i>
+                                        </button>  
                                         </form>
-                                        
-                                        <button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#modalClient{{ $client->id }}">
-                                            Détails
+                                        <!-- Détails -->
+                                        <button type="button" class="btn-no-border" data-bs-toggle="modal" data-bs-target="#modalClient{{ $client->id }}">
+                                        <i class="fa-solid fa-eye  black-icon"></i>
                                         </button>
+                                    </td>
+                                    <td>
                                         <!-- Bouton pour ouvrir le modal des règlements -->
                                         <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modalReglements{{ $client->id }}">
-                                            voir tout les Règlements
+                                            Règ
                                         </button>
                                         {{-- <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modalAddReglement{{ $client->id }}">
-                                            add Règlements
+                                            add Règ
                                         </button> --}}
-                                        <a href="{{ route('reglement_cl.create') }}" class="btn btn-success">Ajouter un reglement</a>
+                                        <a href="{{ route('reglement_cl.create') }}" class="btn btn-success">add Reg</a>
                 
                                     </td>
                                 </tr>
@@ -304,3 +315,23 @@
 </div>
 @endforeach
 @endsection
+<style>
+    .red-icon {
+        color: red;
+        font-size: 2em;
+    }
+    .btn-no-border {
+        border: none;
+        background-color: transparent;
+        padding: 0; /* Optionnel : supprime le rembourrage par défaut du bouton */
+    }
+    .green-icon {
+        color: green;
+        font-size: 2em;
+    }
+    .black-icon{
+        
+        font-size: 2em;
+    
+    }
+</style>
