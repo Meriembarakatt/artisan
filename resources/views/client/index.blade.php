@@ -197,9 +197,10 @@
                 @php
                 $totalMontant += $reglement->montant; // Accumulez le montant dans le total
             @endphp
-             <div class="total-montant">Total : {{ $totalMontant }}</div> <!-- Affichez le total après la boucle -->
+             <!-- Affichez le total après la boucle -->
             
             @endforeach
+            <div class="total-montant">Total : {{ $totalMontant }}</div>
             @else
             <tr>
                 <td colspan="3">Aucun règlement trouvé pour ce client.</td>
