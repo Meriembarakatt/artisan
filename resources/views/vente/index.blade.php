@@ -85,6 +85,7 @@
                                                     <p><strong>ID de la vente :</strong> {{ $vente->id }}</p>
                                                     <p><strong>Date :</strong> {{ $vente->date }}</p>
                                                     <p><strong>Client :</strong> {{ $vente->client->nom }}</p>
+                                                    <p><strong>montant total de vente:</strong> {{ $totalMontant }}</p>
                                                     <!-- Ajoutez d'autres détails de vente ici -->
                                                 </div>
                                                 <div class="modal-footer">

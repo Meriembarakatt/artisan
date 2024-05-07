@@ -4,14 +4,16 @@ namespace App\Http\Controllers;
 
 use App\Models\Artisan;
 use Illuminate\Http\Request;
+use App\Models\Mode;
 
 class ArtisanController extends Controller
 {
     public function index()
     
     {  
-        $artisans = Artisan::orderBy('id', 'desc')->paginate(10); 
-        return view('artisan.index', ['artisans' => $artisans]);
+        $artisans = Artisan::orderBy('id', 'desc')->paginate(10);
+        $modes = Mode::orderBy('id', 'desc')->paginate(10);  
+        return view('artisan.index', ['artisans' => $artisans,'modes' => $modes]);
     }
 
     public function create()

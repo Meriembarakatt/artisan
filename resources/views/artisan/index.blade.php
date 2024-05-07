@@ -105,6 +105,12 @@
                                     <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modalReglements{{ $artisan->id }}">
                                         Règ
                                     </button>
+                                    <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#addReglementModal">
+                                        Add Règ
+                                      </button>
+                                      
+                                      
+                                    
                                 </td>
                             </tr>
                             @endforeach
@@ -287,7 +293,53 @@
     </div>
 </div>
 @endforeach
+{{-- modal pour ajouter un reglement de artisan --}}
+<!-- Button trigger modal -->
 
+  <div class="modal fade" id="addReglementModal" tabindex="-1" aria-labelledby="addReglementModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="addReglementModalLabel">Ajouter un Règlement Artisan</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form action="{{ route('reglement_artisan.store') }}" method="POST">
+            @csrf
+            <div class="form-group">
+              <label for="artisan_id">Artisan:</label>
+              <select name="artisan_id" id="artisan_id" class="form-control">
+                @foreach($artisans as $artisan)
+                <option value="{{ $artisan->id }}">{{ $artisan->nom }} {{ $artisan->prenom }}</option>
+                @endforeach
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="mode_id">Mode:</label>
+              <select name="mode_id" id="mode_id" class="form-control">
+                @foreach($modes as $mode)
+                <option value="{{ $mode->id }}">{{ $mode->mode }}</option>
+                @endforeach
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="date">Date:</label>
+              <input type="date" name="date" id="date" class="form-control">
+            </div>
+            <div class="form-group">
+              <label for="montant">Montant:</label>
+              <input type="number" name="montant" id="montant" class="form-control" min="0" step="0.01">
+            </div>
+            <div class="modal-footer">
+              <button type="submit" class="btn btn-primary">Ajouter</button>
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Retour</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  
 {{-- modal pour ajouter --}}
 <div class="modal fade" id="modalAjouterArtisan" tabindex="-1" aria-labelledby="modalAjouterArtisanLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">

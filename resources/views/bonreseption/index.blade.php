@@ -23,6 +23,7 @@
                                 <th scope="col">ID</th>
                                 <th scope="col">Date</th>
                                 <th scope="col">Artisan</th>
+                                {{-- <th scope="col">montant total de vente</th> --}}
                                 <th scope="col">Actions</th>
                             </tr>
                         </thead>
@@ -32,6 +33,25 @@
                                     <th scope="row">{{ $bonreception->id }}</th>
                                     <td>{{ $bonreception->date }}</td>
                                     <td>{{ $bonreception->artisan->nom }}</td>
+                                    {{-- <td>
+                                        @php
+    $totalMontant = 0;
+@endphp
+
+@if($bonreception->details)
+    @foreach($bonreception->details as $detail)
+        @php
+            $qte = intval($detail->qte);
+            $prix = floatval($detail->prix);
+            $totalMontant += $qte * $prix;
+        @endphp
+    @endforeach
+    {{ $totalMontant }}
+@else
+    Aucun détail de vente
+@endif
+
+                                        </td> --}}
                                     <td>
                                         <a href="{{ route('bonreseption.edit', $bonreception->id) }}" class="btn btn-warning">Modifier</a>
                                         <form action="{{ route('bonreseption.destroy', $bonreception->id) }}" method="POST" style="display: inline-block;">

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Client;
+use App\Models\Mode;
 use Illuminate\Http\Request;
 
 
@@ -10,9 +11,9 @@ class ClientController extends Controller
 {
     public function index()
     {   $clients = Client::orderBy('id', 'desc')->paginate(10); 
+        $modes= Mode::orderBy('id', 'desc')->paginate(10);
        
-       
-        return view('client.index', ['clients' => $clients]);
+        return view('client.index', ['clients' => $clients,'modes' => $modes]);
     }
     public function search(Request $request)
     {
@@ -51,8 +52,9 @@ class ClientController extends Controller
                 <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modalReglements' . $client->id . '">
                    Règ
                 </button>
-                <a href="' . route("reglement_cl.create") . '" class="btn btn-success">add Règ</a>
-                </td></tr>';
+                <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#addReglementModal">add
+                Règ
+            </button> </td></tr>';
         }
     
         return response($output);

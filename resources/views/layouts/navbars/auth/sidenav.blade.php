@@ -94,7 +94,7 @@
            
             
             
-              <li class="nav-item">
+              {{-- <li class="nav-item">
                 <a class="nav-link {{ Route::currentRouteName() == 'reglement de client' ? 'active' : '' }}" href="{{ route('reglement_cl.index') }}">
                     <div
                         class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
@@ -102,8 +102,8 @@
                     </div>
                     <span class="nav-link-text ms-1">reglement de client </span>
                 </a>
-            </li>
-        <li class="nav-item">
+            </li> --}}
+        {{-- <li class="nav-item">
                 <a class="nav-link {{ Route::currentRouteName() == 'reglement de artisan' ? 'active' : '' }}" href="{{ route('reglement_artisan.index') }}">
                     <div
                         class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
@@ -111,7 +111,7 @@
                     </div>
                     <span class="nav-link-text ms-1">reglement de artisan</span>
                 </a>
-            </li>  
+            </li>   --}}
             <li class="nav-item">
                 <a class="nav-link {{ Route::currentRouteName() == 'vente' ? 'active' : '' }}" href="{{ route('vente.index') }}">
                     <div
@@ -168,6 +168,8 @@
                         <option value="{{ route('modes.index') }}">Modes</option>
                         <option value="{{ route('familles.index') }}">Familles</option>
                         <option value="{{ route('sousfamille.index') }}">sous-famille</option>
+                        <option value="{{ route('reglement_artisan.index') }}">tout les reglement des artisan </option>
+                        <option value="{{ route('reglement_cl.index') }}">tout les reglement des client </option>
                     </select>
                     
                 </div>
