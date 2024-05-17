@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string("designation");
             $table->string("prix_ht");
-            $table->string("qte");
+          
             $table->string("stock");
             $table->string("image");
             $table->foreignId('sousfamille_id')->constrained('sous_familles');
