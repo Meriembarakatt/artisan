@@ -148,7 +148,7 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="addReglementModalLabel">Ajouter un Règlement Artisan</h5>
+                <h5 class="modal-title" id="addReglementModalLabel">Ajouter un Règlement Client</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -241,9 +241,10 @@
                 @php
                 $totalMontant += $reglement->montant; // Accumulez le montant dans le total
             @endphp
-             <div class="total-montant">Total : {{ $totalMontant }}</div> <!-- Affichez le total après la boucle -->
+             <!-- Affichez le total après la boucle -->
             
             @endforeach
+            <div class="total-montant">Total : {{ $totalMontant }}</div>
             @else
             <tr>
                 <td colspan="3">Aucun règlement trouvé pour ce client.</td>

@@ -1,3 +1,5 @@
+<link rel="stylesheet" href="{{asset('fontawesome-free-6.5.2-web/css/all.min.css')}}" >
+
 @extends('layouts.app')
 
 @section('content')
@@ -56,19 +58,22 @@
                                         </td>
                                         <td>
                                             <!-- Actions -->
-                                            <a href="{{ route('vente.edit', $vente->id) }}" class="btn btn-primary">Modifier</a>
-                                            <a href="{{ route('detailsvente.index', $vente->id) }}" class="btn btn-primary">Détails vente</a>
-                                            <form action="{{ route('vente.destroy', $vente->id) }}" method="POST" style="display: inline;">
+                                            <a href="{{ route('vente.edit', $vente->id) }}" class="btn-no-border">
+                                            <i class="fa-solid fa-pen-to-square green-icon"></i>
+                                            </a>
+                                           <form action="{{ route('vente.destroy', $vente->id) }}" method="POST" style="display: inline;">
                                                 @csrf
                                                 @method('DELETE')
-                                                <button type="submit" class="btn btn-danger" onclick="return confirm('Êtes-vous sûr de vouloir supprimer cette vente ?')">Supprimer</button>
+                                                <button type="submit" class="btn-no-border" onclick="return confirm('Êtes-vous sûr de vouloir supprimer cette vente ?')">
+                                                <i class="fa-solid fa-trash-can red-icon"></i>
+                                            </button>
                                             </form>
-                                            <button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#modalDetailsVente{{ $vente->id }}">
-                                                Détails
+
+                                            <button type="button"  class="btn-no-border" data-bs-toggle="modal" data-bs-target="#modalDetailsVente{{ $vente->id }}">
+                                            <i class="fa-solid fa-eye  black-icon"></i>
                                             </button>
-                                            <button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#modalDetailsVente{{ $vente->id }}">
-                                               add Détails
-                                            </button>
+                                            <a href="{{ route('detailsvente.index', $vente->id) }}" class="btn btn-primary">Détails vente</a>
+                                            
                                         </td>
                                     </tr>
                                     <!-- Modal -->
@@ -102,3 +107,22 @@
         </div>
     </div>
 @endsection
+<style>
+    .red-icon {
+        color: red;
+        font-size: 2em;
+    }
+    .btn-no-border {
+        border: none;
+        background-color: transparent;
+        padding: 0; /* Optionnel : supprime le rembourrage par défaut du bouton */
+    }
+    .green-icon {
+        color: green;
+        font-size: 2em;
+    }
+    .black-icon{
+        
+        font-size: 2em;
+    }
+</style>

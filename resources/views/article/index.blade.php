@@ -59,7 +59,7 @@
                             <tr>
                                 <th>Désignation</th>
                                 <th>Prix HT</th>
-                                {{-- <th>Quantité</th> --}}
+                              
                                 <th>Stock</th>
                                 <th>Sous-famille</th>
                                 <th>Image</th>
@@ -71,7 +71,7 @@
                             <tr>
                                 <td>{{ $article->designation }}</td>
                                 <td>{{ $article->prix_ht }}</td>
-                                {{-- <td>{{ $article->qte }}</td> --}}
+                               
                                 <td>{{ $article->stock }}</td>
                                 <td>{{ $article->sousFamille->name }}</td>
                                 <td>
