@@ -13,8 +13,10 @@ class VenteController extends Controller
     public function index()
     {
         $ventes = Vente::orderBy('id', 'desc')->paginate(10);
-        $detailsVente = DetailVente::all();
-        return view('vente.index', compact('ventes','detailsVente'));
+        //$detailsVente = DetailVente::all();
+        $articles = Article::all();
+        $clients = Client::all();   
+        return view('vente.index', compact('ventes', 'articles', 'clients'));
     
        
     }

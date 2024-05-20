@@ -17,7 +17,7 @@ use App\Http\Controllers\ReglementController;
 use App\Http\Controllers\ReglementaController;
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('home');
 });
 Route::post('/enregistrer-details-vente', 'DetailventeController@enregistrerDetailsVente')->name('enregistrer.details.vente');
 

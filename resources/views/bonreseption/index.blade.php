@@ -53,11 +53,11 @@
 
                                         </td> --}}
                                     <td>
-                                        <a href="{{ route('bonreseption.edit', $bonreception->id) }}" class="btn btn-warning">Modifier</a>
+                                        <a href="{{ route('bonreseption.edit', $bonreception->id) }}" class="btn btn-warning">Mod</a>
                                         <form action="{{ route('bonreseption.destroy', $bonreception->id) }}" method="POST" style="display: inline-block;">
                                             @csrf
                                             @method('DELETE')
-                                            <button type="submit" class="btn btn-danger" onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce bon de réception ?')">Supprimer</button>
+                                            <button type="submit" class="btn btn-danger" onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce bon de réception ?')">Sup</button>
                                         </form>
                                         <!-- Bouton pour ouvrir le modal -->
                                         <button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#modalBonReception{{ $bonreception->id }}">
