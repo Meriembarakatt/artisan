@@ -2,6 +2,10 @@
 
 @section('content')
 @include('layouts.navbars.auth.topnav', ['title' => 'Dashboard'])
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-12">
@@ -63,6 +67,8 @@
                                         <button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#modalBonReception{{ $bonreception->id }}">
                                             Détails
                                         </button>
+                                        <a href="{{ route('details.create') }}" class="btn btn-success">Add un détail</a>
+                     
                                     </td>
                                 </tr>
                             @endforeach

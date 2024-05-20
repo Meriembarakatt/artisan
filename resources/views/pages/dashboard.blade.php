@@ -1,5 +1,35 @@
 @extends('layouts.app', ['class' => 'g-sidenav-show bg-gray-100'])
+<?php
 
+use App\Models\Client;
+
+use App\Models\Article;
+use App\Models\ReglementCl;
+
+// Calculer le chiffre d'affaires en fonction des transactions, par exemple :
+$chiffre_affaires = ReglementCl::sum('montant');
+
+// Afficher le chiffre d'affaires
+echo "Chiffre d'affaires total : " . $chiffre_affaires;
+
+
+
+$article=Article::count();
+$client=client::count();
+use Carbon\Carbon; // Assurez-vous d'avoir importé la classe Carbon pour manipuler les dates
+
+// Définir la période pour considérer qu'un client est nouveau
+$periode = Carbon::now()->subDays(7); // par exemple, les clients créés au cours des 7 derniers jours
+
+// Compter le nombre de nouveaux clients
+$nouveaux_clients = Client::whereDate('created_at', '>=', $periode)->count();
+
+// Afficher le nombre de nouveaux clients
+echo "Nombre de nouveaux clients : " . $nouveaux_clients;
+
+
+
+?>
 @section('content')
 
     @include('layouts.navbars.auth.topnav', ['title' => 'Dashboard'])
@@ -7,13 +37,14 @@
         <div class="row">
             <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
                 <div class="card">
-                    <div class="card-body p-3">
+
+                     <div class="card-body p-3">
                         <div class="row">
                             <div class="col-8">
                                 <div class="numbers">
-                                    <p class="text-sm mb-0 text-uppercase font-weight-bold">Today's Money</p>
+                                    <p class="text-sm mb-0 text-uppercase font-weight-bold">Total client</p>
                                     <h5 class="font-weight-bolder">
-                                        $53,000
+                                        {{$client}}
                                     </h5>
                                     <p class="mb-0">
                                         <span class="text-success text-sm font-weight-bolder">+55%</span>
@@ -36,9 +67,9 @@
                         <div class="row">
                             <div class="col-8">
                                 <div class="numbers">
-                                    <p class="text-sm mb-0 text-uppercase font-weight-bold">Today's Users</p>
+                                    <p class="text-sm mb-0 text-uppercase font-weight-bold">Total des reglement des client</p>
                                     <h5 class="font-weight-bolder">
-                                        2,300
+                                        {{$chiffre_affaires}}
                                     </h5>
                                     <p class="mb-0">
                                         <span class="text-success text-sm font-weight-bolder">+3%</span>
@@ -63,7 +94,7 @@
                                 <div class="numbers">
                                     <p class="text-sm mb-0 text-uppercase font-weight-bold">New Clients</p>
                                     <h5 class="font-weight-bolder">
-                                        +3,462
+                                        {{$nouveaux_clients}}
                                     </h5>
                                     <p class="mb-0">
                                         <span class="text-danger text-sm font-weight-bolder">-2%</span>
@@ -86,9 +117,9 @@
                         <div class="row">
                             <div class="col-8">
                                 <div class="numbers">
-                                    <p class="text-sm mb-0 text-uppercase font-weight-bold">Sales</p>
+                                    <p class="text-sm mb-0 text-uppercase font-weight-bold">total des article</p>
                                     <h5 class="font-weight-bolder">
-                                        $103,430
+                                       {{ $article}}
                                     </h5>
                                     <p class="mb-0">
                                         <span class="text-success text-sm font-weight-bolder">+5%</span> than last month

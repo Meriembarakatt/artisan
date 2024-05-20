@@ -43,7 +43,7 @@ class ReglementArtisanController extends Controller
 
         reglementArtisan::create($validatedData);
 
-        return redirect()->route('reglement_artisan.index')->with('success', 'Reglement artisan ajouté avec succès.');
+        return redirect()->route('artisan.index')->with('success', 'Reglement artisan ajouté avec succès.');
     }
 
     public function edit(reglementArtisan $reglementArtisan)

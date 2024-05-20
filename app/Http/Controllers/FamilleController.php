@@ -55,7 +55,6 @@ class FamilleController extends Controller
     {
         return view('familles.create');
     }
-
     /**
      * Store a newly created resource in storage.
      *
@@ -110,9 +109,9 @@ class FamilleController extends Controller
         ]);
 
         $famille->update($validatedData);
-
-        return redirect('/familles')->with('success', 'Famille mise à jour avec succès');
+        return redirect()->route('familles.index')->with('success', 'Famille mise à jour avec succès');
     }
+    
 
 
     /**
